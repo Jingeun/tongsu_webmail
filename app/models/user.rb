@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 			:recoverable, :rememberable, :trackable, :validatable
 
 	has_and_belongs_to_many :channels, join_table: "users_channels", class_name: "Channel"
+	has_many :messages
 
 	validates :uid, presence: true, uniqueness: { case_sensitive: false }
 	validates :name ,presence: true

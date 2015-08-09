@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  reply_id: 1
+  message_id: MyString
+  subject: MyString
+  content: MyText
+  date: 2015-08-10 03:50:04
+  from: MyString
+  to: MyString
+  reply_to: MyString
+  cc: MyString
+  bcc: MyString
+  mime_version: MyString
+
+two:
+  user_id: 
+  reply_id: 1
+  message_id: MyString
+  subject: MyString
+  content: MyText
+  date: 2015-08-10 03:50:04
+  from: MyString
+  to: MyString
+  reply_to: MyString
+  cc: MyString
+  bcc: MyString
+  mime_version: MyString
