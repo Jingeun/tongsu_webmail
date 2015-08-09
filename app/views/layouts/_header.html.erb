@@ -8,71 +8,173 @@
 <nav id="sidebar" class="sidebar" role="navigation">
     <!-- need this .js class to initiate slimscroll -->
     <div class="js-sidebar-content">
-        <header id="header_logo" class="logo hidden-xs">
-            <a href="<%= root_path %>">Mail</a>
+        <header class="logo hidden-xs">
+            <a href="index.html">sing</a>
         </header>
         <!-- seems like lots of recent admin template have this feature of user info in the sidebar.
              looks good, so adding it and enhancing with notifications -->
-
-<!-- mini-size session start-->
-        <% if user_signed_in? %>
         <div class="sidebar-status visible-xs">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span class="thumb-sm avatar pull-right">
-                    <img class="img-circle" src="<%= asset_path 'common/people/a5.jpg' %>">
+                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
                 </span>
                 <!-- .circle is a pretty cool way to add a bit of beauty to raw data.
                      should be used with bg-* and text-* classes for colors -->
-                <span style="font-size:18px"> &nbsp <%= current_user.user_id %> &nbsp </span>
-                
-                <!-- <span class="circle bg-warning fw-bold text-gray-dark"> 13 </span> -->
+                <span class="circle bg-warning fw-bold text-gray-dark">
+                    13
+                </span>
+                &nbsp;
+                Philip <strong>Smith</strong>
                 <b class="caret"></b>
             </a>
             <!-- #notifications-dropdown-menu goes here when screen collapsed to xs or sm -->
         </div>
-        <% else %>
-        <div class="sidebar-status visible-xs" >
-            <ul class="sidebar-nav">
-                <li>
-                    <a href="<%= new_user_session_path %>"><span class="icon"><i class="fa fa-lock"></i></span><strong> Login </strong></a>
-                </li>
-            </ul>
-        </div>
-        <% end %>
-
-<!-- mini-size session end -->
-
         <!-- main notification links are placed inside of .sidebar-nav -->
         <ul class="sidebar-nav">
             <li class="active">
-                <a href="<%= root_path %>"> <span class="icon"> <i class="fa fa-desktop"></i> </span> Dashboard </a>
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a href="<%= root_path %>">
+                    <span class="icon">
+                        <i class="fa fa-desktop"></i>
+                    </span>
+                    Dashboard
+                </a>
             </li>
-            <h5 class="sidebar-nav-title">Mailing-List <a class="action-link" href="#"><i class="glyphicon glyphicon-refresh"></i></a></h5>
-<!-- channel filtering start -->
-			<% if user_signed_in? %>
-					<% @mailing.each do |m| %>
-						<li>
-							<a href="#sidebar-dashboard-<%= m.mail %>" data-toggle="collapse" data-parent="#sidebar">
-								<span class="icon"> <i class="fa fa-desktop"></i> </span>
-								<%= m.mail %>
-								<i class="toggle fa fa-angle-down"></i>
-							</a>
-							<form method="post" id="mailing_form">
-							<ul id="sidebar-dashboard-<%= m.mail %>" class="collapse">
-								<input type="hidden" name="mailing_target" value="<%= m.mail %>">
-								<li><a href="javascript:{}" onclick="mailing_form_action('timeline');">TimeLine</a></li>
-								<li><a href="javascript:{}" onclick="mailing_form_action('chart');">Chart</a></li>
-							</ul>
-							</form>
-						 </li>
-					<% end %>
-			<% else %>
-			<h3 class="sidebar-nav-title"> Please, Login to site.</h3>
-			<% end %>
-<!-- channel filtering end -->
+            <li>
+                <a href="inbox.html">
+                    <span class="icon">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                    Email
+                    <span class="label label-danger">
+                        9
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="charts.html">
+                    <span class="icon">
+                        <i class="glyphicon glyphicon-stats"></i>
+                    </span>
+                    Charts
+                </a>
+            </li>
         </ul>
-
-
+        <!-- every .sidebar-nav may have a title -->
+        <h5 class="sidebar-nav-title">MailingList <a class="action-link" href="#"><i class="glyphicon glyphicon-refresh"></i></a></h5>
+        <ul class="sidebar-nav">
+            <% if user_signed_in? %>
+            <% end %>
+            <li>
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a class="collapsed" href="#sidebar-forms" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="glyphicon glyphicon-align-right"></i>
+                    </span>
+                    Forms
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+                <ul id="sidebar-forms" class="collapse">
+                    <li><a href="form_elements.html">Form Elements</a></li>
+                    <li><a href="form_validation.html">Form Validation</a></li>
+                    <li><a href="form_wizard.html">Form Wizard</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="collapsed" href="#sidebar-ui" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="glyphicon glyphicon-tree-conifer"></i>
+                    </span>
+                    UI Elements
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+                <ul id="sidebar-ui" class="collapse">
+                    <li><a href="ui_components.html">Components</a></li>
+                    <li><a href="ui_notifications.html">Notifications</a></li>
+                    <li><a href="ui_icons.html">Icons</a></li>
+                    <li><a href="ui_buttons.html">Buttons</a></li>
+                    <li><a href="ui_tabs_accordion.html">Tabs & Accordion</a></li>
+                    <li><a href="ui_list_groups.html">List Groups</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="grid.html">
+                    <span class="icon">
+                        <i class="glyphicon glyphicon-th"></i>
+                    </span>
+                    Grid
+                </a>
+            </li>
+            <li>
+                <a class="collapsed" href="#sidebar-maps" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="glyphicon glyphicon-map-marker"></i>
+                    </span>
+                    Maps
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+                <ul id="sidebar-maps" class="collapse">
+                    <!-- data-no-pjax turns off pjax loading for this link. Use in case of complicated js loading on the
+                         target page -->
+                    <li><a href="maps_google.html" data-no-pjax>Google Maps</a></li>
+                    <li><a href="maps_vector.html">Vector Maps</a></li>
+                </ul>
+            </li>
+            <li>
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a class="collapsed" href="#sidebar-tables" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    Tables
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+                <ul id="sidebar-tables" class="collapse">
+                    <li><a href="tables_basic.html">Tables Basic</a></li>
+                    <li><a href="tables_dynamic.html">Tables Dynamic</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="collapsed" href="#sidebar-extra" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-leaf"></i>
+                    </span>
+                    Extra
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+                <ul id="sidebar-extra" class="collapse">
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="invoice.html">Invoice</a></li>
+                    <li><a href="login.html" target="_blank" data-no-pjax>Login Page</a></li>
+                    <li><a href="error.html" target="_blank" data-no-pjax>Error Page</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="search.html">Search Results</a></li>
+                    <li><a href="time_line.html" data-no-pjax>Time Line</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="collapsed" href="#sidebar-levels" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-folder-open"></i>
+                    </span>
+                    Menu Levels
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+                <ul id="sidebar-levels" class="collapse">
+                    <li><a href="#">Level 1</a></li>
+                    <li>
+                        <a class="collapsed" href="#sidebar-sub-levels" data-toggle="collapse" data-parent="#sidebar-levels">
+                            Level 2
+                            <i class="toggle fa fa-angle-down"></i>
+                        </a>
+                        <ul id="sidebar-sub-levels" class="collapse">
+                            <li><a href="#">Level 3</a></li>
+                            <li><a href="#">Level 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
         <h5 class="sidebar-nav-title">Labels <a class="action-link" href="#"><i class="glyphicon glyphicon-plus"></i></a></h5>
         <!-- some styled links in sidebar. ready to use as links to email folders, projects, groups, etc -->
         <ul class="sidebar-labels">
@@ -171,15 +273,15 @@
                     </div>
                 </div>
             </form>
-<!-- Session -->
-            <% if (user_signed_in?) %>
-            <ul class="nav navbar-nav navbar-right" style="margin-right:150px;">
+            <!-- Session -->
+            <% if user_signed_in? %>
+            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">
                         <span class="thumb-sm avatar pull-left">
                             <img class="img-circle" src="<%= asset_path 'common/people/a5.jpg' %>">
                         </span>
-                        <span style="font-size:15px"> &nbsp <%= current_user.user_id %> &nbsp </span>
+                        <span style="font-size:15px"> &nbsp <%= current_user.uid %> &nbsp </span>
                         <!-- <span class="circle bg-warning fw-bold"> 13 </span> -->
                         <b class="caret"></b></a>
                     <!-- ready to use notifications dropdown.  inspired by smartadmin template.
@@ -574,14 +676,3 @@
         </footer>
     </div>
 </div>
-
-<script type="text/javascript">
-function mailing_form_action(target){
-	var form = document.getElementById("mailing_form");
-	if(target=="timeline")
-		form.action = '<%= timelines_path %>';
-	else
-		form.action ='';
-	form.submit();
-}
-</script>

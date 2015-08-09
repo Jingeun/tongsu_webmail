@@ -11,32 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715184036) do
+ActiveRecord::Schema.define(version: 20150809133105) do
 
-  create_table "matchings", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.string   "mail",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+  create_table "channels", force: :cascade do |t|
+    t.integer  "group_id",         limit: 4
+    t.string   "name",             limit: 255, null: false
+    t.string   "email",            limit: 255, null: false
+    t.string   "list_id",          limit: 255
+    t.string   "list_unsubscribe", limit: 255
+    t.string   "list_subscribe",   limit: 255
+    t.string   "list_post",        limit: 255
+    t.string   "list_help",        limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
-  create_table "openstack_devs", force: :cascade do |t|
-    t.string   "from",       limit: 255
-    t.string   "to",         limit: 255
-    t.string   "subject",    limit: 255
-    t.string   "body",       limit: 255
-    t.date     "date"
-    t.string   "file",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+  add_index "channels", ["group_id"], name: "index_channels_on_group_id", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name",       limit: 255, default: "", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  create_table "users", primary_key: "idx", force: :cascade do |t|
-    t.string   "user_id",                limit: 255
-    t.string   "name",                   limit: 255
-    t.string   "sex",                    limit: 255
-    t.string   "phone",                  limit: 255
-    t.string   "email",                  limit: 255, default: ""
+  add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
@@ -48,8 +49,20 @@ ActiveRecord::Schema.define(version: 20150715184036) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "uid",                    limit: 255, default: "", null: false
+    t.string   "name",                   limit: 255, default: "", null: false
   end
 
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["uid"], name: "index_users_on_uid", unique: true, using: :btree
 
+  create_table "users_channels", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "channel_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_foreign_key "channels", "groups"
 end

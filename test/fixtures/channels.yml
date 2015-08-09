@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  group_id: 
+  name: MyString
+  email: MyString
+  list_id: MyString
+  list_unsubscribe: MyString
+  list_subscribe: MyString
+  list_post: MyString
+  list_help: MyString
+
+two:
+  group_id: 
+  name: MyString
+  email: MyString
+  list_id: MyString
+  list_unsubscribe: MyString
+  list_subscribe: MyString
+  list_post: MyString
+  list_help: MyString
