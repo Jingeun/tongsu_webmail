@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 	post 'users/id_check' => 'home#id_check'
 
 	namespace :api, path: '/', constraints: { subdomain: 'api' } do
-		get '/check/registered'
+		post '/check/registered'
 		post '/check/mailinglist'
 	end
 
