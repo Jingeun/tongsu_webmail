@@ -8,9 +8,6 @@ module API
 			end
 		end
 
-		def mailinglist
-		end
-
 		private
 
 		def registered?(message_id)

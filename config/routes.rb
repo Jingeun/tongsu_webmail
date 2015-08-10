@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+	constraints(host: /^(?!www\.)/i) do
+	    get '(*any)' => redirect { |params, request|
+	      URI.parse(request.url).tap { |uri| uri.host = "www.#{uri.host.to_s.sub('api.', '')}" }.to_s
+	    }
+	end
+
 	
 	root 'home#index'
 
@@ -9,7 +16,8 @@ Rails.application.routes.draw do
 
 	namespace :api, path: '/', constraints: { subdomain: 'api' } do
 		post '/check/registered'
-		post '/check/mailinglist'
+		# post '/check/mailinglist'
+		post '/mail/receive'
 	end
 
 end
