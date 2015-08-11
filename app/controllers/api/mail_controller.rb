@@ -1,7 +1,7 @@
 module API
 	class MailController < ApplicationController
 		def receive
-			puts "DEBUG::PARAMS: #{params}"
+			mail = Mail.read_from_string(params)
 			head 204
 		end
 	end
