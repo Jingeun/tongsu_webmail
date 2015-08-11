@@ -1,7 +1,6 @@
 class CreateMessages < ActiveRecord::Migration
   def change
     create_table :messages do |t|
-      t.references :user, index: true
       t.integer :reply_id
       t.string :message_id
       t.string :subject
@@ -16,7 +15,6 @@ class CreateMessages < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :messages, :users
     add_index :messages, :message_id, unique: true
     add_index :messages, :subject, unique: true
   end

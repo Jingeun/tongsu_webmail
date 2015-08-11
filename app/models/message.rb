@@ -1,5 +1,8 @@
 class Message < ActiveRecord::Base
-  belongs_to :user
+  # User & Message N:M Association
+  has_many :users_messages
+  has_many :user, through: "users_messages"
+
   has_many :replys, foreign_key: "origin_id", class_name: "Message"
   belongs_to :origin, class_name: "Message"
 

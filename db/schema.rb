@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811124834) do
+ActiveRecord::Schema.define(version: 20150811175854) do
 
   create_table "channels", force: :cascade do |t|
     t.integer  "group_id",         limit: 4
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20150811124834) do
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
 
   create_table "mailinglists", force: :cascade do |t|
-    t.integer  "channel_id",   limit: 4
     t.integer  "origin_id",    limit: 4
     t.string   "message_id",   limit: 255
     t.string   "subject",      limit: 255
@@ -63,12 +62,10 @@ ActiveRecord::Schema.define(version: 20150811124834) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "mailinglists", ["channel_id"], name: "index_mailinglists_on_channel_id", using: :btree
   add_index "mailinglists", ["message_id"], name: "index_mailinglists_on_message_id", unique: true, using: :btree
   add_index "mailinglists", ["subject"], name: "index_mailinglists_on_subject", unique: true, using: :btree
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "user_id",      limit: 4
     t.integer  "reply_id",     limit: 4
     t.string   "message_id",   limit: 255
     t.string   "subject",      limit: 255
@@ -86,7 +83,6 @@ ActiveRecord::Schema.define(version: 20150811124834) do
 
   add_index "messages", ["message_id"], name: "index_messages_on_message_id", unique: true, using: :btree
   add_index "messages", ["subject"], name: "index_messages_on_subject", unique: true, using: :btree
-  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -116,9 +112,19 @@ ActiveRecord::Schema.define(version: 20150811124834) do
     t.datetime "updated_at",           null: false
   end
 
+  create_table "users_messages", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "message_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "users_messages", ["message_id"], name: "index_users_messages_on_message_id", using: :btree
+  add_index "users_messages", ["user_id"], name: "index_users_messages_on_user_id", using: :btree
+
   add_foreign_key "channels", "groups"
   add_foreign_key "channels_mailinglists", "channels"
   add_foreign_key "channels_mailinglists", "mailinglists"
-  add_foreign_key "mailinglists", "channels"
-  add_foreign_key "messages", "users"
+  add_foreign_key "users_messages", "messages"
+  add_foreign_key "users_messages", "users"
 end

@@ -1,7 +1,6 @@
 class CreateMailinglists < ActiveRecord::Migration
   def change
     create_table :mailinglists do |t|
-      t.references :channel, index: true
       t.integer :origin_id
       t.string :message_id
       t.string :subject
@@ -16,7 +15,6 @@ class CreateMailinglists < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :mailinglists, :channels
     add_index :mailinglists, :message_id, unique: true
     add_index :mailinglists, :subject, unique: true
   end
