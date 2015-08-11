@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 	end
 
 	def id_check
-		id = params["uid"]
+		id = params[:uid]
 			#@availabe = false
 		check = User.find_by_uid(id)
 		

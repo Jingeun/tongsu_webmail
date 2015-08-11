@@ -16,13 +16,13 @@
                         <%= form_for(resource, as: resource_name, class: "login-form mt-lg", url: session_path(resource_name)) do |f| %>
 
                         <div class="form-group">
-                            <%= f.label :uid, style: "font-size:16px" %> 
-                            <%= f.text_field :uid, autofocus: true, class: "form-control", placeholder: "Id" %>
+                            <label style="font-size:16px" for="user_uid">ID</label>
+                            <%= f.text_field :uid, autofocus: true, class: "form-control" %>
                         </div>
 
                         <div class="form-group">
                             <%= f.label :password, style: "font-size:16px" %>
-                            <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "password" %>
+                            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
                         </div>
                         <div class="clearfix">
                             <div class="btn-toolbar pull-right">

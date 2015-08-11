@@ -79,11 +79,11 @@
 <script>
 
 function duplication_id(){
-	var id = $('#user_user_id').val();
+	var id = $('#user_uid').val();
 	$.ajax({
 		url: "/users/id_check",
 		type: "POST",
-		data: {user_id: id},
+		data: {uid: id},
 		success: function(data) {
 			document.getElementById("duplication_id_check").value = "true";
 			alert("사용가능한 ID입니다.");
