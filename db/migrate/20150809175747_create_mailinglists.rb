@@ -12,6 +12,7 @@ class CreateMailinglists < ActiveRecord::Migration
       t.string :cc
       t.string :bcc
       t.string :mime_version
+      t.text   :origin_text
 
       t.timestamps null: false
     end

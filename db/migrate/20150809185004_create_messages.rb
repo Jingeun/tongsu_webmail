@@ -1,7 +1,7 @@
 class CreateMessages < ActiveRecord::Migration
   def change
     create_table :messages do |t|
-      t.integer :reply_id
+      t.integer :origin_id
       t.string :message_id
       t.string :subject
       t.text :content
@@ -12,6 +12,7 @@ class CreateMessages < ActiveRecord::Migration
       t.string :cc
       t.string :bcc
       t.string :mime_version
+      t.text   :origin_text
 
       t.timestamps null: false
     end
