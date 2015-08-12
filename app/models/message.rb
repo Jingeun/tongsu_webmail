@@ -1,4 +1,6 @@
 class Message < ActiveRecord::Base
+  default_scope -> { order('updated_at DESC') }
+  
   # User & Message N:M Association
   has_many :users_messages
   has_many :user, through: "users_messages"

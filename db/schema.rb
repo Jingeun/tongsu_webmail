@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20150811175854) do
     t.text     "content",      limit: 65535
     t.datetime "date"
     t.string   "from",         limit: 255
+    t.string   "from_name",    limit: 255
     t.string   "to",           limit: 255
     t.string   "reply_to",     limit: 255
     t.string   "cc",           limit: 255
@@ -64,7 +65,6 @@ ActiveRecord::Schema.define(version: 20150811175854) do
   end
 
   add_index "mailinglists", ["message_id"], name: "index_mailinglists_on_message_id", unique: true, using: :btree
-  add_index "mailinglists", ["subject"], name: "index_mailinglists_on_subject", unique: true, using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.integer  "origin_id",    limit: 4
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20150811175854) do
     t.text     "content",      limit: 65535
     t.datetime "date"
     t.string   "from",         limit: 255
+    t.string   "from_name",    limit: 255
     t.string   "to",           limit: 255
     t.string   "reply_to",     limit: 255
     t.string   "cc",           limit: 255
@@ -84,7 +85,6 @@ ActiveRecord::Schema.define(version: 20150811175854) do
   end
 
   add_index "messages", ["message_id"], name: "index_messages_on_message_id", unique: true, using: :btree
-  add_index "messages", ["subject"], name: "index_messages_on_subject", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

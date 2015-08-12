@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
 	devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
 	resources :timelines, except: :create
+	resources :messages, only: [:index, :show]
 
 	post 'users/id_check' => 'home#id_check'
 

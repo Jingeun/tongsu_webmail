@@ -53,7 +53,7 @@ module API
 					# Check user is subscribing
 					delivered_to = mail.header['Delivered-To']
 					delivered_to = delivered_to.first if delivered_to.class.eql?('Array')
-					uid          = delivered_to.split('@').first
+					uid          = delivered_to.field.value.split('@').first
 					user		 = User.where(uid: uid).first
 
 					unless user.channels.include?(channel)
@@ -86,17 +86,19 @@ module API
 						
 						# Check origin mails is exist
 						if registered?(in_reply_to)
-							origin_mail = Message.where(message_id: in_reply_to)
+							origin_mail = Message.where(message_id: in_reply_to).first
 						end
 					end
 
 					body = ''
 					if mail.multipart?
-						mail.parts.each do |part|
-							body += part.body.raw_source
+						if mail.attachments.empty?
+							body = mail.parts.last.body.decoded
+						else
+							body = mail.parts.first.body.parts.last.body.decoded
 						end
 					else
-						body = mail.body
+						body = mail.body.decoded
 					end
 
 					reply_to = ''
@@ -104,16 +106,31 @@ module API
 						reply_to = mail.from.join(', ')
 					end
 
-					Message.create(
-						origin_id: 	origin_mail,
-						message_id: mail.message_id,
-						subject: 	mail.subject,
-						content:    body,
-						from: 		mail.from.join(', '),
-						to: 		mail.to.join(', '),
-						reply_to: 	reply_to,
-						cc: 		mail.cc && mail.cc.join(', ')
+					message = Message.create(
+						message_id:  mail.message_id,
+						subject: 	 mail.subject,
+						content:     body,
+						date: 		 mail.date,
+						from: 		 mail.from.join(', '),
+						from_name:   mail.header['From'].addrs.first.display_name,
+						to: 		 mail.to.join(', '),
+						reply_to: 	 reply_to,
+						cc: 		 mail.cc && mail.cc.join(', '),
+						origin_text: params[:mail]
 					)
+
+					delivered_to = mail.header['Delivered-To']
+					delivered_to = delivered_to.first if delivered_to.class.eql?('Array')
+					uid          = delivered_to.field.value.split('@').first
+					user		 = User.where(uid: uid).first
+
+					unless user.messages.include?(message)
+						user.messages << message
+					end
+
+					if origin_mail.present?
+						origin_mail.replys << message
+					end
 				end
 
 				

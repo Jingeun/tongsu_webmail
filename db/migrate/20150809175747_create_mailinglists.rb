@@ -7,6 +7,7 @@ class CreateMailinglists < ActiveRecord::Migration
       t.text :content
       t.datetime :date
       t.string :from
+      t.string :from_name
       t.string :to
       t.string :reply_to
       t.string :cc
@@ -17,6 +18,5 @@ class CreateMailinglists < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :mailinglists, :message_id, unique: true
-    add_index :mailinglists, :subject, unique: true
   end
 end

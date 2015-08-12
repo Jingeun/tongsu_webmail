@@ -1,4 +1,6 @@
 class Mailinglist < ActiveRecord::Base
+  default_scope -> { order('updated_at DESC') }
+
   # Channel & Mailinglist N:M Association
   has_many :channels_mailinglists
   has_many :channels, through: "channels_mailinglists"
