@@ -24,6 +24,13 @@ class MessagesController < ApplicationController
 		end
 	end
 
+	def new
+		@current_users_messages = current_user.messages
+
+		# FORM FOR MAIL CREATE
+		# TODO
+	end
+
 	private
 
 	def recursive(messages, message)
