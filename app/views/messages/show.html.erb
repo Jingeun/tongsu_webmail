@@ -14,7 +14,7 @@
                 <ul class="nav nav-pills nav-stacked nav-email-folders mt">
                     <li class="active">
                         <a href="<%= messages_path %>">
-                            <span class="badge pull-right">2</span>
+                            <span class="badge pull-right"><%= @current_users_messages.where(is_read: false).count %></span>
                             Inbox
                         </a>
                     </li>
@@ -22,7 +22,7 @@
                     <li><a href="#">Sent Mail</a></li>
                     <li>
                         <a href="#">
-                            <span class="badge pull-right">3</span>
+                            <!-- <span class="badge pull-right">3</span> -->
                             Draft
                         </a>
                     </li>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-9 col-lg-10">
                 <div class="clearfix mb-xs">
-                    <a class="btn btn-default btn-sm width-50 pull-left" id="back-btn" href="inbox.html">
+                    <a class="btn btn-default btn-sm width-50 pull-left" id="back-btn" href="<%= messages_path %>">
                         <i class="fa fa-angle-left fa-lg"></i>
                     </a>
                     <div class="pull-right hide" id="folder-stats">
@@ -89,40 +89,37 @@
                                         </div>
                                     </div>
                                     <time class="email-date pull-right">
-                                        0:30
+                                        <%= message.date.strftime("%k:%M") %>
                                     </time>
                                 </div>
                             </div>
-                            <div class="email-body">
+                            <div class="email-body" style="font-size:14px !important;">
                                 <p><%= message.content.html_safe %></p>
                             </div>
-                            <!-- <div class="email-attachments">
+                            <% if message.attaches.present? %>
+                            <div class="email-attachments">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <hr>
-                                        <p class="details"><strong>2 attachments</strong> &nbsp;-&nbsp; <a href="#">Download all attachments</a>
+                                        <p class="details"><strong><%= message.attaches.count %> attachments</strong> &nbsp;-&nbsp; <a href="#">Download all attachments</a>
                                             &nbsp;&nbsp;&nbsp;<a href="#">View all Images</a></p>
+                                        <% message.attaches.each do |file| %>
                                         <section class="attachment">
-                                            <img class="img-responsive" src="demo/img/pictures/1.jpg" alt="">
-                                            <h5 class="title">some-cool-image1.jpg</h5>
+                                            <% if file.content_content_type.start_with?('image/') %>
+                                            <%= image_tag file.content.url, class: "img-responsive" %>
+                                            <% end %>
+                                            <h5 class="title"><%= file.content_file_name %></h5>
                                             <p class="details">
                                                 568K  &nbsp;&nbsp;
                                                 <a href="#">View</a> &nbsp;&nbsp;
                                                 <a href="#">Download</a>
                                             </p>
                                         </section>
-                                        <section class="attachment">
-                                            <img class="img-responsive" src="demo/img/pictures/2.jpg" alt="">
-                                            <h5 class="title">some-cool-image2.jpg</h5>
-                                            <p class="details">
-                                                229K  &nbsp;&nbsp;
-                                                <a href="#">View</a> &nbsp;&nbsp;
-                                                <a href="#">Download</a>
-                                            </p>
-                                        </section>
+                                        <% end %>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div> 
+                            <% end %>
                         </div>
                     </div>
                 </section>

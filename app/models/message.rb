@@ -1,5 +1,9 @@
 class Message < ActiveRecord::Base
   default_scope -> { order('updated_at DESC') }
+
+  # File attachment
+  has_many :attaches, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :attaches
   
   # User & Message N:M Association
   has_many :users_messages

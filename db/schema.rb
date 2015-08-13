@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811175854) do
+ActiveRecord::Schema.define(version: 20150812195511) do
+
+  create_table "attaches", force: :cascade do |t|
+    t.integer  "attachable_id",        limit: 4
+    t.string   "attachable_type",      limit: 255
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "content_file_name",    limit: 255
+    t.string   "content_content_type", limit: 255
+    t.integer  "content_file_size",    limit: 4
+    t.datetime "content_updated_at"
+  end
 
   create_table "channels", force: :cascade do |t|
     t.integer  "group_id",         limit: 4
@@ -50,7 +61,7 @@ ActiveRecord::Schema.define(version: 20150811175854) do
     t.integer  "origin_id",    limit: 4
     t.string   "message_id",   limit: 255
     t.string   "subject",      limit: 255
-    t.text     "content",      limit: 65535
+    t.text     "content",      limit: 4294967295
     t.datetime "date"
     t.string   "from",         limit: 255
     t.string   "from_name",    limit: 255
@@ -59,9 +70,11 @@ ActiveRecord::Schema.define(version: 20150811175854) do
     t.string   "cc",           limit: 255
     t.string   "bcc",          limit: 255
     t.string   "mime_version", limit: 255
-    t.text     "origin_text",  limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.text     "origin_text",  limit: 4294967295
+    t.boolean  "is_read",      limit: 1,          default: false
+    t.boolean  "is_favorite",  limit: 1,          default: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "mailinglists", ["message_id"], name: "index_mailinglists_on_message_id", unique: true, using: :btree
@@ -70,7 +83,7 @@ ActiveRecord::Schema.define(version: 20150811175854) do
     t.integer  "origin_id",    limit: 4
     t.string   "message_id",   limit: 255
     t.string   "subject",      limit: 255
-    t.text     "content",      limit: 65535
+    t.text     "content",      limit: 4294967295
     t.datetime "date"
     t.string   "from",         limit: 255
     t.string   "from_name",    limit: 255
@@ -79,9 +92,11 @@ ActiveRecord::Schema.define(version: 20150811175854) do
     t.string   "cc",           limit: 255
     t.string   "bcc",          limit: 255
     t.string   "mime_version", limit: 255
-    t.text     "origin_text",  limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.text     "origin_text",  limit: 4294967295
+    t.boolean  "is_read",      limit: 1,          default: false
+    t.boolean  "is_favorite",  limit: 1,          default: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "messages", ["message_id"], name: "index_messages_on_message_id", unique: true, using: :btree

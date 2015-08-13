@@ -17,7 +17,7 @@
                 <ul class="nav nav-pills nav-stacked nav-email-folders mt" id="folders-list">
                     <li class="active">
                         <a href="<%= messages_path %>">
-                            <span class="badge pull-right">2</span>
+                            <span class="badge pull-right"><%= @messages.where(is_read: false).count %></span>
                             Inbox
                         </a>
                     </li>
@@ -25,7 +25,7 @@
                     <li><a href="#">Sent Mail</a></li>
                     <li>
                         <a href="#">
-                            <span class="badge pull-right">3</span>
+                            <!-- <span class="badge pull-right">3</span> -->
                             Draft
                         </a>
                     </li>
@@ -105,12 +105,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <% @messages.each do |message| %>
-                            <tr class="unread">
+                            <% @origin_messages.each_with_index do |message, index| %>
+                            <tr class="<%= message.is_read ? '' : 'unread' %>">
                                 <td>
                                     <div class="checkbox">
-                                        <input type="checkbox" id="checkbox1">
-                                        <label for="checkbox1"></label>
+                                        <input type="checkbox" id="checkbox<%= index+1 %>">
+                                        <label for="checkbox<%= index+1 %>"></label>
                                     </div>
                                 </td>
                                 <td><span class="starred"><i class="fa fa-star-o"></i></span></td>

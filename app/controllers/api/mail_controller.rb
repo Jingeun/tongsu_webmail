@@ -106,6 +106,7 @@ module API
 						reply_to = mail.from.join(', ')
 					end
 
+					# Create Message (Non-Mailinglist Email)
 					message = Message.create(
 						message_id:  mail.message_id,
 						subject: 	 mail.subject,
@@ -119,17 +120,34 @@ module API
 						origin_text: params[:mail]
 					)
 
+					# Get Receiver
 					delivered_to = mail.header['Delivered-To']
 					delivered_to = delivered_to.first if delivered_to.class.eql?('Array')
 					uid          = delivered_to.field.value.split('@').first
 					user		 = User.where(uid: uid).first
 
+					# Associate to User
 					unless user.messages.include?(message)
 						user.messages << message
 					end
 
+					# Save File Attachments
+					unless mail.attachments.empty?
+						mail.attachments.each do |attachment|
+							attach = message.attaches.build
+							dd = attachment.body.decoded
+							attach.content_file_size = dd.bytesize
+							attach.content_content_type = attachment.content_type
+							attach.content = StringIO.new(dd)
+							attach.content_file_name = attachment.filename
+							attach.save
+						end
+					end
+
+					# Save Origin Mail if reply
 					if origin_mail.present?
 						origin_mail.replys << message
+						origin_mail.touch
 					end
 				end
 

@@ -4,7 +4,7 @@ class CreateMessages < ActiveRecord::Migration
       t.integer :origin_id
       t.string :message_id
       t.string :subject
-      t.text :content
+      t.text :content, :limit => 4294967295
       t.datetime :date
       t.string :from
       t.string :from_name
@@ -13,7 +13,9 @@ class CreateMessages < ActiveRecord::Migration
       t.string :cc
       t.string :bcc
       t.string :mime_version
-      t.text   :origin_text
+      t.text   :origin_text, :limit => 4294967295
+      t.boolean    :is_read, default: false
+      t.boolean    :is_favorite, default: false
 
       t.timestamps null: false
     end

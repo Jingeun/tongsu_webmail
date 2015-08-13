@@ -1,0 +1,36 @@
+sudo apt-get install libpq-dev
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+
+  # Use mysql as the database for Active Record
+  gem 'mysql2'
+end
+
+group :production do
+	gem 'rails_12factor'
+	gem 'pg'
+end
+
+ruby "2.2.1"
+
+
+
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+heroku login
+
+heroku git:remote -a chobbang
+
+config/initializers/devise.rb -- > config.secret_key = '~~~~'
+
+rake assets:precompile RAILS_ENV=production
+
+heroku run rake db:migrate --app [appname]  (학교에서 안됨)
