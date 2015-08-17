@@ -114,7 +114,7 @@
                                     </div>
                                 </td>
                                 <td><span class="starred"><i class="fa fa-star-o"></i></span></td>
-                                <td class="name hidden-xs" onclick="location.href='<%= message_path(message) %>'"><%= message.from %></td>
+                                <td class="name hidden-xs" onclick="location.href='<%= message_path(message) %>'"><%= truncate(message.from, length: 20) %></td>
                                 <td class="subject" onclick="location.href='<%= message_path(message) %>'"><%= message.subject %></td>
                                 <td class="hidden-xs" onclick="location.href='<%= message_path(message) %>'"></td>
                                 <td class="date" onclick="location.href='<%= message_path(message) %>'"><%= message.date.strftime("%b %-d")%></td>

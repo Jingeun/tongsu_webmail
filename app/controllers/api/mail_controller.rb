@@ -163,7 +163,7 @@ module API
 						body = mail.body.decoded
 					end
 
-					body = auto_link(body.gsub(/(?:\n\r?|\r\n?)/, '<br>'))
+					body = auto_link(body.gsub(/(?:\n\r?|\r\n?)/, '<br>'), html: { target: '_blank' })
 
 					reply_to = ''
 					if mail.reply_to.nil?
