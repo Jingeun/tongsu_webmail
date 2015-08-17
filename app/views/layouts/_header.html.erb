@@ -9,7 +9,7 @@
     <!-- need this .js class to initiate slimscroll -->
     <div class="js-sidebar-content">
         <header class="logo hidden-xs">
-            <a href="<%= root_path %>">sing</a>
+            <a href="<%= root_path %>">Tongsu</a>
         </header>
         <!-- seems like lots of recent admin template have this feature of user info in the sidebar.
              looks good, so adding it and enhancing with notifications -->
@@ -46,9 +46,11 @@
                         <i class="fa fa-envelope"></i>
                     </span>
                     Email
+                    <% if @not_read != 0 %>
                     <span class="label label-danger">
-                        9
+                        <%= @not_read %>
                     </span>
+                    <% end %>
                 </a>
             </li>
             <li>
@@ -221,6 +223,7 @@
     </div>
 </nav>
 <!-- This is the white navigation bar seen on the top. A bit enhanced BS navbar. See .page-controls in _base.scss. -->
+<% if user_signed_in? %>
 <nav class="page-controls navbar navbar-default">
     <div class="container-fluid">
         <!-- .navbar-header contains links seen on xs & sm screens -->
@@ -456,6 +459,7 @@
         </div>
     </div>
 </nav>
+<% end %>
 <div class="chat-sidebar" id="chat">
     <div class="chat-sidebar-content">
         <header class="chat-sidebar-header">

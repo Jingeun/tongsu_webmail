@@ -14,8 +14,6 @@ class CreateMessages < ActiveRecord::Migration
       t.string :bcc
       t.string :mime_version
       t.text   :origin_text, :limit => 4294967295
-      t.boolean    :is_read, default: false
-      t.boolean    :is_favorite, default: false
 
       t.timestamps null: false
     end

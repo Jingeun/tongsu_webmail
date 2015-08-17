@@ -18,4 +18,9 @@ class ApplicationController < ActionController::Base
 			false
 		end
 	end
+
+	def get_not_read_messaged
+		# Count Not read messages
+		@not_read = current_user.users_messages.where(is_read: false).count
+	end
 end

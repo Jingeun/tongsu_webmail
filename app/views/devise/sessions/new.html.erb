@@ -1,49 +1,120 @@
 <!-- /users/login -->
+<style type="text/css">
+.menu_top{
+    background-color:#98fb98;
+    height:5px;
+}
+.input-radius-left{
+    border-radius:5px; 
+    border-top-right-radius:0px;
+    border-bottom-right-radius:0px;
+}
+.input-radius-right{
+    border-radius:5px; 
+    border-top-left-radius:0px;
+    border-bottom-left-radius:0px;
+}
+.border-box{
+    color:white;
+}
+.input-group-size{
+    height:40px;
+    font-size:20px;
+}
+</style>
+
+
 <div class="content-wrap">
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
-        <div class="row">
-            <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
-                <h2 class="widget-login-logo animated fadeInUp">
-                    <i class="fa fa-circle text-gray"></i> Log in <i class="fa fa-circle text-warning"></i>
-                </h2>
+        <!--<h1 class="page-title">Mailing List</h1>-->
 
-                <section class="widget widget-login animated fadeInUp">
-                    <header style="margin-bottom: 30px;"> 
-						<h4>Login to Mailing List</h4> 
-					</header>
-                    <div class="widget-body">
-                        <%= form_for(resource, as: resource_name, class: "login-form mt-lg", url: session_path(resource_name)) do |f| %>
-
-                        <div class="form-group">
-                            <label style="font-size:16px" for="user_uid">ID</label>
-                            <%= f.text_field :uid, autofocus: true, class: "form-control" %>
-                        </div>
-
-                        <div class="form-group">
-                            <%= f.label :password, style: "font-size:16px" %>
-                            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-                        </div>
-                        <div class="clearfix">
-                            <div class="btn-toolbar pull-right">
-                                <% if devise_mapping.rememberable? -%>
-                                <div class="checkbox widget-login-info ml-n-lg" style="display:inline; margin-right:20px; font-size:14px;">
-                                    <%= f.check_box :remember_me %>
-                                    <%= f.label :remember_me %>
-                                </div>
-                                <% end %>
-                                <%= f.submit "Login" , class: "btn btn-inverse btn-sm", style: "display:inline; font-size:14px;" %>
+        <div class="row" style="margin:65px; 0 0 60px">
+            <div class="col-md-8" style="padding:0px;">
+                <div class="row border-box" style="width:100%;margin:0px;">
+                    <div id="myCarousel" class="carousel slide border-box" data-ride="carousel" style="width:100%; magin:0px;">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        </ol>
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox" style="height:max-height:300px; width:100%;">
+                            <div class="item active"> <img src="/assets/mailing.png" style="width:100%;  max-height:300px;">
+                            <!--<div class="carousel-caption"><h1> Let's use the</br>Mailing List, Conveniently.</h1></div>-->
                             </div>
                         </div>
-
-                        
-                        <% end %>
-
-                        <%= render "devise/shared/links" %>
-
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
-                </section>
+                </div>
+                <div class="row border-box" style="width:100%;margin:0px;background-color:#4C5C68; padding-left:30px;">
+                    <p style="color:white; font-size:50px; font-weight: 600"> Use the Mailing List </br>Conveniently with Tongsu.</p>
+                </div>
             </div>
+                <div class="col-md-4" style="padding:0px; color:white;">
+                    <section class="widget widget-login animated fadeInUp border-box" style="background-color:#A9BCD0; padding:0px;">
+                        <div class="menu_top"> &nbsp </div>
+                        <div style="font-size:28px; padding:10px; background-color:#58A4B0;"> <b> &nbsp Sign in to Tongsu.tk</b> </div>
+                        <div class="widget-body" style="padding: 20px 30px 20px 30px">
+                            <%= form_for(resource, as: resource_name, class: "login-form mt-lg", url: session_path(resource_name)) do |f| %>
+                            <div class="form-group">
+                                <%= f.label :ID, style: "font-size:23px" %>
+                                <div class="input-group">
+                                    <span class="input-group-addon input-radius-left input-group-size" ><i class="fa fa-user"></i></span>
+                                    <%= f.text_field :uid, autofocus: true, class: "form-control input-radius-right input-group-size", placeholder: "User ID"%>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.label :Password, style: "font-size:23px" %>
+                                <div class="input-group">
+                                    <span class="input-group-addon input-radius-left input-group-size"><i class="fa fa-lock"></i></span>
+                                    <%= f.password_field :password, autocomplete: "off", class: "form-control input-radius-right input-group-size", placeholder: "Password" %>
+                                </div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="btn-toolbar pull-right">
+                                    <% if devise_mapping.rememberable? -%>
+                                    <div class="checkbox widget-login-info ml-n-lg" style="display:inline; margin-right:30px;">
+                                        <%= f.check_box :remember_me %>
+                                        <%= f.label :remember_me, style: "color:white; font-size:20px;"%>
+                                    </div>
+                                    <% end %>
+                                    <%= f.submit "Login " , class: "btn btn-success", style: "display:inline; font-size:20px;padding:6px 18px;" %>
+                                </div>
+                            </div>
+                            <% end %>
+                        </div>
+
+                        <div class="col-lg-6 col-xs-6 border-box" style="display:table;color:white;height:91px; background-color:#9eaa91">
+                            <% if devise_mapping.registerable? && controller_name != "registrations" %>
+                                <div style="display:table-cell; vertical-align:middle;">
+                                    <button type="button" class="btn btn-danger btn-block" onclick="location.href='<%= new_registration_path(resource_name)%>'" style="font-size:16px">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Create an account
+                                    </button>
+                                </div>
+                            <% end %>
+                        </div>
+                        
+                        <div class="col-lg-6 col-xs-6 border-box" style="display:table;height:91px; background-color:#7aa792">
+                            <%- if devise_mapping.recoverable? && controller_name != "passwords" && controller_name != "registrations" %>
+                                <div style="display:table-cell; vertical-align:middle;">
+                                    <button type="button" class="btn btn-gray btn-block" onclick="location.href='<%= new_password_path(resource_name)%>'" style=" font-size:16px;">
+                                    <span class="glyphicon glyphicon-question-sign"></span> Find your password
+                                    </button>
+                                </div>
+                            <% end -%>
+                        </div>
+                    </section>
+                </div>
         </div>
     </main>
 </div>
@@ -52,3 +123,5 @@
 <div class="loader-wrap hiding hide">
   <i class="fa fa-circle-o-notch fa-spin-fast"></i>
 </div>
+
+<script src="/assets/common/bootstrap/carousel.js"></script>

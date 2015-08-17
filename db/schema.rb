@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 20150812195511) do
   create_table "channels_mailinglists", force: :cascade do |t|
     t.integer  "channel_id",     limit: 4
     t.integer  "mailinglist_id", limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.boolean  "is_read",        limit: 1, default: false
+    t.boolean  "is_favorite",    limit: 1, default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   add_index "channels_mailinglists", ["channel_id"], name: "index_channels_mailinglists_on_channel_id", using: :btree
@@ -71,10 +73,8 @@ ActiveRecord::Schema.define(version: 20150812195511) do
     t.string   "bcc",          limit: 255
     t.string   "mime_version", limit: 255
     t.text     "origin_text",  limit: 4294967295
-    t.boolean  "is_read",      limit: 1,          default: false
-    t.boolean  "is_favorite",  limit: 1,          default: false
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "mailinglists", ["message_id"], name: "index_mailinglists_on_message_id", unique: true, using: :btree
@@ -93,10 +93,8 @@ ActiveRecord::Schema.define(version: 20150812195511) do
     t.string   "bcc",          limit: 255
     t.string   "mime_version", limit: 255
     t.text     "origin_text",  limit: 4294967295
-    t.boolean  "is_read",      limit: 1,          default: false
-    t.boolean  "is_favorite",  limit: 1,          default: false
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "messages", ["message_id"], name: "index_messages_on_message_id", unique: true, using: :btree
@@ -130,10 +128,12 @@ ActiveRecord::Schema.define(version: 20150812195511) do
   end
 
   create_table "users_messages", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "message_id", limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "user_id",     limit: 4
+    t.integer  "message_id",  limit: 4
+    t.boolean  "is_read",     limit: 1, default: false
+    t.boolean  "is_favorite", limit: 1, default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   add_index "users_messages", ["message_id"], name: "index_users_messages_on_message_id", using: :btree

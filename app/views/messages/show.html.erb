@@ -14,7 +14,7 @@
                 <ul class="nav nav-pills nav-stacked nav-email-folders mt">
                     <li class="active">
                         <a href="<%= messages_path %>">
-                            <span class="badge pull-right"><%= @current_users_messages.where(is_read: false).count %></span>
+                            <span class="badge pull-right"><%= @not_read %></span>
                             Inbox
                         </a>
                     </li>

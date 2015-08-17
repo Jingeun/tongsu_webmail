@@ -1,13 +1,13 @@
 class MessagesController < ApplicationController
 	before_action :authenticate_user!
+	before_action :get_not_read_messaged, only: [:index, :show]
 
 	def index
-		@messages = current_user.messages
-		@origin_messages = @messages.where(origin_id: nil)
+		# Show only origin messages
+		@messages = current_user.messages.where(origin_id: nil)
 	end
 
 	def show
-		@current_users_messages = current_user.messages
 		@messages = Array.new
 		@message  = Message.find_by_id(params[:id])
 
@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
 		# Find all Replys
 		recursive(@messages, @message)
 		@messages.each do |m|
-			m.update_columns(is_read: true)
+			m.users_messages.where(user_id: current_user).first.update_columns(is_read: true)
 		end
 	end
 

@@ -17,7 +17,7 @@
                 <ul class="nav nav-pills nav-stacked nav-email-folders mt" id="folders-list">
                     <li class="active">
                         <a href="<%= messages_path %>">
-                            <span class="badge pull-right"><%= @messages.where(is_read: false).count %></span>
+                            <span class="badge pull-right"><%= @not_read %></span>
                             Inbox
                         </a>
                     </li>
@@ -105,8 +105,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <% @origin_messages.each_with_index do |message, index| %>
-                            <tr class="<%= message.is_read ? '' : 'unread' %>">
+                            <% @messages.each_with_index do |message, index| %>
+                            <tr class="<%= message.users_messages.where(user_id: current_user).first.is_read ? '' : 'unread' %>">
                                 <td>
                                     <div class="checkbox">
                                         <input type="checkbox" id="checkbox<%= index+1 %>">
