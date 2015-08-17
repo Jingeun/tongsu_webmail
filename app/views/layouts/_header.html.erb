@@ -46,7 +46,7 @@
                         <i class="fa fa-envelope"></i>
                     </span>
                     Email
-                    <% if @not_read != 0 %>
+                    <% if @not_read.present? %>
                     <span class="label label-danger">
                         <%= @not_read %>
                     </span>

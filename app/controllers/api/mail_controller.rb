@@ -61,16 +61,73 @@ module API
 					end
 
 					# Check mail is reply
+					origin_mail = nil
 					in_reply_to = mail.header['In-Reply-To']
 					unless in_reply_to.nil?
 						in_reply_to = in_reply_to.field.value
 						in_reply_to = in_reply_to[/\<(.*)>/,1] || in_reply_to
 
 						# Check origin mails is exist && is mailinglist
-						if registered?(in_reply_to) && ((!mail.header[:list_id].nil?) || (!mail.header[:list_post]))
+						if Mailinglist.registered?(in_reply_to)
+							origin_mail = Mailinglist.where(message_id: in_reply_to).first
 							# Remove origin from mail
 							# TODO
 						end
+					end
+
+					body = ''
+					if mail.multipart?
+						if mail.attachments.empty?
+							body = mail.parts.last.body.decoded
+						else
+							body = mail.parts.first.body.parts.last.body.decoded
+						end
+					else
+						body = mail.body.decoded
+					end
+
+					reply_to = ''
+					if mail.reply_to.nil?
+						reply_to = mail.from.join(', ')
+					end
+
+					# Save Mailinglist
+					mailinglist = Mailinglist.create(
+						message_id:  mail.message_id,
+						subject: 	 mail.subject,
+						content:     body,
+						date: 		 mail.date,
+						from: 		 mail.from.join(', '),
+						from_name:   mail.header['From'].addrs.first.display_name,
+						to: 		 mail.to.join(', '),
+						reply_to: 	 reply_to,
+						cc: 		 mail.cc && mail.cc.join(', '),
+						origin_text: params[:mail]
+					)
+
+					# Associate to Channel
+					ch_mailing = channel.mailinglists
+					unless ch_mailing.include?(mailinglist)
+						ch_mailing << mailinglist
+					end
+
+					# Save File Attachments
+					unless mail.attachments.empty?
+						mail.attachments.each do |attachment|
+							attach = mailinglist.attaches.build
+							dd = attachment.body.decoded
+							attach.content_file_size = dd.bytesize
+							attach.content_content_type = attachment.content_type
+							attach.content = StringIO.new(dd)
+							attach.content_file_name = attachment.filename
+							attach.save
+						end
+					end
+
+					# Associate Origin Mail if reply
+					if origin_mail.present?
+						origin_mail.replys << mailinglist
+						origin_mail.touch
 					end
 
 				else
@@ -85,7 +142,7 @@ module API
 
 						
 						# Check origin mails is exist
-						if registered?(in_reply_to)
+						if Message.registered?(in_reply_to)
 							origin_mail = Message.where(message_id: in_reply_to).first
 						end
 					end
