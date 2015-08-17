@@ -27,6 +27,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 # File attachments
 gem 'paperclip'
+# Auto Link
+gem 'rails_autolink'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

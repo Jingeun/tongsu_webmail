@@ -2,7 +2,7 @@
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
         <ol class="breadcrumb">
-            <li>YOU ARE HERE</li>
+            <li>Tongsu</li>
             <li class="active">Email</li>
         </ol>
         <h1 class="page-title">Email - <span class="fw-semi-bold">Inbox</span></h1>
@@ -13,8 +13,8 @@
                 </a>
                 <ul class="nav nav-pills nav-stacked nav-email-folders mt">
                     <li class="active">
-                        <a href="inbox.html">
-                            <span class="badge pull-right"><%= @current_users_messages.where(is_read: false).count %></span>
+                        <a href="<%= messages_path %>">
+                            <span class="badge pull-right"><%= @not_read %></span>
                             Inbox
                         </a>
                     </li>

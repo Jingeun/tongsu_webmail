@@ -1,5 +1,8 @@
 module API
 	class MailController < ApplicationController
+		include ActionView::Helpers::TextHelper
+  		include ActionView::Helpers::UrlHelper
+
 		def receive
 			mail = Mail.read_from_string(params[:mail])
 
@@ -11,7 +14,7 @@ module API
 				# If mail isn't registered	
 
 				# Check mail is mailinglist
-				if (!mail.header[:list_id].nil?) || (!mail.header[:list_post].nil?)
+				unless mail.header[:list_post].nil?
 					# If mail is mailinglist
 
 					# Get List-Id
@@ -35,18 +38,20 @@ module API
 						group = Group.find_by_name(group_name)
 
 						# If Group isn't registered
-						unless group.prersent?
+						unless group.present?
 							group = Group.create(name: group_name)
 						end
 
+						list_subscribe   = mail.header[:list_subscribe].nil? ? '' : mail.header[:list_subscribe].field.value
+						list_unsubscribe = mail.header[:list_unsubscribe].nil? ? '' : mail.header[:list_unsubscribe].field.value
 						# Resiger Channel
 						channel = group.channels.create(
 							name: 				list_post.split('@').first,
 							email: 				list_post,
 							list_id: 			list_id,
-							list_unsubscribe: 	mail.header[:list_unsubscribe].field.value,
-							list_subscribe: 	mail.header[:list_subscribe].field.value,
-							list_post: 			mail.header[:list_post].field.value
+							list_unsubscribe: 	list_unsubscribe,
+							list_subscribe: 	list_subscribe,
+							list_post: 			list_post
 						)
 					end
 
@@ -157,6 +162,8 @@ module API
 					else
 						body = mail.body.decoded
 					end
+
+					body = auto_link(body.gsub(/(?:\n\r?|\r\n?)/, '<br>'))
 
 					reply_to = ''
 					if mail.reply_to.nil?

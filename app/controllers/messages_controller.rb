@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
 	before_action :authenticate_user!
-	before_action :get_not_read_messaged, only: [:index, :show]
+	before_action :get_not_read_message, except: :show
 
 	def index
 		# Show only origin messages
@@ -22,6 +22,8 @@ class MessagesController < ApplicationController
 		@messages.each do |m|
 			m.users_messages.where(user_id: current_user).first.update_columns(is_read: true)
 		end
+
+		get_not_read_message
 	end
 
 	def new
