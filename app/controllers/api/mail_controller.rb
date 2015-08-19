@@ -17,29 +17,38 @@ module API
 				unless mail.header[:list_post].nil?
 					# If mail is mailinglist
 
+					
+					# Get List-Post
+					list_post = mail.header[:list_post].field.value
+					list_post = list_post[/\<(.*)>/,1] || list_post
+					list_post = list_post.gsub('mailto:', '')
+
 					# Get List-Id
 					list_id   = ""
-					list_post = ""
 					unless mail.header[:list_id].nil?
 						list_id = mail.header[:list_id].field.value
 						list_id = list_id[/\<(.*)>/,1] || list_id
 					else
-						list_post = mail.header[:list_post].field.value
-						list_post = list_post[/\<(.*)>/,1] || list_post
-						list_post.gsub('mailto:', '')
 						list_id = list_post
 					end
+
+					p "DEBUG::MAIL List-Id:#{list_id}"
+					p "DEBUG::MAIL List-Post:#{list_post}"
 
 					# Check Channel is registered
 					channel = Channel.find_by(list_id: list_id)
 					unless channel.present?
+						p "DEBUG::MAIL Channel isn't registered."
 						# If Channel isn't registered
 						group_name = list_id.split('@').last.split('.')[-2..-1].join('.')
 						group = Group.find_by_name(group_name)
+						p "DEBUG::MAIL Find gruop name : #{group_name}"
 
 						# If Group isn't registered
 						unless group.present?
+							p "DEBUG::MAIL Group isn't registered."
 							group = Group.create(name: group_name)
+							p "DEBUG::MAIL Create group : #{group.name}"
 						end
 
 						list_subscribe   = mail.header[:list_subscribe].nil? ? '' : mail.header[:list_subscribe].field.value
@@ -60,6 +69,7 @@ module API
 					delivered_to = delivered_to.first if delivered_to.class.eql?('Array')
 					uid          = delivered_to.field.value.split('@').first
 					user		 = User.where(uid: uid).first
+					p "DEBUG::MAIL Check user subscribing : #{uid}"
 
 					unless user.channels.include?(channel)
 						user.channels << channel

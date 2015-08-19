@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
 	# User & Message N:M Association
 	has_many :messages, through: "users_messages"
-	has_many :users_messages
+	has_many :users_messages, dependent: :destroy
 
 	validates :uid, presence: true, uniqueness: { case_sensitive: false }
 	validates :name ,presence: true
