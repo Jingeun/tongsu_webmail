@@ -11,7 +11,10 @@ Rails.application.routes.draw do
 
 	devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
 	resources :mailinglists, only: [:index, :show]
+
+	# Non-mailinglist emails
 	resources :messages, only: [:index, :show, :new]
+	get '/messages/:id/original' => 'messages#original', as: 'original_message'
 
 	post 'users/id_check' => 'home#id_check'
 

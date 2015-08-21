@@ -33,6 +33,18 @@ class MessagesController < ApplicationController
 		# TODO
 	end
 
+	def original
+		@message = current_user.messages.find(params[:id])
+
+		# If Message non-exists
+		unless @message.present?
+			redirect_to root_path 
+			return
+		else
+			render layout: false
+		end
+	end
+
 	private
 
 	def recursive(messages, message)
