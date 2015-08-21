@@ -1,8 +1,14 @@
 class HomeController < ApplicationController
-	before_action :authenticate_user!, only: [:index]
-	before_action :get_not_read_message, only: [:index]
 
 	def index
+		if user_signed_in?
+			redirect_to dashboard_path
+		else
+			render layout: false
+		end
+	end
+
+	def dashboard
 	end
 
 	def id_check

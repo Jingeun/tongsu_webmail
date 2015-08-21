@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 	get '/messages/:id/original' => 'messages#original', as: 'original_message'
 
 	post 'users/id_check' => 'home#id_check'
+	get  '/dashboard' => 'home#dashboard'
 
 	namespace :api, path: '/', constraints: { subdomain: 'api' } do
 		post '/check/registered'

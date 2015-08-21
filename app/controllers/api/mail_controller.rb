@@ -92,10 +92,10 @@ module API
 
 					body = ''
 					if mail.multipart?
-						if mail.attachments.empty?
-							body = mail.parts.last.body.decoded
+						unless mail.html_part.nil?
+							body = mail.html_part.body.decoded
 						else
-							body = mail.parts.first.body.parts.last.body.decoded
+							body = mail.text_part.body.decoded
 						end
 					else
 						body = mail.body.decoded
@@ -164,10 +164,10 @@ module API
 
 					body = ''
 					if mail.multipart?
-						if mail.attachments.empty?
-							body = mail.parts.last.body.decoded
+						unless mail.html_part.nil?
+							body = mail.html_part.body.decoded
 						else
-							body = mail.parts.first.body.parts.last.body.decoded
+							body = mail.text_part.body.decoded
 						end
 					else
 						body = mail.body.decoded
