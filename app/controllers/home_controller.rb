@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+	before_action :authenticate_user!, only: [:dashboard]
+	before_action :get_not_read_message, only: [:dashboard]
+	before_action :get_groups, only: [:dashboard]
 
 	def index
 		if user_signed_in?

@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
 	before_action :authenticate_user!
-	before_action :get_not_read_message, except: :show
+	before_action :get_not_read_message, except: [:show, :original]
+	before_action :get_groups, except: :original
 
 	def index
 		# Show only origin messages

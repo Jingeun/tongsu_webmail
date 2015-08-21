@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
 		# Count Not read messages
 		@not_read = current_user.users_messages.where(is_read: false).count
 	end
+
+	def get_groups
+		@groups = Group.joins(:channels).merge(current_user.channels).uniq
+	end
 end
