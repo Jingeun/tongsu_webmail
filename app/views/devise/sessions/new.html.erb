@@ -1,127 +1,151 @@
-<!-- /users/login -->
-<style type="text/css">
-.menu_top{
-    background-color:#98fb98;
-    height:5px;
-}
-.input-radius-left{
-    border-radius:5px; 
-    border-top-right-radius:0px;
-    border-bottom-right-radius:0px;
-}
-.input-radius-right{
-    border-radius:5px; 
-    border-top-left-radius:0px;
-    border-bottom-left-radius:0px;
-}
-.border-box{
-    color:white;
-}
-.input-group-size{
-    height:40px;
-    font-size:20px;
-}
-</style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Creative - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <%= stylesheet_link_tag 'index/bootstrap.min.css' %>
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag 'index/font-awesome.min.css' %>
 
 
-<div class="content-wrap">
-    <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
-    <main id="content" class="content" role="main">
-        <!--<h1 class="page-title">Mailing List</h1>-->
+    <!-- Plugin CSS -->
+    <%= stylesheet_link_tag 'index/animate.min.css' %>
 
-        <div class="row" style="margin:65px; 0 0 60px">
-            <div class="col-md-8" style="padding:0px;">
-                <div class="row border-box" style="width:100%;margin:0px;">
-                    <div id="myCarousel" class="carousel slide border-box" data-ride="carousel" style="width:100%; magin:0px;">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        </ol>
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner" role="listbox" style="height:max-height:300px; width:100%;">
-                            <div class="item active"> <img src="/assets/mailing.png" style="width:100%;  max-height:300px;">
-                            <!--<div class="carousel-caption"><h1> Let's use the</br>Mailing List, Conveniently.</h1></div>-->
-                            </div>
-                        </div>
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="row border-box" style="width:100%;margin:0px;background-color:#4C5C68; padding-left:30px;">
-                    <p style="color:white; font-size:50px; font-weight: 600"> Use the Mailing List </br>Conveniently with Tongsu.</p>
+    <!-- Custom CSS -->
+    <%= stylesheet_link_tag 'index/creative.css' %>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top">
+    <header>
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="<%= root_path %>">Tongsu</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="<%= new_user_session_path %>">Sign in</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="<%= new_user_registration_path %>">Sign up</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <section id="services">
+        <div class="container" style="margin-top: 80px">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Sign in</h2>
+                    <hr class="primary">
                 </div>
             </div>
-                <div class="col-md-4" style="padding:0px; color:white;">
-                    <section class="widget widget-login animated fadeInUp border-box" style="background-color:#A9BCD0; padding:0px;">
-                        <div class="menu_top"> &nbsp </div>
-                        <div style="font-size:28px; padding:10px; background-color:#58A4B0;"> <b> &nbsp Sign in to Tongsu.tk</b> </div>
-                        <div class="widget-body" style="padding: 20px 30px 20px 30px">
-                            <%= form_for(resource, as: resource_name, class: "login-form mt-lg", url: session_path(resource_name)) do |f| %>
-                            <div class="form-group">
-                                <%= f.label :ID, style: "font-size:23px" %>
-                                <div class="input-group">
-                                    <span class="input-group-addon input-radius-left input-group-size" ><i class="fa fa-user"></i></span>
-                                    <%= f.text_field :uid, autofocus: true, class: "form-control input-radius-right input-group-size", placeholder: "User ID"%>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <%= f.label :Password, style: "font-size:23px" %>
-                                <div class="input-group">
-                                    <span class="input-group-addon input-radius-left input-group-size"><i class="fa fa-lock"></i></span>
-                                    <%= f.password_field :password, autocomplete: "off", class: "form-control input-radius-right input-group-size", placeholder: "Password" %>
-                                </div>
-                            </div>
-
-                            <div class="clearfix">
-                                <div class="btn-toolbar pull-right">
-                                    <% if devise_mapping.rememberable? -%>
-                                    <div class="checkbox widget-login-info ml-n-lg" style="display:inline; margin-right:30px;">
-                                        <%= f.check_box :remember_me %>
-                                        <%= f.label :remember_me, style: "color:white; font-size:20px;"%>
-                                    </div>
-                                    <% end %>
-                                    <%= f.submit "Login " , class: "btn btn-success", style: "display:inline; font-size:20px;padding:6px 18px;" %>
-                                </div>
-                            </div>
-                            <% end %>
-                        </div>
-
-                        <div class="col-lg-6 col-xs-6 border-box" style="display:table;color:white;height:91px; background-color:#9eaa91">
-                            <% if devise_mapping.registerable? && controller_name != "registrations" %>
-                                <div style="display:table-cell; vertical-align:middle;">
-                                    <button type="button" class="btn btn-danger btn-block" onclick="location.href='<%= new_registration_path(resource_name)%>'" style="font-size:16px">
-                                    <span class="glyphicon glyphicon-plus-sign"></span> Create an account
-                                    </button>
-                                </div>
-                            <% end %>
-                        </div>
-                        
-                        <div class="col-lg-6 col-xs-6 border-box" style="display:table;height:91px; background-color:#7aa792">
-                            <%- if devise_mapping.recoverable? && controller_name != "passwords" && controller_name != "registrations" %>
-                                <div style="display:table-cell; vertical-align:middle;">
-                                    <button type="button" class="btn btn-gray btn-block" onclick="location.href='<%= new_password_path(resource_name)%>'" style=" font-size:16px;">
-                                    <span class="glyphicon glyphicon-question-sign"></span> Find your password
-                                    </button>
-                                </div>
-                            <% end -%>
-                        </div>
-                    </section>
-                </div>
         </div>
-    </main>
-</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
+                    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                        <div class="form-group">
+                            <%= f.text_field :uid, autofocus: true, class: "form-control", placeholder: "ID"%>
+                        </div>
+                        <div class="form-group">
+                            <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password" %>
 
-<!-- The Loader. Is shown when pjax happens -->
-<div class="loader-wrap hiding hide">
-  <i class="fa fa-circle-o-notch fa-spin-fast"></i>
-</div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="pull-right">
+                                <%= f.submit "Login " , class: "btn btn-inverse btn-sm" %>
+                            </div>
+                        </div>
+                        <div class="row" style="height:24px; margin-top: 20px;">
+                            <div class="col-sm-6 col-sm-push-6">
+                                <div class="clearfix">
+                                    <div class="pull-right ml-n-lg">
+                                        <%= f.check_box :remember_me %>
+                                        <%= f.label :remember_me, 'Keep me sign in' %>
+                                    </div>
+                                </div>
+                            </div>
 
-<script src="/assets/common/bootstrap/carousel.js"></script>
+                            <div class="col-sm-6 col-sm-pull-6" style="margin-top: 3px;">
+                                <a class="mr-n-lg" href="#">Trouble with account?</a>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x wow bounceIn"></i>
+                    <p>123-456-6789</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <p><a href="mailto:kkd927@tongsu.tk">kkd927@tongsu.tk</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</header>
+    <!-- jQuery -->
+    <%= javascript_include_tag 'index/jquery.js' %>
+
+    <!-- Bootstrap Core JavaScript -->
+    <%= javascript_include_tag 'index/bootstrap.min.js' %>
+
+    <!-- Plugin JavaScript -->
+    <%= javascript_include_tag 'index/jquery.easing.min.js' %>
+    <%= javascript_include_tag 'index/jquery.fittext.js' %>
+    <%= javascript_include_tag 'index/wow.min.js' %>
+
+    <!-- Custom Theme JavaScript -->
+    <%= javascript_include_tag 'index/creative.js' %>
+
+</body>
+
+</html>
