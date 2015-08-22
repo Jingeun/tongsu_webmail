@@ -29,6 +29,8 @@ gem 'devise'
 gem 'paperclip'
 # Auto Link
 gem 'rails_autolink'
+# for remove custom css
+gem 'nokogiri'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

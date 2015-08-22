@@ -1,5 +1,8 @@
 class Mailinglist < ActiveRecord::Base
   default_scope -> { order('updated_at DESC') }
+  # File attachment
+  has_many :attaches, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :attaches
 
   # Channel & Mailinglist N:M Association
   has_many :channels_mailinglists

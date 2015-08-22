@@ -1,0 +1,105 @@
+<!-- timelines -->
+
+<script src="/assets/timelines/jquery.magnific-popup.min.js"></script>
+<!-- ##Gmap Library <script src="/assets/timelines/maps.js"></script> <script src="/assets/timelines/timeline.js"></script> -->
+
+<div class="content-wrap">
+    <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
+    <main id="content" class="content" role="main">
+        <ol class="breadcrumb" style="font-size:16px;">
+            <li>Tongsu</li>
+            <li class="active">Mailing List</li>
+        </ol>
+        <h2 class="page-title"><%= @channel.group.name %> - <span class="fw-semi-bold"><%= @channel.name %></span></h2>
+        <ul class="timeline" style="margin-left:-90px">
+            <% temp_date    = nil %>
+            <% color_index  = 0 %>
+
+            <% @mailinglists.each do |message| %>
+            <% message_updated_at = message.updated_at.localtime.strftime("%b %e") %>
+            <li >
+                <% if temp_date.nil? or message_updated_at != temp_date %>
+                    <% temp_date   = message_updated_at %>
+
+                    <time class="event-time" datetime="">
+                        <!-- <span class="date"><%= message_updated_at %></span> -->
+                        <span class="time">
+                            <% if message_updated_at == DateTime.now.strftime("%b %e") %>
+                                Today
+                            <% else %>
+                                <%= message_updated_at %>
+                            <% end %>
+                        </span>
+                    </time>      
+
+                    <% case ( color_index % 6 ) %>
+                    <% when 0 %>
+                        <% color = "event-icon-danger" %>
+                    <% when 1 %>
+                        <% color = "event-icon-warning" %>
+                    <% when 2 %>
+                        <% color = "event-icon-success" %>
+                    <% when 3 %>
+                        <% color = "event-icon-info" %>
+                    <% when 4 %>
+                        <% color = "event-icon-primary" %>
+                    <% when 5 %>
+                        <% color = "event-icon-gary" %>
+                    <% end %>
+
+                    <span class="event-icon <%= color %>">
+                        <i class="glyphicon glyphicon-sort"></i>
+                    </span>
+
+                    <% color_index = color_index+1 %>
+                <% end %>
+                <section class="event">
+                    <span class="thumb-sm avatar pull-left mr-sm">
+                        <img class="img-circle" src="<%= asset_path 'common/people/a2.jpg' %>">
+                    </span>
+                    <h4 class="event-heading"><a href="#"><%= message.from_name %></a> <small><%= message.from %></small></h4>
+                    <p class="fs-sm text-muted"><%= message.created_at.localtime.strftime("%b %e, %l:%M %P") %> - to <%= @channel.name %></p>
+                    <h4><span class="fw-semi-bold"><%= message.subject %></span></h4>
+                    <div class="fs-mini" style="font-size:15px !important;font-weight: 400;"><%= message.content.html_safe %></div>
+                    <footer>
+                        <ul class="post-links">
+                            <li><a href="#">1 hour</a></li>
+                            <li><a href="#"><span class="text-danger"><i class="fa fa-heart"></i> Like</span></a></li>
+                            <li><a href="#">Comment</a></li>
+                        </ul>
+                        <ul class="post-comments">
+                            <li>
+                                <span class="thumb-xs avatar pull-left mr-sm">
+                                    <img class="img-circle" src="<%= asset_path 'common/people/a2.jpg' %>">
+                                </span>
+                                <div class="comment-body">
+                                    <h6 class="author fw-semi-bold">Radrigo Gonzales <small>7 mins ago</small></h6>
+                                    <p>Someone said they were the best people out there just few years ago. Don't know
+                                        better options.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="thumb-xs avatar pull-left mr-sm">
+                                    <img class="img-circle" src="<%= asset_path 'common/people/a4.jpg' %>">
+                                </span>
+                                <div class="comment-body">
+                                    <h6 class="author fw-semi-bold">Ignacio Abad <small>6 mins ago</small></h6>
+                                    <p>True. Heard absolutely the same.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="thumb-xs avatar pull-left mr-sm">
+                                    <img class="img-circle" src="<%= asset_path 'avatar.png' %>">
+                                </span>
+                                <div class="comment-body">
+                                    <input class="form-control input-sm" type="text" placeholder="Write your comment...">
+                                </div>
+                            </li>
+                        </ul>
+                    </footer>
+                </section>
+            </li>
+            <% end %>
+        </ul>
+    </main>
+</div>

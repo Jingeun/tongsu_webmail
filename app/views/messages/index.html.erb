@@ -117,7 +117,7 @@
                                 <td class="name hidden-xs" onclick="location.href='<%= message_path(message) %>'"><%= truncate(message.from, length: 20) %></td>
                                 <td class="subject" onclick="location.href='<%= message_path(message) %>'"><%= message.subject %></td>
                                 <td class="hidden-xs" onclick="location.href='<%= message_path(message) %>'"></td>
-                                <td class="date" onclick="location.href='<%= message_path(message) %>'"><%= message.date.strftime("%b %-d")%></td>
+                                <td class="date" onclick="location.href='<%= message_path(message) %>'"><%= message.created_at.localtime.strftime("%b %-d")%></td>
                             </tr>
                             <% end%>
                             <!-- <tr class="unread">

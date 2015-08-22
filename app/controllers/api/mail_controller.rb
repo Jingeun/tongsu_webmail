@@ -101,6 +101,16 @@ module API
 						body = mail.body.decoded
 					end
 
+					# body = body.gsub(/(<br>)+/, '<br>')
+					doc  = Nokogiri::HTML(body)
+					doc.xpath('.//@style').remove
+					doc.css("blockquote").each do |block|
+						block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
+					end
+					body = doc.to_s
+					body = auto_link(body.lstrip, :html => { :target => '_blank' })
+					# sanitize(body, scrubber: Loofah::Scrubber.new { |node| node.remove if node.name == 'style' })
+
 					reply_to = ''
 					if mail.reply_to.nil?
 						reply_to = mail.from.join(', ')
@@ -173,7 +183,13 @@ module API
 						body = mail.body.decoded
 					end
 
-					body = auto_link(body.gsub(/(?:\n\r?|\r\n?)/, '<br>'), html: { target: '_blank' })
+					doc  = Nokogiri::HTML(body)
+					doc.xpath('.//@style').remove
+					doc.css("blockquote").each do |block|
+						block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
+					end
+					body = doc.to_s
+					body = auto_link(body.lstrip, :html => { :target => '_blank' })
 
 					reply_to = ''
 					if mail.reply_to.nil?

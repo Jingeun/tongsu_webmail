@@ -89,7 +89,7 @@
                     </a>
                     <ul id="sidebar-<%= group.id %>" class="collapse">
                         <% group.channels.each do |channel| %>
-                            <li><a href="form_elements.html"><%= channel.name %></a></li>
+                            <li><a href="<%= mailinglist_path(channel) %>"><%= channel.name %></a></li>
                         <% end %>
                     </ul>
                 </li>

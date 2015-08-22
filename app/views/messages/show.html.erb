@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                     <time class="email-date pull-right">
-                                        <%= message.date.strftime("%k:%M") %>
+                                        <%= message.created_at.localtime.strftime("%k:%M") %>
                                     </time>
                                 </div>
                             </div>

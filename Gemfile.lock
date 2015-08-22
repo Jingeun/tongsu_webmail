@@ -188,6 +188,7 @@ DEPENDENCIES
   jquery-turbolinks
   mysql
   mysql2
+  nokogiri
   paperclip
   rails (= 4.2.0)
   rails_autolink
