@@ -63,7 +63,7 @@
                     <div class="fs-mini" style="font-size:15px !important;font-weight: 400;">
                         <% if message.content.length > 400 %>
                             <% first_message = truncate(message.content, length: 350, omission: "<span class='text_exposed_hide'>...</span>", separator: "<br>", escape: false) { link_to "Continue", "javascript:{};", onclick: 'see_more('+ message.id.to_s+')' } %>
-                            <div class="message_content" id="<%= message.id %>"><%= Nokogiri::HTML::DocumentFragment.parse(first_message).to_html.html_safe %></div>
+                            <div id="message_content_<%= message.id %>"><%= Nokogiri::HTML::DocumentFragment.parse(first_message).to_html.html_safe %></div>
 
                         <% else %>
                             <%= message.content.html_safe %>

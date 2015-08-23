@@ -1,1 +1,1 @@
-$('#<%= @message.id %>').html('<%= escape_javascript(@message.content).html_safe %>');
+$('#message_content_<%= @message.id %>').html('<%= escape_javascript(@message.content).html_safe %>');
