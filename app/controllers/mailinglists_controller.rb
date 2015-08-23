@@ -14,4 +14,11 @@ class MailinglistsController < ApplicationController
 			redirect_to root_path
 		end
 	end
+
+	def see_more
+		@message = Mailinglist.find_by_id(params[:id])
+		respond_to do |format|
+			format.js
+		end
+	end
 end

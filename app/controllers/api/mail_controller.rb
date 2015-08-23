@@ -98,7 +98,7 @@ module API
 							body = mail.text_part.body.decoded
 						end
 					else
-						body = mail.body.decoded
+						body = mail.body.decoded.gsub(/(?:\n\r?|\r\n?)/, '<br>')
 					end
 
 					# body = body.gsub(/(<br>)+/, '<br>')
@@ -180,7 +180,7 @@ module API
 							body = mail.text_part.body.decoded
 						end
 					else
-						body = mail.body.decoded
+						body = mail.body.decoded.gsub(/(?:\n\r?|\r\n?)/, '<br>')
 					end
 
 					doc  = Nokogiri::HTML(body)

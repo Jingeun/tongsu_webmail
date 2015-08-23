@@ -1,0 +1,1 @@
+$('#<%= @message.id %>').html('<%= escape_javascript(@message.content).html_safe %>');

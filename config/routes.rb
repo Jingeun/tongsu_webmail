@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
 	devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
 	resources :mailinglists, only: [:index, :show]
+	post '/mailinglists/see_more'
 
 	# Non-mailinglist emails
 	resources :messages, only: [:index, :show, :new]

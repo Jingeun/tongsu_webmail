@@ -1,0 +1,8 @@
+.text_exposed_hide {
+	display: inline-block;
+	margin-right: 4px;
+}
+
+.text_exposed_show {
+	display: none;
+}
