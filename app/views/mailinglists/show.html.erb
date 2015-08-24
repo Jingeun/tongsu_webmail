@@ -1,6 +1,5 @@
 <!-- timelines -->
 
-<script src="/assets/timelines/jquery.magnific-popup.min.js"></script>
 <!-- ##Gmap Library <script src="/assets/timelines/maps.js"></script> <script src="/assets/timelines/timeline.js"></script> -->
 
 <div class="content-wrap">
@@ -55,7 +54,7 @@
                 <% end %>
                 <section class="event">
                     <span class="thumb-sm avatar pull-left mr-sm">
-                        <img class="img-circle" src="<%= asset_path 'common/people/a2.jpg' %>">
+                        <img class="img-circle" src="<%= asset_path 'avatar.png' %>">
                     </span>
                     <h4 class="event-heading"><a href="#"><%= message.from_name %></a> <small><%= message.from %></small></h4>
                     <p class="fs-sm text-muted"><%= message.created_at.localtime.strftime("%b %e, %l:%M %P") %> - to <%= @channel.name %></p>
@@ -69,40 +68,15 @@
                             <%= message.content.html_safe %>
                         <% end %>
                     </div>
-                    <footer>
+                    <footer style="font-weight:400;" >
                         <ul class="post-links">
                             <li><a href="#">1 hour</a></li>
                             <li><a href="#"><span class="text-danger"><i class="fa fa-heart"></i> Like</span></a></li>
-                            <li><a href="#">Comment</a></li>
+                            <% reply = Array.new %>
+                            <% recursive(reply, message) %>
+                            <li><a href="javascript:{}" onclick="get_comments(<%= message.id.to_s %>)"><%= pluralize(reply.count-1, 'Comment') %></a></li>
                         </ul>
-                        <ul class="post-comments">
-                            <li>
-                                <span class="thumb-xs avatar pull-left mr-sm">
-                                    <img class="img-circle" src="<%= asset_path 'common/people/a2.jpg' %>">
-                                </span>
-                                <div class="comment-body">
-                                    <h6 class="author fw-semi-bold">Radrigo Gonzales <small>7 mins ago</small></h6>
-                                    <p>Someone said they were the best people out there just few years ago. Don't know
-                                        better options.</p>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="thumb-xs avatar pull-left mr-sm">
-                                    <img class="img-circle" src="<%= asset_path 'common/people/a4.jpg' %>">
-                                </span>
-                                <div class="comment-body">
-                                    <h6 class="author fw-semi-bold">Ignacio Abad <small>6 mins ago</small></h6>
-                                    <p>True. Heard absolutely the same.</p>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="thumb-xs avatar pull-left mr-sm">
-                                    <img class="img-circle" src="<%= asset_path 'avatar.png' %>">
-                                </span>
-                                <div class="comment-body">
-                                    <input class="form-control input-sm" type="text" placeholder="Write your comment...">
-                                </div>
-                            </li>
+                        <ul class="post-comments" id="message_reply_<%= message.id %>" >
                         </ul>
                     </footer>
                 </section>
@@ -112,16 +86,5 @@
     </main>
 </div>
 
-<script>
-    function see_more(id){
-        $.ajax({
-            url: "/mailinglists/see_more",
-            type: "POST",
-            data: {id: id},
-            success: function(data) {
-            },
-            error: function(data){
-            }
-        });
-    }
-</script>
+<script src="/assets/timelines/jquery.magnific-popup.min.js"></script>
+<script src="/assets/mailinglists.js"></script>

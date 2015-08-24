@@ -95,7 +95,7 @@ module API
 						unless mail.html_part.nil?
 							body = mail.html_part.body.decoded
 						else
-							body = mail.text_part.body.decoded
+							body = mail.text_part.body.decoded.gsub(/(?:\n\r?|\r\n?)/, '<br>')
 						end
 					else
 						body = mail.body.decoded.gsub(/(?:\n\r?|\r\n?)/, '<br>')
@@ -104,11 +104,14 @@ module API
 					# body = body.gsub(/(<br>)+/, '<br>')
 					doc  = Nokogiri::HTML(body)
 					doc.xpath('.//@style').remove
+					doc.xpath('.//@mark').remove
+					doc.xpath('//comment()').remove
 					doc.css("blockquote").each do |block|
 						block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
 					end
 					body = doc.to_s
 					body = auto_link(body.lstrip, :html => { :target => '_blank' })
+					body = body.gsub("  ", "&nbsp; &nbsp;")
 					# sanitize(body, scrubber: Loofah::Scrubber.new { |node| node.remove if node.name == 'style' })
 
 					reply_to = ''
@@ -177,7 +180,7 @@ module API
 						unless mail.html_part.nil?
 							body = mail.html_part.body.decoded
 						else
-							body = mail.text_part.body.decoded
+							body = mail.text_part.body.decoded.gsub(/(?:\n\r?|\r\n?)/, '<br>')
 						end
 					else
 						body = mail.body.decoded.gsub(/(?:\n\r?|\r\n?)/, '<br>')
@@ -185,11 +188,13 @@ module API
 
 					doc  = Nokogiri::HTML(body)
 					doc.xpath('.//@style').remove
+					doc.xpath('.//@mark').remove
 					doc.css("blockquote").each do |block|
 						block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
 					end
 					body = doc.to_s
 					body = auto_link(body.lstrip, :html => { :target => '_blank' })
+					body = body.gsub("  ", "&nbsp; &nbsp;")
 
 					reply_to = ''
 					if mail.reply_to.nil?

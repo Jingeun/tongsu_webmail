@@ -1,0 +1,1 @@
+$('#message_reply_<%= @message.id %>').html('<%= j render "replys" %>');
