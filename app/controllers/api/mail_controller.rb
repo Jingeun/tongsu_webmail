@@ -110,7 +110,9 @@ module API
 						block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
 					end
 					body = doc.to_s
-					body = auto_link(body.lstrip, :html => { :target => '_blank' })
+					body = auto_link(body.lstrip, :html => { :target => '_blank' }) do |text|
+						truncate(text, :length => 100)
+					end
 					body = body.gsub("  ", "&nbsp; &nbsp;")
 					# sanitize(body, scrubber: Loofah::Scrubber.new { |node| node.remove if node.name == 'style' })
 
@@ -193,7 +195,9 @@ module API
 						block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
 					end
 					body = doc.to_s
-					body = auto_link(body.lstrip, :html => { :target => '_blank' })
+					body = auto_link(body.lstrip, :html => { :target => '_blank' }) do |text|
+						truncate(text, :length => 100)
+					end
 					body = body.gsub("  ", "&nbsp; &nbsp;")
 
 					reply_to = ''
@@ -251,6 +255,10 @@ module API
 
 			end
 			head 204
+		end
+
+		def download
+			send_file params[:url]
 		end
 	end
 end

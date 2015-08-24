@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 		post '/check/registered'
 		# post '/check/mailinglist'
 		post '/mail/receive'
+		# attachments download
+		post '/file/download' => 'mail#download', as: 'download'
 	end
 
 end

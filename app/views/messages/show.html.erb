@@ -102,18 +102,19 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <hr>
-                                        <p class="details"><strong><%= message.attaches.count %> attachments</strong> &nbsp;-&nbsp; <a href="#">Download all attachments</a>
-                                            &nbsp;&nbsp;&nbsp;<a href="#">View all Images</a></p>
+                                        <p class="details"><strong><%= pluralize(message.attaches.count, "attachment") %></strong> &nbsp;<!-- -&nbsp; 
+                                             <a href="#">Download all attachments</a>
+                                            &nbsp;&nbsp;&nbsp;<a href="#">View all Images</a></p> -->
                                         <% message.attaches.each do |file| %>
-                                        <section class="attachment">
+                                        <section class="attachment" style="width: 300px;">
                                             <% if file.content_content_type.start_with?('image/') %>
                                                 <a href="<%= file.content.url %>" data-lightbox="roadtrip" data-title="<%= file.content_file_name %>">
-                                                <%= image_tag file.content.url, class: "img-responsive", style: "max-width: 300px;" %></a>
+                                                <%= image_tag file.content.url, style: "max-width: 300px;" %></a>
                                             <% end %>
                                                 <h5 class="title"><%= file.content_file_name %></h5>
                                                 <p class="details">
                                                     <%= (file.content_file_size/1024.0).round(2) %>K  &nbsp;&nbsp;
-                                                    <a href="#">Download</a>
+                                                    <%= link_to "Download", api_download_url(url: file.content.path, subdomain: "api"), method: :post %>
                                                 </p>
                                         </section>
                                         <% end %>

@@ -68,6 +68,30 @@
                             <%= message.content.html_safe %>
                         <% end %>
                     </div>
+                    <% if message.attaches.present? %>
+                    <div class="email-attachments">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <hr>
+                                <p class="details"><strong><%= pluralize(message.attaches.count, "attachment") %></strong> &nbsp;
+                                    <!-- S-&nbsp; <a href="#">Download all attachments</a> &nbsp;&nbsp;&nbsp;<a href="javascript:{}" onclick="" >View all Images</a></p> -->
+                                <% message.attaches.each do |file| %>
+                                <section class="attachment" stlye="width:300px;">
+                                    <% if file.content_content_type.start_with?('image/') %>
+                                        <a href="<%= file.content.url %>" data-lightbox="roadtrip" data-title="<%= file.content_file_name %>">
+                                        <%= image_tag file.content.url, style: "max-width: 300px;" %></a>
+                                    <% end %>
+                                        <h5 class="title"><%= file.content_file_name %></h5>
+                                        <p class="details">
+                                            <%= (file.content_file_size/1024.0).round(2) %>K  &nbsp;&nbsp;
+                                            <%= link_to "Download", api_download_url(url: file.content.path, subdomain: "api"), method: :post %>
+                                        </p>
+                                </section>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div> 
+                    <% end %>
                     <footer style="font-weight:400;" >
                         <ul class="post-links">
                             <li><a href="#">1 hour</a></li>
