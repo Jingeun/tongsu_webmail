@@ -1,0 +1,7 @@
+$('#my-posts').append('<%= j render @mailinglists %>');
+<% if @mailinglists.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @mailinglists %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

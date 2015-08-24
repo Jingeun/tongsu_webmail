@@ -1,0 +1,88 @@
+<% message_updated_at = mailinglist.updated_at.localtime.strftime("%b %e") %>
+<li >
+<% if $temp_date.nil? or message_updated_at != $temp_date %>
+    <% $temp_date   = message_updated_at %>
+
+    <time class="event-time" datetime="">
+        <!-- <span class="date"><%= message_updated_at %></span> -->
+        <span class="time" style="padding-right: 100px;">
+            <% if message_updated_at == DateTime.now.strftime("%b %e") %>
+                Today
+            <% else %>
+                <%= message_updated_at %>
+            <% end %>
+        </span>
+    </time>      
+
+    <% case ( $color_index % 5 ) %>
+    <% when 0 %>
+        <% color = "event-icon-danger" %>
+    <% when 1 %>
+        <% color = "event-icon-warning" %>
+    <% when 2 %>
+        <% color = "event-icon-success" %>
+    <% when 3 %>
+        <% color = "event-icon-info" %>
+    <% when 4 %>
+        <% color = "event-icon-primary" %>
+    <% end %>
+
+    <span class="event-icon <%= color %>">
+        <i class="glyphicon glyphicon-sort"></i>
+    </span>
+
+    <% $color_index = $color_index+1 %>
+<% end %>
+<section class="event">
+    <span class="thumb-sm avatar pull-left mr-sm">
+        <img class="img-circle" src="<%= asset_path 'avatar.png' %>">
+    </span>
+    <h4 class="event-heading"><a href="#"><%= mailinglist.from_name %></a> <small><%= mailinglist.from %></small></h4>
+    <p class="fs-sm text-muted"><%= mailinglist.created_at.localtime.strftime("%b %e, %l:%M %P") %> - to <%= @channel.name %></p>
+    <h4 style="margin-bottom: 20px;"><span class="fw-semi-bold"><%= mailinglist.subject %></span></h4>
+    <div class="fs-mini" style="font-size:15px !important;font-weight: 400;">
+        <% if mailinglist.content.length > 400 %>
+            <% first_message = truncate(mailinglist.content, length: 350, omission: "<span class='text_exposed_hide'>...</span>", separator: "<br>", escape: false) { link_to "Continue", "javascript:{};", onclick: 'see_more('+ mailinglist.id.to_s+')' } %>
+            <div id="message_content_<%= mailinglist.id %>"><%= Nokogiri::HTML::DocumentFragment.parse(first_message).to_html.html_safe %></div>
+
+        <% else %>
+            <%= mailinglist.content.html_safe %>
+        <% end %>
+    </div>
+    <% if mailinglist.attaches.present? %>
+    <div class="email-attachments">
+        <div class="row">
+            <div class="col-sm-6">
+                <hr>
+                <p class="details"><strong><%= pluralize(mailinglist.attaches.count, "attachment") %></strong> &nbsp;
+                    <!-- S-&nbsp; <a href="#">Download all attachments</a> &nbsp;&nbsp;&nbsp;<a href="javascript:{}" onclick="" >View all Images</a></p> -->
+                <% mailinglist.attaches.each do |file| %>
+                <section class="attachment" stlye="width:300px;">
+                    <% if file.content_content_type.start_with?('image/') %>
+                        <a href="<%= file.content.url %>" data-lightbox="roadtrip" data-title="<%= file.content_file_name %>">
+                        <%= image_tag file.content.url, style: "max-width: 300px;" %></a>
+                    <% end %>
+                        <h5 class="title"><%= file.content_file_name %></h5>
+                        <p class="details">
+                            <%= (file.content_file_size/1024.0).round(2) %>K  &nbsp;&nbsp;
+                            <%= link_to "Download", api_download_url(url: file.content.path, subdomain: "api"), method: :post %>
+                        </p>
+                </section>
+                <% end %>
+            </div>
+        </div>
+    </div> 
+    <% end %>
+    <footer style="font-weight:400;" >
+        <ul class="post-links">
+            <li><a href="#">1 hour</a></li>
+            <li><a href="#"><span class="text-danger"><i class="fa fa-heart"></i> Like</span></a></li>
+            <% reply = Array.new %>
+            <% recursive(reply, mailinglist) %>
+            <li><a href="javascript:{}" onclick="get_comments(<%= mailinglist.id.to_s %>)"><%= pluralize(reply.count-1, 'Comment') %></a></li>
+        </ul>
+        <ul class="post-comments" id="message_reply_<%= mailinglist.id %>" >
+        </ul>
+    </footer>
+</section>
+</li>
