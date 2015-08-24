@@ -107,14 +107,14 @@
                                         <% message.attaches.each do |file| %>
                                         <section class="attachment">
                                             <% if file.content_content_type.start_with?('image/') %>
-                                            <%= image_tag file.content.url, class: "img-responsive" %>
+                                                <a href="<%= file.content.url %>" data-lightbox="roadtrip" data-title="<%= file.content_file_name %>">
+                                                <%= image_tag file.content.url, class: "img-responsive", style: "max-width: 300px;" %></a>
                                             <% end %>
-                                            <h5 class="title"><%= file.content_file_name %></h5>
-                                            <p class="details">
-                                                568K  &nbsp;&nbsp;
-                                                <a href="#">View</a> &nbsp;&nbsp;
-                                                <a href="#">Download</a>
-                                            </p>
+                                                <h5 class="title"><%= file.content_file_name %></h5>
+                                                <p class="details">
+                                                    <%= (file.content_file_size/1024.0).round(2) %>K  &nbsp;&nbsp;
+                                                    <a href="#">Download</a>
+                                                </p>
                                         </section>
                                         <% end %>
                                     </div>
@@ -129,3 +129,5 @@
         </div>
     </main>
 </div>
+
+<%= javascript_include_tag 'lightbox/lightbox' %>

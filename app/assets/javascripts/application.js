@@ -29,4 +29,3 @@
 
 //= require common/settings.js
 //= require common/app.js
-//= require lightbox/lightbox.js
