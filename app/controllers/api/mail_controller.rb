@@ -82,11 +82,9 @@ module API
 						in_reply_to = in_reply_to.field.value
 						in_reply_to = in_reply_to[/\<(.*)>/,1] || in_reply_to
 
-						# Check origin mails is exist && is mailinglist
+						# Check origin mails is exist
 						if Mailinglist.registered?(in_reply_to)
 							origin_mail = Mailinglist.where(message_id: in_reply_to).first
-							# Remove origin from mail
-							# TODO
 						end
 					end
 
@@ -94,6 +92,20 @@ module API
 					if mail.multipart?
 						unless mail.html_part.nil?
 							body = mail.html_part.body.decoded
+							doc  = Nokogiri::HTML(body)
+							doc  = doc.xpath('//body')
+							doc.xpath('.//comment()').remove
+							doc.xpath('.//@style').remove
+							doc.xpath('.//@mark').remove
+
+							if in_reply_to.nil?
+								doc.css("blockquote").each do |block|
+									block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
+								end
+							else
+								doc.xpath('.//blockquote').remove
+							end
+							body = doc.to_s
 						else
 							body = mail.text_part.body.decoded.gsub(/(?:\n\r?|\r\n?)/, '<br>')
 						end
@@ -102,18 +114,18 @@ module API
 					end
 
 					# body = body.gsub(/(<br>)+/, '<br>')
-					doc  = Nokogiri::HTML(body)
-					doc.xpath('.//@style').remove
-					doc.xpath('.//@mark').remove
-					doc.xpath('//comment()').remove
-					doc.css("blockquote").each do |block|
-						block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
-					end
-					body = doc.to_s
 					body = auto_link(body.lstrip, :html => { :target => '_blank' }) do |text|
 						truncate(text, :length => 100)
 					end
 					body = body.gsub("  ", "&nbsp; &nbsp;")
+					body = body.gsub("<pre>", "<p>")
+					body = body.gsub("</pre>", "</p>")
+
+					unless in_reply_to.nil?
+						arr  = body.split("<br>")
+						arr.delete_if { |a| a.start_with?("&gt;") }
+						body = arr.join("<br>")
+					end
 					# sanitize(body, scrubber: Loofah::Scrubber.new { |node| node.remove if node.name == 'style' })
 
 					reply_to = ''
@@ -181,6 +193,14 @@ module API
 					if mail.multipart?
 						unless mail.html_part.nil?
 							body = mail.html_part.body.decoded
+							doc  = Nokogiri::HTML(body)
+							doc  = doc.xpath('//body')
+							doc.xpath('.//@style').remove
+							doc.xpath('.//@mark').remove
+							doc.css("blockquote").each do |block|
+								block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
+							end
+							body = doc.to_s
 						else
 							body = mail.text_part.body.decoded.gsub(/(?:\n\r?|\r\n?)/, '<br>')
 						end
@@ -188,13 +208,7 @@ module API
 						body = mail.body.decoded.gsub(/(?:\n\r?|\r\n?)/, '<br>')
 					end
 
-					doc  = Nokogiri::HTML(body)
-					doc.xpath('.//@style').remove
-					doc.xpath('.//@mark').remove
-					doc.css("blockquote").each do |block|
-						block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
-					end
-					body = doc.to_s
+					
 					body = auto_link(body.lstrip, :html => { :target => '_blank' }) do |text|
 						truncate(text, :length => 100)
 					end
