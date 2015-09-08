@@ -91,7 +91,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def send_msg(key)  
     require 'bunny'
 
-    conn = Bunny.new(hostname: "210.118.69.43", vhost: "tongsu", user: "webmail", password: "1234")
+    conn = Bunny.new(hostname: "210.118.69.58", vhost: "tongsu-vhost", user: "tongsu", password: "12341234")
     conn.start
 
     ch   = conn.create_channel
