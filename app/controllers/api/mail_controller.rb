@@ -8,7 +8,26 @@ module API
 
 			# Check mail is registered
 			if registered?(mail.message_id)
-				# If mail is registered
+
+				unless mail.header[:list_post].nil?
+					# If mail is mailinglist
+
+				else
+					p "DEBUG::MAIL ALREADY REGISTERED MESSAGE"
+					the_mail = Message.where(message_id: mail.message_id).first
+
+					p "DEBUG::MAIL #{the_mail.subject}"
+					# Get Receiver
+					delivered_to = mail.header['Delivered-To']
+					delivered_to = delivered_to.first if delivered_to.class.to_s.eql?('Array')
+					uid          = delivered_to.field.value.split('@').first
+					user		 = User.where(uid: uid).first
+
+					# Associate to User
+					unless user.messages.include?(the_mail)
+						user.messages << the_mail
+					end
+				end
 
 			else
 				# If mail isn't registered	
@@ -98,7 +117,7 @@ module API
 							doc.xpath('.//@style').remove
 							doc.xpath('.//@mark').remove
 
-							if in_reply_to.nil?
+							if origin_mail.nil?
 								doc.css("blockquote").each do |block|
 									block.set_attribute("style", "margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex")
 								end
@@ -121,9 +140,9 @@ module API
 					body = body.gsub("<pre>", "<p>")
 					body = body.gsub("</pre>", "</p>")
 
-					unless in_reply_to.nil?
+					unless origin_mail.nil?
 						arr  = body.split("<br>")
-						arr.delete_if { |a| a.start_with?("&gt;") }
+						arr.delete_if { |a| ( a.start_with?("&gt;") or a.start_with?(">") or (a.start_with?("On") and  a.end_with?("wrote:")) ) }
 						body = arr.join("<br>")
 					end
 					# sanitize(body, scrubber: Loofah::Scrubber.new { |node| node.remove if node.name == 'style' })

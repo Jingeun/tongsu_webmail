@@ -44,7 +44,7 @@ class MailinglistsController < ApplicationController
 		@replys = Array.new
 		recursive(@replys, @message)
 		@replys.shift
-		@replys = @replys.reverse
+		@replys = @replys.sort
 
 		respond_to do |format|
 			format.js
