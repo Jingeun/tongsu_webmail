@@ -1,43 +1,29 @@
-<!DOCTYPE html>
-<!--
-	Apache License
-                           Version 2.0, January 2004
-                        http://www.apache.org/licenses/
--->
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Creative - Start Bootstrap Theme</title>
-
+    <title>Webmail Service for Mailing-list with tongsu</title>
+	
     <!-- Bootstrap Core CSS -->
-    <%= stylesheet_link_tag 'index/bootstrap.min.css' %>
-
+    <%= stylesheet_link_tag "index/bootstrap.min.css" %>
     <!-- Custom Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <%= stylesheet_link_tag 'index/font-awesome.min.css' %>
-
-
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css">
+    <%= stylesheet_link_tag "index/font-awesome.min.css" %>
     <!-- Plugin CSS -->
-    <%= stylesheet_link_tag 'index/animate.min.css' %>
-
+    <%= stylesheet_link_tag "index/animate.min.css" %>
     <!-- Custom CSS -->
-    <%= stylesheet_link_tag 'index/creative.css' %>
+    <%= stylesheet_link_tag "index/creative.css" %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- WARNING: Respond.js doesn"t work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body id="page-top">
@@ -75,20 +61,20 @@
         <div class="container" style="margin-top: 80px">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Sign Up</h2>
+                    <h2 style="font-size:50px; font-weight:bold" class="section-heading">Sign Up</h2>
                     <hr class="primary">
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
+                <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1" style="font-size:22px;">
                     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
                     	<%= devise_error_messages! %>
                         <div class="form-group">
                         	<label>ID</label><br />
-                            <%= f.text_field :uid, autofocus: true, class: "form-control", style: "display:inline; width:78%"  %>
-                            <%= f.button "Check", type: "button", onclick: "duplication_id()", class: "btn btn-inverse btn-sm", style: "font-size:60%; border-radius: 3px; padding-bottom: 9px; padding-top: 9px; width: 20%;" %>
+                            <%= f.text_field :uid, autofocus: true, class: "form-control", style: "display:inline; width:78%;"  %>
+                            <%= f.button "Check", type: "button", onclick: "duplication_id()", class: "btn btn-inverse btn-sm", style: "font-size:65%; border-radius: 7px; margin-top: 3px; padding: 7px 0; width: 20%;" %>
 								<input type="hidden" id="duplication_id_check" value="false">
                         </div>
                         <div class="form-group">
@@ -112,7 +98,7 @@
                         <div class="clearfix">
                             <div class="pull-right">
                                 <br />
-								<%= f.submit "Sign up", class: "btn btn-danger btn-sm", id: "submit", style: "display:inline; font-size:14px;" %>
+								<%= f.submit "Sign up", class: "btn btn-danger", id: "submit", style: "display:inline; font-size:14px;" %>
                             </div>
                         </div>
                     <% end %>
@@ -127,11 +113,11 @@
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Let's Get In Touch!</h2>
                     <hr class="primary">
-                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    <p>Ready to start your next project with us?</br> Give us a call or send us an email and we will get back to you as soon as possible!</p>
                 </div>
                 <div class="col-lg-4 col-lg-offset-2 text-center">
                     <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                    <p>(KR) 0508-5181-6263</p>
+                    <p>(KR) 010-1234-5678</p>
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
@@ -146,10 +132,10 @@
 	<script>
 
 	function duplication_id(){
-		var id = $('#user_uid').val();
+		var id = $("#user_uid").val();
 
         if (!id) {
-            alert('Please input your ID.');
+            alert("Please input your ID.");
             return;
         }
 
@@ -170,18 +156,18 @@
 	</script>
 
     <!-- jQuery -->
-    <%= javascript_include_tag 'index/jquery.js' %>
+    <%= javascript_include_tag "index/jquery.js" %>
 
     <!-- Bootstrap Core JavaScript -->
-    <%= javascript_include_tag 'index/bootstrap.min.js' %>
+    <%= javascript_include_tag "index/bootstrap.min.js" %>
 
     <!-- Plugin JavaScript -->
-    <%= javascript_include_tag 'index/jquery.easing.min.js' %>
-    <%= javascript_include_tag 'index/jquery.fittext.js' %>
-    <%= javascript_include_tag 'index/wow.min.js' %>
+    <%= javascript_include_tag "index/jquery.easing.min.js" %>
+    <%= javascript_include_tag "index/jquery.fittext.js" %>
+    <%= javascript_include_tag "index/wow.min.js" %>
 
     <!-- Custom Theme JavaScript -->
-    <%= javascript_include_tag 'index/creative.js' %>
+    <%= javascript_include_tag "index/creative.js" %>
 
 </body>
 
