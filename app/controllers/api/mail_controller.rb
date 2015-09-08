@@ -166,6 +166,15 @@ module API
 						origin_text: params[:mail]
 					)
 
+					from_web 			= Hash.new
+					from_web[:channel] 	= channel.name
+					from_web[:date] 	= mail.date
+					from_web[:content] 	= body
+					json_from_web		= JSON.generate(from_web)
+
+					send_msg(json_from_web)
+					p "DEBUG::MAIL TO JSON #{json_from_web}"
+
 					# Associate to Channel
 					ch_mailing = channel.mailinglists
 					unless ch_mailing.include?(mailinglist)
@@ -283,15 +292,29 @@ module API
 					end
 				end
 
-				
-
-
 			end
 			head 204
 		end
 
 		def download
 			send_file params[:url]
+		end
+
+		private
+
+		def send_msg(msg)
+			require 'bunny'
+		    conn = Bunny.new(hostname: "210.118.69.58", vhost: "tongsu-vhost", user: "tongsu", password: "12341234")
+		    conn.start
+
+		    ch   = conn.create_channel
+		    x    = ch.topic("tongsu")
+
+		    x.publish(msg, persistent: true, routing_key: "From.Web.Keyword.Send")
+		    puts "DEBUG::MAIL#SEND_MSG - Send #{msg}"
+
+		    ch.close
+		    conn.close
 		end
 	end
 end
