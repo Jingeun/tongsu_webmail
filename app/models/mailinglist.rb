@@ -9,7 +9,7 @@ class Mailinglist < ActiveRecord::Base
   has_many :channels, through: "channels_mailinglists"
 
   has_many :replys, foreign_key: "origin_id", class_name: "Mailinglist"
-  belongs_to :origin, class_name: "Mailinglist"
+  belongs_to :origin, class_name: "Mailinglist", counter_cache: :replys_count
 
   def self.registered?(message_id)
   	if self.where(message_id: message_id).present?
@@ -17,5 +17,10 @@ class Mailinglist < ActiveRecord::Base
   	else
   		false
   	end
+  end
+
+  def self.top
+    # where("updated_at >= ?", Time.zone.today.beginning_of_day)
+    includes(:replys).where(origin_id: nil).order('replys_count ASC').limit(5)
   end
 end

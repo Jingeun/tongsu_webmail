@@ -12,6 +12,7 @@ class HomeController < ApplicationController
 	end
 
 	def dashboard
+		@top = Mailinglist.top
 	end
 
 	def id_check
