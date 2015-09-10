@@ -39,9 +39,19 @@ class MessagesController < ApplicationController
 		mail.to   	 = "#{params[:sent_message][:to]}"
 		mail.subject = "#{params[:sent_message][:subject]}"
 		mail.body	 = "#{params[:sent_message][:content]}"
+		mail.message_id = ""
 
-		p "DEBUG::MESSAGES #{mail}"
-		send_msg(mail.to_s)
+		r_mail = ""
+		flag   = true
+		mail.to_s.each_line do |line|
+			if line.include?("Message-ID:") and flag
+				flag = false
+			else
+				r_mail += line
+			end
+		end
+
+		send_msg(r_mail)
 
 		redirect_to messages_path
 	end
