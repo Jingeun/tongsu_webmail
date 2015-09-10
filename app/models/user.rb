@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
 	has_many :messages, through: "users_messages"
 	has_many :users_messages, dependent: :destroy
 
+	# Sent Message 1:N Association
+	has_many :sent_messages, dependent: :destroy
+
 	validates :uid, presence: true, uniqueness: { case_sensitive: false }
 	validates :name ,presence: true
 end

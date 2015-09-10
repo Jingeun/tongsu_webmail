@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910011033) do
+ActiveRecord::Schema.define(version: 20150910070012) do
 
   create_table "attaches", force: :cascade do |t|
     t.integer  "attachable_id",        limit: 4
@@ -99,6 +99,17 @@ ActiveRecord::Schema.define(version: 20150910011033) do
   end
 
   add_index "messages", ["message_id"], name: "index_messages_on_message_id", unique: true, using: :btree
+
+  create_table "sent_messages", force: :cascade do |t|
+    t.string   "from",       limit: 255
+    t.string   "to",         limit: 255
+    t.string   "from_name",  limit: 255
+    t.string   "subject",    limit: 255
+    t.text     "content",    limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

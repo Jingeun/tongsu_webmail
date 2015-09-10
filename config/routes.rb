@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 	post '/mailinglists/get_comments'
 
 	# Non-mailinglist emails
-	resources :messages, only: [:index, :show, :new]
+	resources :messages
 	get '/messages/:id/original' => 'messages#original', as: 'original_message'
 
 	post 'users/id_check' => 'home#id_check'

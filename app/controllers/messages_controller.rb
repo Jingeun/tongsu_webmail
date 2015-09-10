@@ -29,12 +29,21 @@ class MessagesController < ApplicationController
 
 	def new
 		@current_users_messages = current_user.messages
-
-		# FORM FOR MAIL CREATE
-		# TODO
+		@message = current_user.sent_messages.new
 	end
 
 	def create
+		mail = Mail.new do
+		  from    '#{current_user.uid}@tongsu.tk'
+		  to      '#{params[:sent_message][:to]}'
+		  subject '#{params[:sent_message][:subject]}'
+		  body    '#{params[:sent_message][:content]}'
+		end
+
+		p "DEBUG::MESSAGES #{mail}"
+		send_msg(mail)
+
+		redirect_to messages_path
 	end
 
 	def original
@@ -61,5 +70,22 @@ class MessagesController < ApplicationController
 		message.replys.each do |reply|
 			recursive(messages, reply)
 		end
+	end
+
+	private
+
+	def send_msg(msg)
+		require 'bunny'
+	    conn = Bunny.new(hostname: "210.118.69.58", vhost: "tongsu-vhost", user: "tongsu", password: "12341234")
+	    conn.start
+
+	    ch   = conn.create_channel
+	    x    = ch.topic("tongsu")
+
+	    x.publish(msg, persistent: true, routing_key: "From.Web.Send.Mail")
+	    puts "DEBUG::MESSAGES#SEND_MSG - Send #{msg}"
+
+	    ch.close
+	    conn.close
 	end
 end
