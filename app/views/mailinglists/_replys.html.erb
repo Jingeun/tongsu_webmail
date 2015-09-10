@@ -14,11 +14,7 @@
     <span class="thumb-xs avatar pull-left mr-sm">
         <img class="img-circle" src="<%= asset_path 'avatar.png' %>">
     </span>
-    <div class="comment-body">
-        <textarea rows="4" class="form-control" id="wysiwyg"></textarea>
-        <div class="btn-toolbar">
-            <button type="button" class="btn btn-sm btn-default pull-right">Clear</button>
-            <button type="button" class="btn btn-sm btn-danger pull-right">Save</button>
-        </div>
+    <div class="comment-body" id="commet-body-<%= @message.id %>">
+        <textarea rows="1" id="wysiwyg<%= @message.id %>" class="form-control input-sm" type="text" placeholder="Write your comment..." onclick="textedit11(<%= @message.id %>);"></textarea>
     </div>
 </li>

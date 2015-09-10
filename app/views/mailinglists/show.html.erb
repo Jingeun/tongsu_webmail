@@ -26,15 +26,23 @@
 <script src="/assets/timelines/jquery.magnific-popup.min.js"></script>
 <script src="/assets/mailinglists.js"></script>
 
+<!-- <link href="/assets/summernote/summernote.css" rel="stylesheet">
+<script src="/assets/summernote/summernote.min.js"></script> -->
+
 <script src="/assets/wysihtml5/bootstrap-select.min.js"></script>
 <script src="/assets/wysihtml5/jquery.autosize.min.js"></script>
 <script src="/assets/wysihtml5/wysihtml5-0.3.0.min.js"></script>
 <script src="/assets/wysihtml5/bootstrap3-wysihtml5.js"></script>
-<script src="/assets/wysihtml5/select2.min.js"></script>
-<script src="/assets/wysihtml5/switchery.min.js"></script>
-<script src="/assets/wysihtml5/moment.min.js"></script>
-<script src="/assets/wysihtml5/bootstrap-datetimepicker.min.js"></script>
-<script src="/assets/wysihtml5/bootstrap-colorpicker.min.js"></script>
-<script src="/assets/wysihtml5/inputmask.js"></script>
-<script src="/assets/wysihtml5/fileinput.js"></script>
 <script src="/assets/wysihtml5/form-elements.js"></script>
+
+<script>
+function textedit11(message_id) {
+    $('#wysiwyg' + message_id).attr('rows', '15');
+    $('#commet-body-' + message_id).append('<div class="btn-toolbar"><button type="button" class="btn btn-sm btn-default pull-right">Clear</button><button type="button" class="btn btn-sm btn-danger pull-right">Send</button></div>');
+    $('#wysiwyg' + message_id).wysihtml5();
+}
+
+function textedit11cancel(message_id){
+
+}
+</script>

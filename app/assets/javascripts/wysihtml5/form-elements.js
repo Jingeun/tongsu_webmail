@@ -54,26 +54,6 @@ $(function(){
             customTemplates: bs3Wysihtml5Templates,
             stylesheets: []
         });
-        $(".select2").each(function(){
-            $(this).select2($(this).data());
-        });
-
-        new Switchery(document.getElementById('checkbox-ios1'));
-        new Switchery(document.getElementById('checkbox-ios2'),{color: Sing.colors['brand-primary']});
-
-        $('#datetimepicker1').datetimepicker({
-            format: 'MM/dd/YYYY'
-        });
-        $('#datetimepicker2').datetimepicker({
-        });
-
-        $('#colorpicker').colorpicker({color: Sing.colors['gray-light']});
-
-        $("#mask-phone").inputmask({mask: "(999) 999-9999"});
-        $("#mask-date").inputmask({mask: "99-99-9999"});
-        $("#mask-int-phone").inputmask({mask: "+999 999 999 999"});
-        $("#mask-time").inputmask({mask: "99:99"});
-
     }
     pageLoad();
     SingApp.onPageLoad(pageLoad);
