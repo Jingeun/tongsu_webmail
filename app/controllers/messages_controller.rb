@@ -33,12 +33,12 @@ class MessagesController < ApplicationController
 	end
 
 	def create
-		mail = Mail.new do
-		  from    '#{current_user.uid}@tongsu.tk'
-		  to      '#{params[:sent_message][:to]}'
-		  subject '#{params[:sent_message][:subject]}'
-		  body    '#{params[:sent_message][:content]}'
-		end
+		mail = Mail.new
+
+		mail.from 	 = "#{current_user.uid}@tongsu.tk"
+		mail.to   	 = "#{params[:sent_message][:to]}"
+		mail.subject = "#{params[:sent_message][:subject]}"
+		mail.body	 = "#{params[:sent_message][:content]}"
 
 		p "DEBUG::MESSAGES #{mail}"
 		send_msg(mail.to_s)
