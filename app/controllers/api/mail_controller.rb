@@ -2,6 +2,7 @@ module API
 	class MailController < ApplicationController
 		include ActionView::Helpers::TextHelper
   		include ActionView::Helpers::UrlHelper
+  		include ActionView::Helpers::SanitizeHelper
 
 		def receive
 			mail = Mail.read_from_string(params[:mail])
@@ -166,14 +167,7 @@ module API
 						origin_text: params[:mail]
 					)
 
-					from_web 			= Hash.new
-					from_web[:channel] 	= channel.name
-					from_web[:date] 	= mail.date
-					from_web[:content] 	= body
-					json_from_web		= JSON.generate(from_web)
-
-					send_msg(json_from_web)
-					p "DEBUG::MAIL TO JSON #{json_from_web}"
+					send_msg("#{channel.name}_____#{mail.date}_____#{sanitize(body)}")
 
 					# Associate to Channel
 					ch_mailing = channel.mailinglists
