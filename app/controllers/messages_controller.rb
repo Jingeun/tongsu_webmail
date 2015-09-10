@@ -41,7 +41,7 @@ class MessagesController < ApplicationController
 		end
 
 		p "DEBUG::MESSAGES #{mail}"
-		send_msg(mail)
+		send_msg(mail.to_s)
 
 		redirect_to messages_path
 	end
