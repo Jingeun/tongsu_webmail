@@ -3,16 +3,16 @@
 <% if $temp_date.nil? or message_updated_at != $temp_date %>
     <% $temp_date   = message_updated_at %>
 
-    <time class="event-time" datetime="">
+    <time class="event-time hidden-xs" datetime="" style="text-align:left;">
         <!-- <span class="date"><%= message_updated_at %></span> -->
-        <span class="time" style="padding-right: 100px;">
+        <span class="time">
             <% if message_updated_at == DateTime.now.strftime("%b %e") %>
                 Today
             <% else %>
                 <%= message_updated_at %>
             <% end %>
         </span>
-    </time>      
+    </time>
 
     <% case ( $color_index % 5 ) %>
     <% when 0 %>
@@ -27,13 +27,13 @@
         <% color = "event-icon-primary" %>
     <% end %>
 
-    <span class="event-icon <%= color %>">
+    <span class="event-icon <%= color %> hidden-xs" style="left:6%;">
         <i class="glyphicon glyphicon-sort"></i>
     </span>
 
     <% $color_index = $color_index+1 %>
 <% end %>
-<section class="event">
+<section class="event" style="width:90%;right:0%;">
     <span class="thumb-sm avatar pull-left mr-sm">
         <img class="img-circle" src="<%= asset_path 'avatar.png' %>">
     </span>
