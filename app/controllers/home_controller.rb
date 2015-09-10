@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 	before_action :authenticate_user!, only: [:dashboard]
-	before_action :get_not_read_message, only: [:dashboard]
-	before_action :get_groups, only: [:dashboard]
+	before_action :get_not_read_message, only: [:dashboard, :import]
+	before_action :get_groups, only: [:dashboard, :import]
 
 	def index
 		if user_signed_in?
@@ -9,6 +9,9 @@ class HomeController < ApplicationController
 		else
 			render layout: false
 		end
+	end
+
+	def import
 	end
 
 	def dashboard

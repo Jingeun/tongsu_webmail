@@ -164,7 +164,7 @@
                         <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<%= edit_user_registration_path %>"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-envelope"></i> &nbsp; Importing</a></li>
+                        <li><a href="<%= import_path %>"><i class="glyphicon glyphicon-envelope"></i> &nbsp; Importing</a></li>
                         <li class="divider"></li>
                         <li><%= link_to "<i class='glyphicon glyphicon-remove-circle'></i> &nbsp; Sign out".html_safe, destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to logout?" } %></li>
                     </ul>

@@ -15,6 +15,10 @@
         <img class="img-circle" src="<%= asset_path 'avatar.png' %>">
     </span>
     <div class="comment-body">
-        <input class="form-control input-sm" type="text" placeholder="Write your comment...">
+        <textarea rows="4" class="form-control" id="wysiwyg"></textarea>
+        <div class="btn-toolbar">
+            <button type="button" class="btn btn-sm btn-default pull-right">Clear</button>
+            <button type="button" class="btn btn-sm btn-danger pull-right">Save</button>
+        </div>
     </div>
 </li>

@@ -20,7 +20,6 @@ window.DEBUG = true;
 $.fn.widgster.Constructor.DEFAULTS.bodySelector = '.widget-body';
 
 $(function(){
-
     /**
      * Main app class that handles page switching, async script loading, resize & pageLoad callbacks.
      * Events:
