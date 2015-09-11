@@ -132,18 +132,16 @@ window.onload = function(){time()};
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">
                         <span class="thumb-sm avatar pull-left">
-                            <img class="img-circle" src="<%= asset_path "common/people/a5.jpg" %>">
+                            <img class="img-circle" src="<%= asset_path 'common/people/a5.jpg' %>">
                         </span>
                         <span style="font-size:15px"> &nbsp <%= current_user.uid %> &nbsp </span>
-                        <b class="caret"></b>
-					</a>
-					<ul class="dropdown-menu">
+                        <!-- <span class="circle bg-warning fw-bold"> 13 </span> -->
+                        <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
                         <li><a href="<%= edit_user_registration_path %>"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
+                        <li><a href="<%= import_path %>"><i class="glyphicon glyphicon-envelope"></i> &nbsp; Importing</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Calendar</a></li>
-                        <li><a href="<%= messages_path %>">Inbox &nbsp;&nbsp;<span class="badge bg-danger animated bounceIn">9</span></a></li>
-                        <li class="divider"></li>
-                        <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "fa fa-sign-out", data: { confirm: "Are you confirm sign-out?" } %></li>
+                        <li><%= link_to "<i class='glyphicon glyphicon-remove-circle'></i> &nbsp; Sign out".html_safe, destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to logout?" } %></li>
                     </ul>
                 </li>
                 <li>
