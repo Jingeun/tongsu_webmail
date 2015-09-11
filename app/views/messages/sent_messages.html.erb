@@ -93,8 +93,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <% @messages.each_with_index do |message, index| %>
-                            <tr class="<%= message.users_messages.where(user_id: current_user).first.is_read ? '' : 'unread' %>">
+                            <% @sent_messages.each_with_index do |message, index| %>
+                            <tr class="">
                                 <td>
                                     <div class="checkbox">
                                         <input type="checkbox" id="checkbox<%= index+1 %>">
@@ -102,14 +102,11 @@
                                     </div>
                                 </td>
                                 <td><span class="starred"><i class="fa fa-star-o"></i></span></td>
-                                <td class="name hidden-xs" onclick="location.href='<%= message_path(message) %>'"><%= truncate(message.from, length: 20) %></td>
-                                <td class="subject" onclick="location.href='<%= message_path(message) %>'"><%= message.subject %></td>
-                                <td class="hidden-xs" onclick="location.href='<%= message_path(message) %>'">
-                                    <% if message.attaches.present? %>
-                                        <i class="fa fa-paperclip"></i>
-                                    <% end %>
+                                <td class="name hidden-xs" onclick="location.href='<%= sent_message_path(message) %>'"><%= truncate(message.from, length: 20) %></td>
+                                <td class="subject" onclick="location.href='<%= sent_message_path(message) %>'"><%= message.subject %></td>
+                                <td class="hidden-xs" onclick="location.href='<%= sent_message_path(message) %>'">
                                 </td>
-                                <td class="date" onclick="location.href='<%= message_path(message) %>'"><%= message.created_at.localtime.strftime("%b %-d")%></td>
+                                <td class="date" onclick="location.href='<%= sent_message_path(message) %>'"><%= message.created_at.localtime.strftime("%b %-d")%></td>
                             </tr>
                             <% end%>
                             <!-- <tr class="unread">

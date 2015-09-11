@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-9 col-lg-10">
                 <div class="clearfix mb-xs">
-                    <a class="btn btn-default btn-sm width-50 pull-left" id="back-btn" href="inbox.html">
+                    <a class="btn btn-default btn-sm width-50 pull-left" id="back-btn" href="<%= messages_path %>">
                         <i class="fa fa-angle-left fa-lg"></i>
                     </a>
                     <div class="pull-right hide" id="folder-stats">
@@ -40,30 +40,37 @@
                 </div>
                 <section class="widget widget-email">
                     <header>
-                        <h4>Compose <span class="fw-semi-bold">New</span></h4>
+                        <h4><%= @sent_message.subject %></h4>
+                        <div class="widget-controls">
+                            <a href="#"><i class="fa fa-print"></i></a>
+                        </div>
                     </header>
                     <div class="widget-body">
-                        <%= form_for @message, url: messages_path(@message), html: { class: "form-email-compose", id: "email-compose" } do |f| %>
-                            <div class="form-group">
-                                <%= f.email_field :to, class: "input-transparent form-control", placeholder: "To", autofocus: true %>
-                            </div>
-                            <div class="form-group">
-                                <%= f.text_field :subject, class: "input-transparent form-control", placeholder: "Subject" %>
-                            </div>
-                            <div class="form-group">
-                                <%= f.text_area :content, class: "form-control", placeholder: "Message", rows: "10" %>
-                            </div>
-                            <div class="clearfix">
-                                <div class="btn-toolbar pull-right">
-                                    <button type="reset" id="compose-discard-button" class="btn btn-gray">Discard</button>
-                                    <button type="button" id="compose-save-button" class="btn btn-gray">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
-                                    <%= f.submit "Send", class: "btn btn-danger" %>
+                        <div id="email-view" class="email-view">
+                            <div class="email-details clearfix">
+                                <div class="email-details-content">
+                                    <span class="thumb thumb-sm pull-left">
+                                        <img class="img-circle" src="<%= asset_path 'common/people/a5.jpg' %>" alt="Philip Horbacheuski">
+                                    </span>
+                                    <div class="pull-left">
+                                        <strong><%= @sent_message.from_name %></strong>
+                                        <span class="email">&lt;<%= @sent_message.from %>&gt;</span>
+                                        <span class="receiver">to <%= @sent_message.to %></span>
+                                    </div>
+                                    <time class="email-date pull-right">
+                                        <%= @sent_message.created_at.localtime.strftime("%k:%M") %>
+                                    </time>
                                 </div>
                             </div>
-                        <% end %>
+                            <div class="email-body" style="font-size:14px !important;">
+                                <p><%= @sent_message.content.gsub("\n", "<br/>").html_safe %></p>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
         </div>
     </main>
 </div>
+
+<%= javascript_include_tag 'lightbox/lightbox' %>
