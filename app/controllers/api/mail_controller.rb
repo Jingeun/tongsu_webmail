@@ -60,7 +60,13 @@ module API
 					unless channel.present?
 						p "DEBUG::MAIL Channel isn't registered."
 						# If Channel isn't registered
-						group_name = list_id.split('@').last.split('.')[-2..-1].join('.')
+						group_name = ""
+						unless mail.header[:list_id].nil?
+							group_name = list_id.split('.')[-2..-1].join('.')
+						else
+							group_name = list_id.splie('@').last
+						end
+
 						group = Group.find_by_name(group_name)
 						p "DEBUG::MAIL Find gruop name : #{group_name}"
 
