@@ -1,19 +1,7 @@
 <!-- timelines -->
 
 <!-- ##Gmap Library <script src="/assets/timelines/maps.js"></script> <script src="/assets/timelines/timeline.js"></script> -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-<script type="text/javascript">
-jQuery(function($){
-    $(window).scroll(function(){
-        if ($(this).scrollTop() > 100) {
-            $('#gnb_wrp').css({position:'fixed',zIndex:999,top:150,right:15});
-        } else {
-            $('#gnb_wrp').css({position:'static'});
-        };
-    });
-});
-</script>
 <div class="content-wrap">
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
@@ -70,4 +58,15 @@ jQuery(function($){
 <script src="/assets/wysihtml5/jquery.autosize.min.js"></script>
 <script src="/assets/wysihtml5/wysihtml5-0.3.0.min.js"></script>
 <script src="/assets/wysihtml5/bootstrap3-wysihtml5.js"></script>
-<script src="/assets/wysihtml5/form-elements.js"></script>
+
+<script type="text/javascript">
+jQuery(function($){
+    $(window).scroll(function(){
+        if ($(this).scrollTop() >=0) {
+            $('#gnb_wrp').css({position:'fixed',zIndex:999,top:150,right:15});
+        } else {
+            $('#gnb_wrp').css({position:'static'});
+        };
+    });
+});
+</script>
