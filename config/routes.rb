@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 		post '/mail/receive'
 		# attachments download
 		post '/file/download' => 'mail#download', as: 'download'
+		post '/send/keywords' => 'mail#keyword'
 	end
 
 end

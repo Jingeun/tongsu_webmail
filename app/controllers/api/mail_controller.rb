@@ -4,6 +4,9 @@ module API
   		include ActionView::Helpers::UrlHelper
   		include ActionView::Helpers::SanitizeHelper
 
+  		def keyword
+  		end
+
 		def receive
 			mail = Mail.read_from_string(params[:mail])
 
