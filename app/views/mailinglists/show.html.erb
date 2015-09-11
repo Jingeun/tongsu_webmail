@@ -1,7 +1,19 @@
 <!-- timelines -->
 
 <!-- ##Gmap Library <script src="/assets/timelines/maps.js"></script> <script src="/assets/timelines/timeline.js"></script> -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
+<script type="text/javascript">
+jQuery(function($){
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 100) {
+            $('#gnb_wrp').css({position:'fixed',zIndex:999,top:150,right:15});
+        } else {
+            $('#gnb_wrp').css({position:'static'});
+        };
+    });
+});
+</script>
 <div class="content-wrap">
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
@@ -17,7 +29,7 @@
                 <%= render @mailinglists %>
             </ul>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 hidden-xs" id="gnb_wrp" style="background-color:#ccc">
                 <h4>Monthly <span class="fw-semi-bold">Keywords</span></h4>
                 <p class="text-muted fs-mini">Listed content is categorized by the following groups:</p>
                 <ul class="nav nav-pills nav-stacked search-result-categories mt">
@@ -42,11 +54,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class="row">
-        <div class="timeline" id="infinite-scrolling" style="text-align: center;">
-          <%= will_paginate %>
-        </div>
         </div>
     </main>
 </div>
