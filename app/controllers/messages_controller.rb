@@ -53,7 +53,24 @@ class MessagesController < ApplicationController
 
 		send_msg(r_mail)
 
+		current_user.sent_messages.create(
+			from: 		"#{current_user.uid}@tongsu.tk",
+			to:   		params[:sent_message][:to],
+			subject: 	params[:sent_message][:subject],
+			content: 	params[:sent_message][:content],
+			from_name:  current_user.name
+		)
+
+
 		redirect_to messages_path
+	end
+
+	def sent_messages
+		@sent_messages = current_user.sent_messages
+	end
+
+	def sent_messages_show
+		@sent_message = current_user.sent_messages.find(params[:id])
 	end
 
 	def original
