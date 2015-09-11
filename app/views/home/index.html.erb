@@ -9,22 +9,22 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tongsu</title>
+    <title>Webmail Service for Mailing-list with tongsu</title>
 
     <!-- Bootstrap Core CSS -->
-    <%= stylesheet_link_tag 'index/bootstrap.min.css' %>
+    <%= stylesheet_link_tag "index/bootstrap.min.css" %>
 
     <!-- Custom Fonts -->
+
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <%= stylesheet_link_tag 'index/font-awesome.min.css' %>
-
+    <%= stylesheet_link_tag "index/font-awesome.min.css" %>
 
     <!-- Plugin CSS -->
-    <%= stylesheet_link_tag 'index/animate.min.css' %>
+    <%= stylesheet_link_tag "index/animate.min.css" %>
 
     <!-- Custom CSS -->
-    <%= stylesheet_link_tag 'index/creative.css' %>
+    <%= stylesheet_link_tag "index/creative.css" %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,21 +53,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="<%= new_user_session_path %>">Sign in</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="<%= new_user_registration_path %>">Sign up</a>
-                    </li>
+                    <li> <a class="page-scroll" href="#services">Services</a> </li>
+                    <li> <a class="page-scroll" href="#portfolio">Portfolio</a> </li>
+                    <li> <a class="page-scroll" href="#contact">Contact</a> </li>
+                    <li> <a class="page-scroll" href="<%= new_user_session_path %>">Sign in</a> </li>
+                    <li> <a class="page-scroll" href="<%= new_user_registration_path %>">Sign up</a> </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -76,34 +66,35 @@
     </nav>
 
     <header>
-        <div class="header-content">
+        <div class="header-content" style="top:45%">
             <div class="header-content-inner">
-                <h1>Webmail service for mailing-list</h1>
-                <hr>
-                <p>Start Tongsu can help you use better mailing-list like online community! Just sign up and subscribe the mailing-list you want, Everything is convenient!</p>
-                <a href="<%= new_user_registration_path %>" class="btn btn-primary btn-xl page-scroll">Sign up</a>
+				<table>
+					<tr>
+						<td style="width:8%"><img src="<%= asset_path "logo.gif" %>" style="width:250%"></td>
+						<td><h1 class="section-heading">Webmail service</br> for mailing-list</h1></td>
+					</tr>
+				</table>
+				<hr>
+                <p style="font-size:23px;max-width:100%;">Starting Tongsu can help you use better mailing-list like online community!</br>
+				Just sign up and subscribe the mailing-list you want, Everything is convenient!</br>
+				You can easily see project mailing-list as comfortable in forms of timeline. </p>
+				<div class="col-lg-6">
+                <a href="<%= new_user_registration_path %>" class="btn btn-primary btn-xl wow tada" style="font-size:20px;">Sign up</a>
+				</div>
+				<div class="col-lg-6">
+				<a href="<%= new_user_session_path %>" class="btn btn-default btn-xl wow tada" style="font-size:20px;" data-wow-delay=".8s">Sign in</a>
+				</div>
             </div>
         </div>
     </header>
 
-    <section class="bg-primary" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">We've got what you need!</h2>
-                    <hr class="light">
-                    <p class="text-faded">Tongsu has everything you need to use mailing-list for communication! The posts in Tongsu are readable and easy to use. No strings attached!</p>
-                    <a href="<%= new_user_session_path %>" class="btn btn-default btn-xl">Get Started!</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services">
+    <section id="services" style="padding:80px 0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">At Tongsu Service</h2>
+					<p style="font-size:40px">Why you'll love Tongsu</p>
+					<p>Powerful features to make software development more collaborative.</p>
+                    <h2 class="section-heading">At Your Service</h2>
                     <hr class="primary">
                 </div>
             </div>
@@ -113,30 +104,138 @@
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
-                        <h3>Sturdy Service</h3>
-                        <p class="text-muted">Our service are updated regularly so they don't break.</p>
+                        <h3>Mail Inbox</h3>
+                        <p class="text-muted">Our service can send and receive and use e-mail inbox.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                        <h3>Ready to Ship</h3>
-                        <p class="text-muted">You can sent message easly, it will be converted to MIME type</p>
+                        <h3>Timeline</h3>
+                        <p class="text-muted">You can see each project mailing-list as comfortable in form of timeline!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                        <h3>Readable Posts</h3>
-                        <p class="text-muted">Mailing-list messages are readable and elegant.</p>
+                        <h3>Keyword extract in Hadoop</h3>
+                        <p class="text-muted">You can find project issue keyword monthly without reading all the mailing-list .</p>
                     </div>
                 </div>
+
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
-                        <h3>Sympathize with Love</h3>
-                        <p class="text-muted">You can sympathize a message with love botton!</p>
+                        <h3>View past project mail</h3>
+                        <p class="text-muted">If you join some project mailing-list, you can see the past-mail related to project mailing-list</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	 <aside class="bg-dark">
+        <div class="container text-center">
+
+            <div class="call-to-action">
+                <h2>Free Join at Start Mailing-list with TONGSU !</h2>
+					<!-- <a href="#" class="btn btn-default btn-xl wow tada">Download Now!</a> -->
+            </div>
+        </div>
+    </aside>
+	
+    <section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="<%= image_path "index/portfolio/1.jpg" %>" class="img-responsive">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project NameASDF
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="<%= image_path "index/portfolio/2.jpg" %>" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="<%= image_path "index/portfolio/3.jpg"%>" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="<%= image_path "index/portfolio/4.jpg"%>" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="<%= image_path "index/portfolio/5.jpg"%>" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="<%= image_path "index/portfolio/6.jpg"%>" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -148,11 +247,11 @@
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Let's Get In Touch!</h2>
                     <hr class="primary">
-                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    <p>Ready to start your next project with us?</br> Give us a call or send us an email and we will get back to you as soon as possible!</p>
                 </div>
                 <div class="col-lg-4 col-lg-offset-2 text-center">
                     <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                    <p>(KR) 0508-5181-6263</p>
+                    <p>(KR) 010-1234-5678</p>
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
@@ -163,18 +262,18 @@
     </section>
 
     <!-- jQuery -->
-    <%= javascript_include_tag 'index/jquery.js' %>
+    <%= javascript_include_tag "index/jquery.js" %>
 
     <!-- Bootstrap Core JavaScript -->
-    <%= javascript_include_tag 'index/bootstrap.min.js' %>
+    <%= javascript_include_tag "index/bootstrap.min.js" %>
 
     <!-- Plugin JavaScript -->
-    <%= javascript_include_tag 'index/jquery.easing.min.js' %>
-    <%= javascript_include_tag 'index/jquery.fittext.js' %>
-    <%= javascript_include_tag 'index/wow.min.js' %>
+    <%= javascript_include_tag "index/jquery.easing.min.js" %>
+    <%= javascript_include_tag "index/jquery.fittext.js" %>
+    <%= javascript_include_tag "index/wow.min.js" %>
 
     <!-- Custom Theme JavaScript -->
-    <%= javascript_include_tag 'index/creative.js' %>
+    <%= javascript_include_tag "index/creative.js" %>
 
 </body>
 

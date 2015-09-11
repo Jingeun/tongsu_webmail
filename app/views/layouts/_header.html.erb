@@ -1,31 +1,37 @@
 <!--
   Main sidebar seen on the left. may be static or collapsing depending on selected state.
-
     * Collapsing - navigation automatically collapse when mouse leaves it and expand when enters.
     * Static - stays always open.
 -->
+<script>
+function time(){
+var clock = document.getElementById("dt_now");
+var now = new Date();
+clock.innerHTML = now;
+setTimeout("time()", 1000);
+}
+window.onload = function(){time()};
+</script>
 
-<nav id="sidebar" class="sidebar" role="navigation">
+<nav id="sidebar" class="sidebar" role="navigation" >
     <!-- need this .js class to initiate slimscroll -->
     <div class="js-sidebar-content">
-        <header class="logo hidden-xs">
-            <a href="<%= dashboard_path %>">Tongsu</a>
+		
+        <header class="logo hidden-xs" style="margin:5px 0 20px;height:35px;">
+			<a href="<%= root_path %>">
+            <img src="<%= asset_path "logo.gif" %>" width=45>
+			</a>
         </header>
+		
         <!-- seems like lots of recent admin template have this feature of user info in the sidebar.
              looks good, so adding it and enhancing with notifications -->
         <div class="sidebar-status visible-xs">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <span class="thumb-sm avatar pull-right">
-                    <img class="img-circle" src="<%= asset_path 'common/people/a5.jpg' %>" alt="...">
+                <span class="thumb-sm avatar" style="margin-right:10%">
+                    <img class="img-circle" src="<%= asset_path "common/people/a5.jpg" %>">
                 </span>
-                <!-- .circle is a pretty cool way to add a bit of beauty to raw data.
-                     should be used with bg-* and text-* classes for colors -->
-                <span class="circle bg-warning fw-bold text-gray-dark">
-                    13
-                </span>
-                &nbsp;
-                Philip <strong>Smith</strong>
-                <b class="caret"></b>
+                <span style="font-size:15px"> &nbsp <%= current_user.uid %> &nbsp </span>
+                <b class="caret" style="margin-left:3%"></b>
             </a>
             <!-- #notifications-dropdown-menu goes here when screen collapsed to xs or sm -->
         </div>
@@ -33,19 +39,10 @@
         <ul class="sidebar-nav">
             <li class="active">
                 <!-- an example of nested submenu. basic bootstrap collapse component -->
-                <a href="<%= dashboard_path %>">
-                    <span class="icon">
-                        <i class="fa fa-desktop"></i>
-                    </span>
-                    Dashboard
-                </a>
+                <a href="<%= root_path %>"> <span class="icon">  <i class="fa fa-desktop"></i> </span> Dashboard </a>
             </li>
             <li>
-                <a href="<%= messages_path %>">
-                    <span class="icon">
-                        <i class="fa fa-envelope"></i>
-                    </span>
-                    Email
+                <a href="<%= messages_path %>"> <span class="icon"> <i class="fa fa-envelope"></i> </span> Email
                     <% if !@not_read.nil? && @not_read != 0 %>
                         <span class="label label-danger">
                             <%= @not_read %>
@@ -54,12 +51,7 @@
                 </a>
             </li>
             <li>
-                <a href="charts.html">
-                    <span class="icon">
-                        <i class="glyphicon glyphicon-stats"></i>
-                    </span>
-                    Charts
-                </a>
+                <a href="charts.html"> <span class="icon"> <i class="glyphicon glyphicon-stats"></i> </span> Charts </a>
             </li>
         </ul>
         <!-- every .sidebar-nav may have a title -->
@@ -70,7 +62,7 @@
                     <a class="collapsed" href="#sidebar-<%= group.id %>" data-toggle="collapse" data-parent="#sidebar">
                         <span class="icon">
                             <% case ( index % 6 ) %>
-                            <% when 0 %>
+                            <% when 0 %> 
                             <i class="fa fa-circle text-danger mr-xs"></i>
                             <% when 1 %>
                             <i class="fa fa-circle text-warning mr-xs"></i>
@@ -95,6 +87,8 @@
                 </li>
             <% end %>
         </ul>
+        
+        
     </div>
 </nav>
 <!-- This is the white navigation bar seen on the top. A bit enhanced BS navbar. See .page-controls in _base.scss. -->
@@ -106,7 +100,7 @@
             <ul class="nav navbar-nav">
                 <li>
                     <!-- whether to automatically collapse sidebar on mouseleave. If activated acts more like usual admin templates -->
-                    <a class="hidden-sm hidden-xs" id="nav-state-toggle" href="#" title="Turn on/off sidebar collapsing" data-placement="bottom">
+                    <a class="hidden-sm hidden-xs" id="nav-state-toggle" href="#" title="Turn on/off sidebar static" data-placement="bottom">
                         <i class="fa fa-bars fa-lg"></i>
                     </a>
                     <!-- shown on xs & sm screen. collapses and expands navigation -->
@@ -115,8 +109,8 @@
                         <i class="fa fa-bars fa-lg hidden-xs"></i>
                     </a>
                 </li>
-                <li class="ml-sm mr-n-xs hidden-xs"><a href="#"><i class="fa fa-refresh fa-lg"></i></a></li>
-                <li class="ml-n-xs hidden-xs"><a href="#"><i class="fa fa-times fa-lg"></i></a></li>
+                <li class="ml-sm mr-n-xs hidden-xs"><a href="#" onclick="document.location.reload();"><i class="fa fa-refresh fa-lg"></i></a></li>
+				<li class="ml-sm mr-n-xs hidden-xs"><a href="#" style="cursor:default"><div id="dt_now" style="font-size:15px;"></div></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right visible-xs">
                 <li>
@@ -127,46 +121,29 @@
                 </li>
             </ul>
             <!-- xs & sm screen logo -->
-            <a class="navbar-brand visible-xs" href="index.html">
-                <i class="fa fa-circle text-gray mr-n-sm"></i>
-                <i class="fa fa-circle text-warning"></i>
-                &nbsp;
-                Tongsu
-                &nbsp;
-                <i class="fa fa-circle text-warning mr-n-sm"></i>
-                <i class="fa fa-circle text-gray"></i>
-            </a>
+            <a class="navbar-brand visible-xs" href="<%= root_path %>"> Tongsu </a>
         </div>
 
         <!-- this part is hidden for xs screens -->
         <div class="collapse navbar-collapse">
-            <!-- search form! link it to your search server -->
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <div class="input-group input-group-no-border">
-                    <span class="input-group-addon">
-                        <i class="fa fa-search"></i>
-                    </span>
-                        <input class="form-control" type="text" placeholder="Search Dashboard">
-                    </div>
-                </div>
-            </form>
             <!-- Session -->
             <% if user_signed_in? %>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">
                         <span class="thumb-sm avatar pull-left">
-                            <img class="img-circle" src="<%= asset_path 'common/people/a5.jpg' %>">
+                            <img class="img-circle" src="<%= asset_path "common/people/a5.jpg" %>">
                         </span>
                         <span style="font-size:15px"> &nbsp <%= current_user.uid %> &nbsp </span>
-                        <!-- <span class="circle bg-warning fw-bold"> 13 </span> -->
-                        <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+                        <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
                         <li><a href="<%= edit_user_registration_path %>"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
-                        <li><a href="<%= import_path %>"><i class="glyphicon glyphicon-envelope"></i> &nbsp; Importing</a></li>
                         <li class="divider"></li>
-                        <li><%= link_to "<i class='glyphicon glyphicon-remove-circle'></i> &nbsp; Sign out".html_safe, destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to logout?" } %></li>
+                        <li><a href="#">Calendar</a></li>
+                        <li><a href="<%= messages_path %>">Inbox &nbsp;&nbsp;<span class="badge bg-danger animated bounceIn">9</span></a></li>
+                        <li class="divider"></li>
+                        <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "fa fa-sign-out", data: { confirm: "Are you confirm sign-out?" } %></li>
                     </ul>
                 </li>
                 <li>
@@ -177,18 +154,18 @@
                         <div class="chat-notification-inner">
                             <h6 class="title">
                                 <span class="thumb-xs">
-                                    <img src="<%= asset_path 'common/people/a6.jpg' %>" class="img-circle mr-xs pull-left">
+                                    <img src="<%= asset_path "common/people/a6.jpg" %>" class="img-circle mr-xs pull-left">
                                 </span>
                                 Jess Smith
                             </h6>
-                            <p class="text">Hey! What's up?</p>
+                            <p class="text">Hey! What"s up?</p>
                         </div>
                     </div>
                 </li>
             </ul>
             <% else %>
             <div class="nav navbar-nav navbar-right" style="margin-right:150px; padding-top:7px; font-size:14px;">
-                <button class="btn btn-inverse" onclick="location.href='<%= new_user_session_path %>'">&nbsp Login &nbsp</button>
+                <button class="btn btn-inverse" onclick="location.href="<%= new_user_session_path %>"">&nbsp Login &nbsp</button>
             </div>
             <% end %>
 <!-- Session -->
@@ -215,15 +192,15 @@
                 <a class="list-group-item" href="#chat-sidebar-user-1">
                     <i class="fa fa-circle text-success pull-right"></i>
                     <span class="thumb-sm pull-left mr">
-                        <img class="img-circle" src="<%= asset_path 'common/people/a2.jpg' %>" alt="...">
+                        <img class="img-circle" src="<%= asset_path "common/people/a2.jpg" %>" alt="...">
                     </span>
                     <h5 class="message-sender">Chris Gray</h5>
-                    <p class="message-preview">Hey! What's up? So many times since we</p>
+                    <p class="message-preview">Hey! What"s up? So many times since we</p>
                 </a>
                 <a class="list-group-item" href="#chat-sidebar-user-2">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="<%= asset_path 'avatar.png' %>" alt="...">
+                    <img class="img-circle" src="<%= asset_path "avatar.png" %>" alt="...">
                 </span>
                     <h5 class="message-sender">Jamey Brownlow</h5>
                     <p class="message-preview">Good news coming tonight. Seems they agreed to proceed</p>
@@ -231,7 +208,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-3">
                     <i class="fa fa-circle text-danger pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="<%= asset_path 'common/people/a1.jpg' %>" alt="...">
+                    <img class="img-circle" src="<%= asset_path "common/people/a1.jpg" %>" alt="...">
                 </span>
                     <h5 class="message-sender">Livia Walsh</h5>
                     <p class="message-preview">Check out my latest email plz!</p>
@@ -239,7 +216,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-4">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="<%= asset_path 'avatar.png' %>" alt="...">
+                    <img class="img-circle" src="<%= asset_path "avatar.png" %>" alt="...">
                 </span>
                     <h5 class="message-sender">Jaron Fitzroy</h5>
                     <p class="message-preview">What about summer break?</p>
@@ -247,10 +224,10 @@
                 <a class="list-group-item" href="#chat-sidebar-user-5">
                     <i class="fa fa-circle text-success pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="<%= asset_path 'common/people/a4.jpg' %>" alt="...">
+                    <img class="img-circle" src="<%= asset_path "common/people/a4.jpg" %>" alt="...">
                 </span>
                     <h5 class="message-sender">Mike Lewis</h5>
-                    <p class="message-preview">Just ain't sure about the weekend now. 90% I'll make it.</p>
+                    <p class="message-preview">Just ain"t sure about the weekend now. 90% I"ll make it.</p>
                 </a>
             </div>
             <h5 class="sidebar-nav-title">Last Week</h5>
@@ -258,15 +235,15 @@
                 <a class="list-group-item" href="#chat-sidebar-user-6">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="<%= asset_path 'common/people/a6.jpg' %>" alt="...">
+                    <img class="img-circle" src="<%= asset_path "common/people/a6.jpg" %>" alt="...">
                 </span>
                     <h5 class="message-sender">Freda Edison</h5>
-                    <p class="message-preview">Hey what's up? Me and Monica going for a lunch somewhere. Wanna join?</p>
+                    <p class="message-preview">Hey what"s up? Me and Monica going for a lunch somewhere. Wanna join?</p>
                 </a>
                 <a class="list-group-item" href="#chat-sidebar-user-7">
                     <i class="fa fa-circle text-success pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="<%= asset_path 'common/people/a5.jpg' %>" alt="...">
+                    <img class="img-circle" src="<%= asset_path "common/people/a5.jpg" %>" alt="...">
                 </span>
                     <h5 class="message-sender">Livia Walsh</h5>
                     <p class="message-preview">Check out my latest email plz!</p>
@@ -274,7 +251,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-8">
                     <i class="fa fa-circle text-warning pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="<%= asset_path 'common/people/a3.jpg' %>" alt="...">
+                    <img class="img-circle" src="<%= asset_path "common/people/a3.jpg" %>" alt="...">
                 </span>
                     <h5 class="message-sender">Jaron Fitzroy</h5>
                     <p class="message-preview">What about summer break?</p>
@@ -282,10 +259,10 @@
                 <a class="list-group-item" href="#chat-sidebar-user-9">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="<%= asset_path 'avatar.png' %>" alt="...">
+                    <img class="img-circle" src="<%= asset_path "avatar.png" %>" alt="...">
                 </span>
                     <h5 class="message-sender">Mike Lewis</h5>
-                    <p class="message-preview">Just ain't sure about the weekend now. 90% I'll make it.</p>
+                    <p class="message-preview">Just ain"t sure about the weekend now. 90% I"ll make it.</p>
                 </a>
             </div>
         </div>
@@ -299,15 +276,15 @@
             <ul class="message-list">
                 <li class="message">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="<%= asset_path 'common/people/a2.jpg' %>" alt="...">
+                        <img class="img-circle" src="<%= asset_path "common/people/a2.jpg" %>" alt="...">
                     </span>
                     <div class="message-body">
-                        Hey! What's up?
+                        Hey! What"s up?
                     </div>
                 </li>
                 <li class="message">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="<%= asset_path 'common/people/a2.jpg' %>" alt="...">
+                        <img class="img-circle" src="<%= asset_path "common/people/a2.jpg" %>" alt="...">
                     </span>
                     <div class="message-body">
                         Are you there?
@@ -315,7 +292,7 @@
                 </li>
                 <li class="message">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="<%= asset_path 'common/people/a2.jpg' %>" alt="...">
+                        <img class="img-circle" src="<%= asset_path "common/people/a2.jpg" %>" alt="...">
                     </span>
                     <div class="message-body">
                         Let me know when you come back.
@@ -323,7 +300,7 @@
                 </li>
                 <li class="message from-me">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="<%= asset_path 'avatar.png' %>" alt="...">
+                        <img class="img-circle" src="<%= asset_path "avatar.png" %>" alt="...">
                     </span>
                     <div class="message-body">
                         I am here!
