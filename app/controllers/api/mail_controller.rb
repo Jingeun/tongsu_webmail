@@ -263,11 +263,15 @@ module API
 						origin_text: params[:mail]
 					)
 
-					# Get Receiver
-					delivered_to = mail.header['Delivered-To']
-					delivered_to = delivered_to.first if delivered_to.class.to_s.eql?('Array')
-					uid          = delivered_to.field.value.split('@').first
-					user		 = User.where(uid: uid).first
+					if params[:import].eql?("true")
+						user = User.where(uid: params[:uid]).first
+					else
+						# Get Receiver
+						delivered_to = mail.header['Delivered-To']
+						delivered_to = delivered_to.first if delivered_to.class.to_s.eql?('Array')
+						uid          = delivered_to.field.value.split('@').first
+						user		 = User.where(uid: uid).first
+					end
 
 					# Associate to User
 					unless user.messages.include?(message)
@@ -275,7 +279,7 @@ module API
 					end
 
 					if params[:import].eql?("true")
-						message.users_messages.where(user_id: current_user).first.update_attributes(is_import: true)
+						message.users_messages.where(user_id: user).first.update_attributes(is_import: true)
 					end
 
 					# Save File Attachments
