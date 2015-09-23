@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910070012) do
+ActiveRecord::Schema.define(version: 20150923081508) do
 
   create_table "attaches", force: :cascade do |t|
     t.integer  "attachable_id",        limit: 4
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150910070012) do
     t.boolean  "is_favorite",    limit: 1, default: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.boolean  "is_import",      limit: 1, default: false
   end
 
   add_index "channels_mailinglists", ["channel_id"], name: "index_channels_mailinglists_on_channel_id", using: :btree
@@ -146,6 +147,7 @@ ActiveRecord::Schema.define(version: 20150910070012) do
     t.boolean  "is_favorite", limit: 1, default: false
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.boolean  "is_import",   limit: 1, default: false
   end
 
   add_index "users_messages", ["message_id"], name: "index_users_messages_on_message_id", using: :btree

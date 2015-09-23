@@ -274,6 +274,10 @@ module API
 						user.messages << message
 					end
 
+					if params[:import].eql?("true")
+						message.users_messages.where(user_id: current_user).first.update_attributes(is_import: true)
+					end
+
 					# Save File Attachments
 					unless mail.attachments.empty?
 						mail.attachments.each do |attachment|
