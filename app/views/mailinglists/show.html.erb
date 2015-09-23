@@ -43,6 +43,11 @@
                 </ul>
             </div>
         </div>
+	<div class="row">
+-        <div class="timeline" id="infinite-scrolling" style="text-align: center;">
+-          <%= will_paginate %>
+-        </div>
+-        </div>
     </main>
 </div>
 
@@ -58,15 +63,3 @@
 <script src="/assets/wysihtml5/jquery.autosize.min.js"></script>
 <script src="/assets/wysihtml5/wysihtml5-0.3.0.min.js"></script>
 <script src="/assets/wysihtml5/bootstrap3-wysihtml5.js"></script>
-
-<script type="text/javascript">
-jQuery(function($){
-    $(window).scroll(function(){
-        if ($(this).scrollTop() >=0) {
-            $('#gnb_wrp').css({position:'fixed',zIndex:999,top:150,right:15});
-        } else {
-            $('#gnb_wrp').css({position:'static'});
-        };
-    });
-});
-</script>

@@ -1,11 +1,151 @@
+<style type="text/css">
+#datatable-table img{
+	width:30px;
+	height:30px;
+	margin-right:5px;
+}
+#datatable-table2 img{
+	width:30px;
+	height:30px;
+	margin-right:5px;
+}
+#datatable-table3 img{
+	width:30px;
+	height:30px;
+	margin-right:5px;
+}
+</style>
+
 <div class="content-wrap">
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
-    <main id="content" class="content" role="main">
-        <h1 class="page-title" style="margin-bottom:0px; font-weight:400">Dashboard</h1>
+    <main id="content" class="content" role="main" style="padding-top:70px;">
 		<div class="row col-md-14 hidden-xs" style="width:101%; margin-bottom:30px;">
 			<img src="<%= asset_path "main_img.png" %>" style="max-width:100%;">
 		</div>
-		
+		<div class="row">
+			<div class="col-md-4">
+				<section class="widget">
+					<header><h4><span class="glyphicon glyphicon-th-list" style="margin-right:10px;"></span><span class="fw-semi-bold">Popular</span> projects</h4></header>
+					<div class="widget-body">
+						<div class="mt">
+							<div id="datatable-table_wrapper" class="dataTables_wrapper form-inline no-footer">
+								<table id="datatable-table" class="table table-striped table-hover dataTable no-footer" role="grid" aria-describedby="datatable-table_info">
+									<thead>
+										<tr role="row" style="text-align:center">
+											<th style="width: 60%;text-align:center">Name</th>
+											<th style="width: 40%;text-align:center">Users</th>
+										</tr>
+									</thead>
+									<tbody><!-- odd row class name is 'odd' / even row class name is 'even' -->
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/41453/logo-only_small.png"> <span class="fw-semi-bold">Mozilla Firefox</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-success" style="width: 90%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/34/apache_small.png"> <span class="fw-semi-bold">Apache HTTP Server</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-danger" style="width: 70%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/45256/MySQL_white_64x64_small.gif"> <span class="fw-semi-bold">MySQL</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-gray-light" style="width:65%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/1/svn_small.png"> <span class="fw-semi-bold">Apache Subversion</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar" style="width: 60%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/42/php_small.png"> <span class="fw-semi-bold">PHP</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-info" style="width:55%;"></div></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-4">
+				<section class="widget">
+					<header><h4><span class="glyphicon glyphicon-th-list" style="margin-right:10px;"></span><span class="fw-semi-bold">Active</span> projects</h4></header>
+					<div class="widget-body">
+						<div class="mt">
+							<div id="datatable-table_wrapper" class="dataTables_wrapper form-inline no-footer">
+								<table id="datatable-table2" class="table table-striped table-hover dataTable no-footer" role="grid" aria-describedby="datatable-table_info">
+									<thead>
+										<tr role="row" style="text-align:center">
+											<th style="width: 60%;text-align:center">Name</th>
+											<th style="width: 40%;text-align:center">Commits</th>
+										</tr>
+									</thead>
+									<tbody><!-- odd row class name is 'odd' / even row class name is 'even' -->
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/8176/GoogleChromeLogo_small.png"> <span class="fw-semi-bold">Chromium</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-success" style="width: 90%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/34/apache_small.png"> <span class="fw-semi-bold">Apache HTTP Server</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-danger" style="width: 70%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/45256/MySQL_white_64x64_small.gif"> <span class="fw-semi-bold">MySQL</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-gray-light" style="width:65%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/1/svn_small.png"> <span class="fw-semi-bold">Apache Subversion</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar" style="width: 60%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/42/php_small.png"> <span class="fw-semi-bold">PHP</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-info" style="width:55%;"></div></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-4">
+				<section class="widget">
+					<header><h4><span class="glyphicon glyphicon-th-list" style="margin-right:10px;"></span><span class="fw-semi-bold">Recommand</span> projects</h4></header>
+					<div class="widget-body">
+						<div class="mt">
+							<div id="datatable-table_wrapper" class="dataTables_wrapper form-inline no-footer">
+								<table id="datatable-table3" class="table table-striped table-hover dataTable no-footer" role="grid" aria-describedby="datatable-table_info">
+									<thead>
+										<tr role="row" style="text-align:center">
+											<th style="width: 60%;text-align:center">Name</th>
+											<th style="width: 40%;text-align:center">Recommand</th>
+										</tr>
+									</thead>
+									<tbody><!-- odd row class name is 'odd' / even row class name is 'even' -->
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/8176/GoogleChromeLogo_small.png"> <span class="fw-semi-bold">Chromium</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-success" style="width: 90%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/34/apache_small.png"> <span class="fw-semi-bold">Apache HTTP Server</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-danger" style="width: 70%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/45256/MySQL_white_64x64_small.gif"> <span class="fw-semi-bold">MySQL</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-gray-light" style="width:65%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/1/svn_small.png"> <span class="fw-semi-bold">Apache Subversion</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar" style="width: 60%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/42/php_small.png"> <span class="fw-semi-bold">PHP</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-info" style="width:55%;"></div></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+		</div>
 		<div class="row">
 			<div class="col-md-6">
 				<section class="widget">
