@@ -18,9 +18,9 @@
                             Inbox
                         </a>
                     </li>
-                    <li><a href="#">Starred</a></li>
+                    <!--<li><a href="#">Starred</a></li>-->
                     <li><a href="<%= sent_messages_path %>">Sent Mail</a></li>
-                    <li><a href="#">Trash</a></li>
+                    <!--<li><a href="#">Trash</a></li>-->
                 </ul>
             </div>
             <div class="col-md-9 col-lg-10">
@@ -51,12 +51,12 @@
                             <div class="email-details clearfix">
                                 <div class="email-details-content">
                                     <span class="thumb thumb-sm pull-left">
-                                        <img class="img-circle" src="<%= asset_path 'common/people/a5.jpg' %>" alt="Philip Horbacheuski">
+                                        <img class="img-circle" src="<%= asset_path "common/people/a5.jpg" %>">
                                     </span>
                                     <div class="pull-left">
-                                        <strong><%= message.from_name %></strong>
-                                        <span class="email">&lt;<%= message.from %>&gt;</span>
-                                        <span class="receiver">to <%= message.to %></span>
+                                        <strong><%= message.from_name %></strong> &nbsp
+                                        <span class="email">&lt;<%= message.from %>&gt;</span></br>
+                                        <div class="receiver" style="margin-top:1px">to <%= message.to %></div>
                                     </div>
                                     <div class="email-actions pull-right">
                                         <div class="btn-group">

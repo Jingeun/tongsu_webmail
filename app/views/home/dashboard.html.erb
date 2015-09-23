@@ -1,11 +1,151 @@
+<style type="text/css">
+#datatable-table img{
+	width:30px;
+	height:30px;
+	margin-right:5px;
+}
+#datatable-table2 img{
+	width:30px;
+	height:30px;
+	margin-right:5px;
+}
+#datatable-table3 img{
+	width:30px;
+	height:30px;
+	margin-right:5px;
+}
+</style>
+
 <div class="content-wrap">
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
-    <main id="content" class="content" role="main">
-        <h1 class="page-title" style="margin-bottom:0px; font-weight:400">Dashboard</h1>
+    <main id="content" class="content" role="main" style="padding-top:70px;">
 		<div class="row col-md-14 hidden-xs" style="width:101%; margin-bottom:30px;">
 			<img src="<%= asset_path "main_img.png" %>" style="max-width:100%;">
 		</div>
-		
+		<div class="row">
+			<div class="col-md-4">
+				<section class="widget">
+					<header><h4><span class="glyphicon glyphicon-th-list" style="margin-right:10px;"></span><span class="fw-semi-bold">Popular</span> projects</h4></header>
+					<div class="widget-body">
+						<div class="mt">
+							<div id="datatable-table_wrapper" class="dataTables_wrapper form-inline no-footer">
+								<table id="datatable-table" class="table table-striped table-hover dataTable no-footer" role="grid" aria-describedby="datatable-table_info">
+									<thead>
+										<tr role="row" style="text-align:center">
+											<th style="width: 60%;text-align:center">Name</th>
+											<th style="width: 40%;text-align:center">Users</th>
+										</tr>
+									</thead>
+									<tbody><!-- odd row class name is 'odd' / even row class name is 'even' -->
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/41453/logo-only_small.png"> <span class="fw-semi-bold">Mozilla Firefox</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-success" style="width: 90%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/34/apache_small.png"> <span class="fw-semi-bold">Apache HTTP Server</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-danger" style="width: 70%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/45256/MySQL_white_64x64_small.gif"> <span class="fw-semi-bold">MySQL</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-gray-light" style="width:65%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/1/svn_small.png"> <span class="fw-semi-bold">Apache Subversion</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar" style="width: 60%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/42/php_small.png"> <span class="fw-semi-bold">PHP</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-info" style="width:55%;"></div></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-4">
+				<section class="widget">
+					<header><h4><span class="glyphicon glyphicon-th-list" style="margin-right:10px;"></span><span class="fw-semi-bold">Active</span> projects</h4></header>
+					<div class="widget-body">
+						<div class="mt">
+							<div id="datatable-table_wrapper" class="dataTables_wrapper form-inline no-footer">
+								<table id="datatable-table2" class="table table-striped table-hover dataTable no-footer" role="grid" aria-describedby="datatable-table_info">
+									<thead>
+										<tr role="row" style="text-align:center">
+											<th style="width: 60%;text-align:center">Name</th>
+											<th style="width: 40%;text-align:center">Commits</th>
+										</tr>
+									</thead>
+									<tbody><!-- odd row class name is 'odd' / even row class name is 'even' -->
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/8176/GoogleChromeLogo_small.png"> <span class="fw-semi-bold">Chromium</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-success" style="width: 90%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/34/apache_small.png"> <span class="fw-semi-bold">Apache HTTP Server</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-danger" style="width: 70%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/45256/MySQL_white_64x64_small.gif"> <span class="fw-semi-bold">MySQL</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-gray-light" style="width:65%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/1/svn_small.png"> <span class="fw-semi-bold">Apache Subversion</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar" style="width: 60%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/42/php_small.png"> <span class="fw-semi-bold">PHP</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-info" style="width:55%;"></div></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-4">
+				<section class="widget">
+					<header><h4><span class="glyphicon glyphicon-th-list" style="margin-right:10px;"></span><span class="fw-semi-bold">Recommand</span> projects</h4></header>
+					<div class="widget-body">
+						<div class="mt">
+							<div id="datatable-table_wrapper" class="dataTables_wrapper form-inline no-footer">
+								<table id="datatable-table3" class="table table-striped table-hover dataTable no-footer" role="grid" aria-describedby="datatable-table_info">
+									<thead>
+										<tr role="row" style="text-align:center">
+											<th style="width: 60%;text-align:center">Name</th>
+											<th style="width: 40%;text-align:center">Recommand</th>
+										</tr>
+									</thead>
+									<tbody><!-- odd row class name is 'odd' / even row class name is 'even' -->
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/8176/GoogleChromeLogo_small.png"> <span class="fw-semi-bold">Chromium</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-success" style="width: 90%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/34/apache_small.png"> <span class="fw-semi-bold">Apache HTTP Server</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-danger" style="width: 70%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/45256/MySQL_white_64x64_small.gif"> <span class="fw-semi-bold">MySQL</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-gray-light" style="width:65%;"></div></div></td>
+										</tr>
+										<tr role="row" class="even">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/1/svn_small.png"> <span class="fw-semi-bold">Apache Subversion</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar" style="width: 60%;"></div></div></td>
+										</tr>
+										<tr role="row" class="odd">
+											<td><img src="https://s3.amazonaws.com/cloud.ohloh.net/attachments/42/php_small.png"> <span class="fw-semi-bold">PHP</span></td>
+											<td><div class="progress progress-sm mt-xs"><div class="progress-bar progress-bar-info" style="width:55%;"></div></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+		</div>
 		<div class="row">
 			<div class="col-md-6">
 				<section class="widget">
@@ -16,25 +156,26 @@
                             <a data-widgster="load" title="I am spinning!" href="#"><i class="fa fa-refresh"></i></a>
                             <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
                      </div>
-					<div class="widget-body table-responsive" style="min-height:319px; overflow-y:scroll;">
+					<div class="widget-body table-responsive" style="height:319px; overflow-y:scroll;">
                          <table class="table table-hover">
 							<thead>
 								<tr>
                                     <th style="text-align:center" width="5%">#</th>
-                                    <th style="text-align:center" width="45%" >Project Name</th>
+                                    <th style="text-align:center" width="60%" >Project Name</th>
                                     <th style="text-align:center" width="20%">Today</th>
                                     <th style="text-align:center" width="15%">Timeline</th>
-									<th style="text-align:center" width="15%">Keyword</th>
                                 </tr>
                             </thead>
-                            <tbody style="font-size:18px; text-align:center">
-                                <tr>
-                                    <td>100</td>
-                                    <td>Hadoop</td>
+                            <tbody style="font-size:18px; text-align:center;">
+							<% @groups.each_with_index do |group, index| %>
+								<tr>
+                                    <td><%= group.id %></td>
+                                    <td><%= group.name %></td>
                                     <td><span class="badge">0</span></td>
-                                    <td><a href="javascript:resizeing()"><button type="button" class="btn btn-primary btn-sm mb-xs">Link</button></a></td>
-									<td><a href="#"><button type="button" class="btn btn-danger btn-sm mb-xs">Link</button></a></td>
+                                    <td><a href="#"><button type="button" class="btn btn-primary btn-xs mb-xs">Link</button></a></td>
                                 </tr>
+							<% end %>
+                                
                             </tbody>
                          </table>
 					</div>
@@ -60,9 +201,9 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-md-6 widget-container">
+			<div class="col-md-12 widget-container">
                 <section class="widget" id="news-widget" data-widgster-load="demo/ajax/widgets/news.php">
-                        <h4>Recent <span class="fw-semi-bold">Mailing-list</span></h4>
+						<h4><span class="fw-semi-bold">Discussion</span> Top 5</h4>
                         <div class="widget-controls">
                             <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
                             <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
@@ -70,65 +211,58 @@
                             <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
                         </div>
                     <div class="widget-body">
-                        <ul class="news-list stretchable">
-                            <li>
-                                <span class="icon bg-danger text-white">
-                                    <i class="fa fa-star"></i>
-                                </span>
-                                <div class="news-item-info">
-                                    <h4 class="name no-margin mb-xs"><a href="#">Hadoop</a></h4>
-                                    <p class="fs-mini">
-                                        First 700 people will take part in building first human settlement outside of Earth.
-                                        That's awesome, right?
-                                    </p>
-                                    <time class="help-block">Mar 20, 18:46</time>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon bg-info text-white">
-                                    <i class="fa fa-microphone"></i>
-                                </span>
-                                <div class="news-item-info">
-                                    <h4 class="name no-margin mb-xs"><a href="#">openstack-dev</a></h4>
-                                    <p class="fs-mini">
-                                        Light Blue Inc. shares just hit $300 price. "This was inevitable. It should
-                                        have happen sooner or later" - says NYSE expert.
-                                    </p>
-                                    <time class="help-block">Sep 25, 11:59</time>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="icon bg-success text-white">
-                                    <i class="fa fa-eye"></i>
-                                </span>
-                                <div class="news-item-info">
-                                    <h4 class="name no-margin mb-xs"><a href="#">No more spying</a></h4>
-                                    <p class="fs-mini">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua ...
-                                    </p>
-                                    <time class="help-block">Mar 20, 18:46</time>
-                                </div>
-                            </li>
-							<li>
-                                <span class="icon bg-success text-white">
-                                    <i class="fa fa-eye"></i>
-                                </span>
-                                <div class="news-item-info">
-                                    <h4 class="name no-margin mb-xs"><a href="#">No more spying</a></h4>
-                                    <p class="fs-mini">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua ...
-                                    </p>
-                                    <time class="help-block">Mar 20, 18:46</time>
-                                </div>
-                            </li>
-							
-                        </ul>
+                        <table class="table">
+                            <thead>
+								<tr>
+									<th class="hidden-xs">#</th>
+									<th>Channel</th>
+									<th>From</th>
+									<th class="hidden-xs">Subject</th>
+									<th class="hidden-xs">Date</th>
+									<th class="hidden-xs"></th>
+									<th></th>
+								</tr>
+                            </thead>
+                            <tbody>
+                            <% @top.each_with_index do |mail, index| %>
+                                <tr>
+                                    <td class="hidden-xs"><%= index %></td>
+                                    <td>
+                                        <%= mail.channels.first.name %>
+                                    </td>
+                                    <td>
+                                        <%= mail.from_name %>
+                                    </td>
+                                    <td class="hidden-xs">
+                                        <%= truncate(mail.subject, length: 80, separator: " ") %>
+                                    </td>
+                                    <td class="hidden-xs text-semi-muted">
+                                        <%= mail.updated_at.localtime.strftime("%b %e, %l:%m %P")%>
+                                    </td>
+                                    <td class="width-150">
+                                        <div class="progress progress-sm mt-xs js-progress-animate">
+                                            <% case index %>
+                                            <% when 0 %>
+                                                <div class="progress-bar progress-bar-success" data-width="29%" style="width: 0;"></div>
+                                            <% when 1 %>
+                                                <div class="progress-bar progress-bar-warning" data-width="33%" style="width: 0;"></div>
+                                            <% when 2 %>
+                                                <div class="progress-bar progress-bar-gray" data-width="38%" style="width: 0;"></div>
+                                            <% when 3 %>
+                                                <div class="progress-bar progress-bar-danger" data-width="17%" style="width: 0;"></div>
+                                            <% when 4 %>
+                                                <div class="progress-bar" data-width="41%" style="width: 0;"></div>
+                                            <% end %>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
             </div>
-			
+			<!--
 			<div class="col-md-6 col-lg-6 widget-container">
 			
 				<section class="widget widget-calendar" style="margin-top:0px;">
@@ -189,7 +323,7 @@
                     </div>
                 </div>
 			</div>
-			
+			-->
         </div>
     </main>
 </div>
@@ -198,8 +332,8 @@
 <script src="/assets/home/dashboard/jquery.flot.js"></script>
 <script src="/assets/home/dashboard/jquery.flot.animator.min.js"></script>
 <script src="/assets/home/dashboard/charts.js"></script>
-<script src="/assets/home/dashboard/calendar.js"></script>
-<script src="/assets/home/dashboard/fullcalendar.js"></script>
+<!--<script src="/assets/home/dashboard/calendar.js"></script>-->
+<!--<script src="/assets/home/dashboard/fullcalendar.js"></script>-->
 <script src="/assets/home/dashboard/modal.js"></script>
 <script src="/assets/home/dashboard/core.js"></script>
 <script src="/assets/home/dashboard/widget.js"></script>
