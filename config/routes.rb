@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
 	# Non-mailinglist emails
 	resources :messages
+	get '/imported/messages' => 'messages#import', as: 'import_messages'
 	get '/messages/:id/original' => 'messages#original', as: 'original_message'
 	get '/sent/messages' => 'messages#sent_messages', as: 'sent_messages'
 	get '/sent/messages/:id' => 'messages#sent_messages_show', as: 'sent_message'

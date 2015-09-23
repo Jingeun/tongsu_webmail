@@ -8,10 +8,9 @@
         <h1 class="page-title">Email - <span class="fw-semi-bold">Inbox</span></h1>
         <div class="row">
             <div class="col-md-3 col-lg-2">
-                <a class="btn btn-danger btn-block" href="<%= new_message_path %>">
-                    Compose
-                </a>
-                <ul class="nav nav-pills nav-stacked nav-email-folders mt">
+                <a class="btn btn-danger btn-block" id="compose-btn" href="<%= new_message_path %>">Compose</a>
+
+                <ul class="nav nav-pills nav-stacked nav-email-folders mt" id="folders-list">
                     <li class="active">
                         <a href="<%= messages_path %>">
                             <span class="badge pull-right"><%= @not_read %></span>
@@ -20,7 +19,7 @@
                     </li>
                     <!--<li><a href="#">Starred</a></li>-->
                     <li><a href="<%= sent_messages_path %>">Sent Mail</a></li>
-                    <!--<li><a href="#">Trash</a></li>-->
+                    <li><a href="<%= import_messages_path %>">Import</a></li>
                 </ul>
             </div>
             <div class="col-md-9 col-lg-10">

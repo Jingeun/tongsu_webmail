@@ -93,11 +93,15 @@ module API
 					end
 
 					# Check user is subscribing
-					delivered_to = mail.header['Delivered-To']
-					delivered_to = delivered_to.first if delivered_to.class.to_s.eql?('Array')
-					uid          = delivered_to.field.value.split('@').first
-					user		 = User.where(uid: uid).first
-					p "DEBUG::MAIL Check user subscribing : #{uid}"
+					if params[:import].eql?("true")
+						user = User.where(uid: params[:uid]).first
+					else
+						# Get Receiver
+						delivered_to = mail.header['Delivered-To']
+						delivered_to = delivered_to.first if delivered_to.class.to_s.eql?('Array')
+						uid          = delivered_to.field.value.split('@').first
+						user		 = User.where(uid: uid).first
+					end
 
 					unless user.channels.include?(channel)
 						user.channels << channel

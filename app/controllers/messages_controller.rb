@@ -5,7 +5,11 @@ class MessagesController < ApplicationController
 
 	def index
 		# Show only origin messages
-		@messages = current_user.messages.where(origin_id: nil)
+		@messages = current_user.messages.where(origin_id: nil).where('users_messages.is_import = ?', false)
+	end
+
+	def import
+		@messages = current_user.messages.where(origin_id: nil).where('users_messages.is_import = ?', true)
 	end
 
 	def show
