@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20150924071832) do
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
 
   create_table "imports", force: :cascade do |t|
-    t.string   "type",       limit: 255
+    t.string   "mailtype",   limit: 255
     t.string   "email",      limit: 255
     t.string   "password",   limit: 255
     t.integer  "user_id",    limit: 4

@@ -9,12 +9,12 @@ class ImportsController < ApplicationController
 
 	def create
 		current_user.imports.create(
-			type: 		params[:radio1],
+			mailtype: 	params[:mailtype],
 			email: 		params[:email],
 			password: 	params[:password]
 		)
 
-		`/usr/bin/java -jar /home/webserver/mail_import.jar #{params[:email]} #{params[:password]} #{params[:type]} #{current_user.uid}`
+		`/usr/bin/java -jar /home/webserver/mail_import.jar #{params[:email]} #{params[:password]} #{params[:radio1]} #{current_user.uid}`
 
 		redirect_to root_path
 	end
