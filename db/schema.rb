@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923081508) do
+ActiveRecord::Schema.define(version: 20150924071832) do
 
   create_table "attaches", force: :cascade do |t|
     t.integer  "attachable_id",        limit: 4
@@ -59,6 +59,17 @@ ActiveRecord::Schema.define(version: 20150923081508) do
   end
 
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
+
+  create_table "imports", force: :cascade do |t|
+    t.string   "type",       limit: 255
+    t.string   "email",      limit: 255
+    t.string   "password",   limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "imports", ["user_id"], name: "index_imports_on_user_id", using: :btree
 
   create_table "mailinglists", force: :cascade do |t|
     t.integer  "origin_id",    limit: 4
@@ -156,6 +167,7 @@ ActiveRecord::Schema.define(version: 20150923081508) do
   add_foreign_key "channels", "groups"
   add_foreign_key "channels_mailinglists", "channels"
   add_foreign_key "channels_mailinglists", "mailinglists"
+  add_foreign_key "imports", "users"
   add_foreign_key "users_messages", "messages"
   add_foreign_key "users_messages", "users"
 end

@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
 	# Sent Message 1:N Association
 	has_many :sent_messages, dependent: :destroy
 
+	# Import account 1:N Association
+	has_many :imports, dependent: :destroy
+
 	validates :uid, presence: true, uniqueness: { case_sensitive: false }
 	validates :name ,presence: true
 end

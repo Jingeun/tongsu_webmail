@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 	
 	root 'home#index'
 
-	get 'import' => 'home#import'
+	resources :imports, only: [:new, :create]
 	
 	devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
 	resources :mailinglists, only: [:index, :show]
