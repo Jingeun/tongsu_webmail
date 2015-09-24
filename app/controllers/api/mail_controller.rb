@@ -22,10 +22,14 @@ module API
 
 					p "DEBUG::MAIL #{the_mail.subject}"
 					# Get Receiver
-					delivered_to = mail.header['Delivered-To']
-					delivered_to = delivered_to.first if delivered_to.class.to_s.eql?('Array')
-					uid          = delivered_to.field.value.split('@').first
-					user		 = User.where(uid: uid).first
+					if params[:import].eql?("true")
+						user = User.where(uid: params[:uid]).first
+					else
+						delivered_to = mail.header['Delivered-To']
+						delivered_to = delivered_to.first if delivered_to.class.to_s.eql?('Array')
+						uid          = delivered_to.field.value.split('@').first
+						user		 = User.where(uid: uid).first
+					end
 
 					# Associate to User
 					unless user.messages.include?(the_mail)
