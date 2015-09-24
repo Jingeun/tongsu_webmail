@@ -187,6 +187,10 @@ module API
 						ch_mailing << mailinglist
 					end
 
+					if params[:import].eql?("true")
+						mailinglist.channels_mailinglists.where(channel_id: channel).first.update_attributes(is_import: true)
+					end
+
 					# Save File Attachments
 					unless mail.attachments.empty?
 						mail.attachments.each do |attachment|

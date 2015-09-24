@@ -73,7 +73,7 @@ window.onload = function(){time()};
                             <i class="fa fa-circle text-gray mr-xs"></i>
                             <% end %>
                         </span>
-                        <%= group.name %>
+                        <%= truncate(group.name, length: 15) %>
                         <i class="toggle fa fa-angle-down"></i>
                     </a>
                     <ul id="sidebar-<%= group.id %>" class="collapse">
