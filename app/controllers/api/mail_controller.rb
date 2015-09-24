@@ -13,23 +13,45 @@ module API
 			# Check mail is registered
 			if registered?(mail.message_id)
 
+				# Get Receiver
+				if params[:import].eql?("true")
+					user = User.where(uid: params[:uid]).first
+				else
+					delivered_to = mail.header['Delivered-To']
+					delivered_to = delivered_to.first if delivered_to.class.to_s.eql?('Array')
+					uid          = delivered_to.field.value.split('@').first
+					user		 = User.where(uid: uid).first
+				end
+
 				unless mail.header[:list_post].nil?
 					# If mail is mailinglist
 					p "DEBUG::MAIL ALREADY REGISTERED MAILINGLIST"
+					the_mailinglist = Mailinglist.where(message_id: mail.message_id).first
+
+					# Get List-Post
+					list_post = mail.header[:list_post].field.value
+					list_post = list_post[/\<(.*)>/,1] || list_post
+					list_post = list_post.gsub('mailto:', '')
+
+					# Get List-Id
+					list_id   = ""
+					unless mail.header[:list_id].nil?
+						list_id = mail.header[:list_id].field.value
+						list_id = list_id[/\<(.*)>/,1] || list_id
+					else
+						list_id = list_post
+					end
+
+					# Check Channel is registered
+					channel = Channel.find_by(list_id: list_id)
+
+					unless user.channels.include?(channel)
+						user.channels << channel
+					end
+
 				else
 					p "DEBUG::MAIL ALREADY REGISTERED MESSAGE"
 					the_mail = Message.where(message_id: mail.message_id).first
-
-					p "DEBUG::MAIL #{the_mail.subject}"
-					# Get Receiver
-					if params[:import].eql?("true")
-						user = User.where(uid: params[:uid]).first
-					else
-						delivered_to = mail.header['Delivered-To']
-						delivered_to = delivered_to.first if delivered_to.class.to_s.eql?('Array')
-						uid          = delivered_to.field.value.split('@').first
-						user		 = User.where(uid: uid).first
-					end
 
 					# Associate to User
 					unless user.messages.include?(the_mail)
@@ -59,13 +81,9 @@ module API
 						list_id = list_post
 					end
 
-					p "DEBUG::MAIL List-Id:#{list_id}"
-					p "DEBUG::MAIL List-Post:#{list_post}"
-
 					# Check Channel is registered
 					channel = Channel.find_by(list_id: list_id)
 					unless channel.present?
-						p "DEBUG::MAIL Channel isn't registered."
 						# If Channel isn't registered
 						group_name = list_id.split('@').last.split('.')[-2..-1].join('.')
 
@@ -74,13 +92,10 @@ module API
 						end
 
 						group = Group.find_by_name(group_name)
-						p "DEBUG::MAIL Find gruop name : #{group_name}"
 
 						# If Group isn't registered
 						unless group.present?
-							p "DEBUG::MAIL Group isn't registered."
 							group = Group.create(name: group_name)
-							p "DEBUG::MAIL Create group : #{group.name}"
 						end
 
 						list_subscribe   = mail.header[:list_subscribe].nil? ? '' : mail.header[:list_subscribe].field.value
