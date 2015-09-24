@@ -1,129 +1,105 @@
+<script language="javascript">
+function Email_form(){
+	var check_doc = document.getElementsByName('checking')[0];
+	var form_doc = document.getElementById('Email_form')
+	if(check_doc.checked==false)
+		form_doc.style.display='block';
+	else{
+		document.getElementById('email').value = '';
+		document.getElementById('password').value = '';
+		form_doc.style.display='none';
+	}
+}
+</script>
+
 <div class="content-wrap">
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
         <h1 class="page-title">Import - <span class="fw-semi-bold">Webmail</span></h1>
-        <div class="row">
-            <div class="col-md-12">
-                <section class="widget">
-                    <header>
-                        <div class="widget-controls">
-                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+		<div class="row">
+			<div class="col-md-8">
+				<section class="widget">
+                    <div class="widget-body" style="text-align:center">
+                        <h3><span class="fw-semi-bold">Select</span> webmail to take webservice</h3>
+						<div class="btn-group" data-toggle="buttons" style="margin-top: 30px; margin-bottom:50px;">
+							<label class="btn btn-gray" data-toggle="modal" data-target="#googlemail">
+								<input type="radio" name="Company" > Google 
+							</label>
+							<label class="btn btn-gray" data-toggle="modal" data-target="#navermail">
+								<input type="radio" name="Company"> Naver 
+							</label>
+							<label class="btn btn-gray" data-toggle="modal" data-target="#daummail">
+								<input type="radio" name="Company"> Daum 
+							</label>
                         </div>
-                    </header>
-                    <div class="widget-body">
-                        <div class="row">
-							<div class="col-md-1"> </div>
-                            <div class="col-md-10">
-                                <div id="wizard" class="form-wizard">
-                                    <ul class="nav-justified mb-sm">
-                                        <li><a href="#tab1" data-toggle="tab"> <small>1.</small> Low Security Settings</a></li>
-                                        <li><a href="#tab2" data-toggle="tab"> <small>2.</small> Input your mail Id and Password</a></li>
-                                        <li><a href="#tab3" data-toggle="tab"> <small>3.</small> Thank you!</a></li>
-                                    </ul>
-                                    <div id="bar" class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-gray-light"></div>
+                        <div class="modal fade" id="googlemail" tabindex="-1" role="dialog" aria-labelledby="googlemail1" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog" style="width:80%">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h2 class="modal-title text-align-center fw-bold mt" id="googlemail1">Google Mail</h2>
+                                        <p class="text-align-center fs-mini text-muted mt-sm">
+                                            Must do low security settings to bring other mails.
+                                        </p>
                                     </div>
-                                    <div class="tab-content" style="hegiht:100%;">
-                                        <div class="tab-pane bg-gray-lighter" id="tab1">
-                                            <form action='' method="POST" data-parsley-priority-enabled="false" novalidate="novalidate">
-                                                <fieldset style="height:100%;">
-                                                    <div class="form-group">
-														<div class="row">
-															<div class="col-md-12">
-																<div class="panel-group mb-lg" id="accordion" data-toggle="collapse">
-																	<div class="panel panel-default">
-																		<div class="panel-heading collapsed">
-																			<h5 class="panel-title">
-																				<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-																					* Google Mail <i class="fa fa-angle-down pull-right"></i>
-																				</a>
-																			</h5>
-																		</div>
-																		<div id="collapseOne" class="panel-collapse collapse">
-																			<div class="panel-body">
-																				<img src="<%= asset_path "google_mail.png" %>">
-																			</div>
-																		</div>
-																	</div>
-																	<div class="panel panel-default">
-																		<div class="panel-heading">
-																			<h5 class="panel-title">
-																				<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-																					* Naver mail
-																					<i class="fa fa-angle-down pull-right"></i>
-																				</a>
-																			</h5>
-																		</div>
-																		<div id="collapseTwo" class="panel-collapse collapse">
-																			<div class="panel-body">
-																				<img src="<%= asset_path "naver_mail.png"%>">
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-														
-                                                        <label for="country-select" style="margin-right:30px;">I agree Low Security Settings so that bring other mail</label>
-															<div class="btn-group" data-toggle="buttons">
-																<label class="btn  btn-danger">
-																	<input type="checkbox" name="gr1" value=""> <i class="fa fa-check text-danger"></i> Check
-																</label>
-															</div>
-                                                        <span class="help-block">Please choose your country destination</span>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                        <div class="tab-pane bg-gray-lighter" id="tab2">
-										<form action='' method="POST" data-parsley-priority-enabled="false" novalidate="novalidate">
-                                                <fieldset>
-                                                    <div class="form-group">
-                                                        <!-- Email -->
-                                                        <label for="email">Email</label>
-                                                            <input type="email" id="email" name="email" placeholder="example@tongsu.su" class="form-control" data-parsley-trigger="change" required="required">
-                                                            <span class="help-block">Please provide your E-mail</span>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <!-- Password -->
-                                                        <label for="address">Password</label>
-                                                            <input type="password" id="password" name="password" placeholder="password" class="form-control">
-                                                            <span class="help-block">Please provide your address</span>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                        <div class="tab-pane bg-gray-lighter" id="tab3">
-										가지고오는중...
-                                            <h2>Thank you!</h2>
-                                            <p>Your submission has been received.</p>
-                                        </div>
-                                        <ul class="pager wizard">
-                                            <li class="previous">
-                                                <button class="btn btn-default btn-rounded pull-left">
-                                                    <i class="fa fa-caret-left"></i> &nbsp; Previous
-                                                </button>
-                                            </li>
-                                            <li class="next">
-                                                <button class="btn btn-primary btn-rounded pull-right" >
-                                                    Next &nbsp; <i class="fa fa-caret-right"></i></button>
-                                            </li>
-                                            <li class="finish" style="display: none">
-                                                <button class="btn btn-success btn-rounded pull-right" >
-                                                    Finish &nbsp; <i class="glyphicon glyphicon-ok"></i>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <div class="modal-body bg-gray-lighter" style="text-align:center"><img src="<%= asset_path "google_mail.png" %>"></div>
+                                    <div class="modal-footer"><button type="button" class="btn btn-gray" data-dismiss="modal">Close</button></div>
                                 </div>
                             </div>
                         </div>
+						<div class="modal fade" id="navermail" tabindex="-1" role="dialog" aria-labelledby="navermail1" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog" style="width:80%">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h2 class="modal-title text-align-center fw-bold mt" id="navermail1">Naver Mail</h2>
+                                        <p class="text-align-center fs-mini text-muted mt-sm">
+                                            Must do low security settings to bring other mails.
+                                        </p>
+                                    </div>
+                                    <div class="modal-body bg-gray-lighter" style="text-align:center"><img src="<%= asset_path "naver_mail.png" %>"></div>
+                                    <div class="modal-footer"><button type="button" class="btn btn-gray" data-dismiss="modal">Close</button></div>
+                                </div>
+                            </div>
+                        </div>
+						<!-- daum mail -->
                     </div>
+					<div class="row" style="text-align:center">
+						<label for="country-select" style="margin-right:30px;">I agree Low Security Settings so that bring other mail</label>
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn  btn-danger" onclick="Email_form();">
+								<input type="checkbox" name="checking" value="Check"> <i class="fa fa-check text-danger"></i> Check
+							</label>
+						</div>
+					</div>
+					<div class="row" style="border:1px solid black">
+						<div class="col-md-8" id="Email_form" style="display:none;margin-top:30px; border:1px solid red">
+							<form action="" method="POST" data-parsley-priority-enabled="false" novalidate="novalidate">
+								<fieldset>
+									<div class="form-group">
+										<!-- Email -->
+										<label for="email">Email</label>
+											<input type="email" id="email" name="email" placeholder="example@tongsu.su" class="form-control" data-parsley-trigger="change" required="required">
+											<span class="help-block">Please provide your E-mail</span>
+									</div>
+									<div class="form-group">
+										<!-- Password -->
+										<label for="address">Password</label>
+											<input type="password" id="password" name="password" placeholder="password" class="form-control">
+											<span class="help-block">Please provide your address</span>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success btn-rounded pull-right">
+											Finish &nbsp; <i class="glyphicon glyphicon-ok"></i>
+										</button>
+									</div>
+								 </fieldset>
+							 </form>
+						</div>
+					</div>
                 </section>
-            </div>
-        </div>
+			</div>
+		</div>
     </main>
 </div>
 <!-- The Loader. Is shown when pjax happens -->
@@ -131,18 +107,4 @@
     <i class="fa fa-circle-o-notch fa-spin-fast"></i>
 </div>
 
-
-<script src="/assets/home/import/form-wizard.js"></script>
-
-<script src="/assets/home/import/parsley.min.js"></script>
-
-<script src="/assets/home/import/tab.js"></script>
-
-<script src="/assets/home/import/jquery.bootstrap.wizard.min.js"></script>
-<script src="/assets/home/import/select2.js"></script>
-<script src="/assets/home/import/moment.min.js"></script>
-<script src="/assets/home/import/bootstrap-datetimepicker.min.js"></script>
-<script src="/assets/home/import/inputmask.js"></script>
 <script src="/assets/home/import/modal.js"></script>
-<script src="/assets/home/import/popover.js"></script>
-<script src="/assets/home/import/bootstrap-wizard.js"></script>
