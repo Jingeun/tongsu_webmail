@@ -15,7 +15,7 @@ module API
 
 				unless mail.header[:list_post].nil?
 					# If mail is mailinglist
-
+					p "DEBUG::MAIL ALREADY REGISTERED MAILINGLIST"
 				else
 					p "DEBUG::MAIL ALREADY REGISTERED MESSAGE"
 					the_mail = Message.where(message_id: mail.message_id).first
