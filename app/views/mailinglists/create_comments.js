@@ -1,3 +1,3 @@
-var add = '<li><span class="thumb-xs avatar pull-left mr-sm"><img class="img-circle" src="/assets/avatar.png"></span><div class="comment-body"><h6 class="author fw-semi-bold"><%= @uid %><small style="margin-left:8px;"><%= time_ago_in_words(@mail.created_at) %> ago</small></h6><p><%= @mail.content %></p></div></li>';
+var add = '<li><span class="thumb-xs avatar pull-left mr-sm"><img class="img-circle" src="/assets/avatar.png"></span><div class="comment-body"><h6 class="author fw-semi-bold"><%= @uid %><small style="margin-left:8px;"><%= time_ago_in_words(@mail.created_at) %> ago</small></h6><p><%= @mail.content.html_safe %></p></div></li>';
 $('#message_reply_<%= @message.id %> li:last-child').fadeOut("slow");
 $('#message_reply_<%= @message.id %>').append(add);
