@@ -11,6 +11,7 @@ class MailinglistsController < ApplicationController
 	end
 
 	def show
+		@uid     = current_user.uid
 		@channel = Channel.find_by_id(params[:id])
 
 		# If channel non-exists
@@ -45,6 +46,22 @@ class MailinglistsController < ApplicationController
 		recursive(@replys, @message)
 		@replys.shift
 		@replys = @replys.sort
+
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def create_comments
+		@uid     = current_user.uid
+		channel  = Channel.find_by_id(params[:id])
+		@message = Mailinglist.find_by_id(params[:message_id])
+		@mail = channel.mailinglists.create(
+			content:     params[:content],
+			from: 		 "#{current_user.uid}@tongsu.tk",
+			from_name:   current_user.uid,
+		)
+		@message.replys << @mail
 
 		respond_to do |format|
 			format.js

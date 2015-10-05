@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 	resources :mailinglists, only: [:index, :show]
 	post '/mailinglists/see_more'
 	post '/mailinglists/get_comments'
+	post '/mailinglists/create_comments'
 
 	# Non-mailinglist emails
 	resources :messages
