@@ -22,12 +22,31 @@ function get_comments(id) {
     });
 };
 
-function textedit11(message_id) {
+function textedit11(message_id, id) {
     $('#wysiwyg' + message_id).attr('rows', '15');
-    $('#commet-body-' + message_id).append('<div class="btn-toolbar"><button type="button" class="btn btn-sm btn-default pull-right">Clear</button><button type="button" class="btn btn-sm btn-danger pull-right">Send</button></div>');
+    $('#commet-body-' + message_id).append('<div class="btn-toolbar"><button type="button" class="btn btn-sm btn-default pull-right">Clear</button><button type="button" class="btn btn-sm btn-danger pull-right" onclick="create_comment(' + message_id +', \''+ id +'\')">Send</button></div>');
     $('#wysiwyg' + message_id).wysihtml5();
 };
 
 function textedit11cancel(message_id){
 
+};
+
+function create_comment(message_id, id) {
+    var content = $('#wysiwyg' + message_id).val();
+
+    if (content == "") {
+        console.log("content is empty");
+    }
+    else {
+        $.ajax({
+            url: "/mailinglists/create_comments",
+            type: "POST",
+            data: {id: id, message_id: message_id, content: content},
+            success: function(data) {
+            },
+            error: function(data){
+            }
+        });   
+    }
 };

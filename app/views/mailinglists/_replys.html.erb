@@ -15,6 +15,6 @@
         <img class="img-circle" src="<%= asset_path 'avatar.png' %>">
     </span>
     <div class="comment-body" id="commet-body-<%= @message.id %>">
-        <textarea rows="1" id="wysiwyg<%= @message.id %>" class="form-control input-sm" type="text" placeholder="Write your comment..." onclick="textedit11(<%= @message.id %>);"></textarea>
+        <textarea rows="1" id="wysiwyg<%= @message.id %>" class="form-control input-sm" type="text" placeholder="Write your comment..." onclick="textedit11(<%= @message.id %> , '<%= @message.channels_mailinglists.first.channel_id %>');"></textarea>
     </div>
 </li>
