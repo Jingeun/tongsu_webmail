@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
 	post 'users/id_check' => 'home#id_check'
 	get  '/dashboard' => 'home#dashboard'
+        get  '/board' => 'home#board'
 
 	namespace :api, path: '/', constraints: { subdomain: 'api' } do
 		post '/check/registered'

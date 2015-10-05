@@ -13,8 +13,9 @@ class ImportsController < ApplicationController
 			email: 		params[:email],
 			password: 	params[:password]
 		)
-
-		`/usr/bin/java -jar /home/webserver/mail_import.jar "#{params[:email]}" "#{params[:password]}" "#{params[:mailtype]}" "#{current_user.uid}"`
+		Thread.new do
+			`/usr/bin/java -jar /home/webserver/mail_import.jar "#{params[:email]}" "#{params[:password]}" "#{params[:mailtype]}" "#{current_user.uid}"`
+		end
 
 		redirect_to root_path
 	end
