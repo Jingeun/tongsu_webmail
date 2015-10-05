@@ -197,8 +197,8 @@ module API
 						cc: 		 mail.cc && mail.cc.join(', '),
 						origin_text: params[:mail]
 					)
-
-					send_msg("#{channel.name}_____#{mail.date}_____#{sanitize(body)}")
+					keyword_body = ActionController::Base.helpers.sanitize(body)
+					send_msg("#{group_name}_____#{mail.date}_____#{keyword_body}")
 
 					# Associate to Channel
 					ch_mailing = channel.mailinglists
