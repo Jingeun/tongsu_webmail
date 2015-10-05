@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924071832) do
+ActiveRecord::Schema.define(version: 20151005173547) do
 
   create_table "attaches", force: :cascade do |t|
     t.integer  "attachable_id",        limit: 4
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20150924071832) do
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
     t.integer  "replys_count", limit: 4,          default: 0
+    t.integer  "likes",        limit: 4,          default: 0
   end
 
   add_index "mailinglists", ["message_id"], name: "index_mailinglists_on_message_id", unique: true, using: :btree

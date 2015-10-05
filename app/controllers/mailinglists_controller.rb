@@ -2,7 +2,7 @@ class MailinglistsController < ApplicationController
 	before_action :authenticate_user!, only: [:index, :show]
 	before_action :get_not_read_message, only: [:index, :show]
 	before_action :get_groups, only: [:show]
-	before_action :get_mailinglist, only: [:see_more, :get_comments]
+	before_action :get_mailinglist, only: [:see_more, :get_comments, :likes]
 
 	$temp_date    = nil
     $color_index  = 0
@@ -62,6 +62,25 @@ class MailinglistsController < ApplicationController
 			from_name:   current_user.uid,
 		)
 		@message.replys << @mail
+
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def likes
+		channel = Channel.find_by_id(params[:channel])
+		temp    = @message.channels_mailinglists.where(channel_id: channel).first
+		@is_add = false
+		if temp.is_favorite
+			temp.update_attributes(is_favorite: false)
+			@message.update_attributes(likes: @message.likes-1)
+			@is_add = false
+		else
+			temp.update_attributes(is_favorite: true)
+			@message.update_attributes(likes: @message.likes+1)
+			@is_add = true
+		end
 
 		respond_to do |format|
 			format.js
