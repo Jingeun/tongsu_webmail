@@ -50,3 +50,16 @@ function create_comment(message_id, id) {
         });   
     }
 };
+
+
+function add_like(channel, id) {
+    $.ajax({
+        url: "/mailinglists/likes",
+        type: "POST",
+        data: {id: id, channel: channel},
+        success: function(data) {
+        },
+        error: function(data){
+        }
+    });
+}

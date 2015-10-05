@@ -1,0 +1,6 @@
+<% if @is_add %>
+	$('#like_<%= @message.id %>').html('<i class="fa fa-heart"></i> <%=j pluralize(@message.likes, "Like") %>');
+
+<% else %>
+	$('#like_<%= @message.id %>').html('<i class="fa fa-heart-o"></i> <%=j pluralize(@message.likes, "Like") %>');
+<% end %>

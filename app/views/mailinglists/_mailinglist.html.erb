@@ -75,8 +75,13 @@
     <% end %>
     <footer style="font-weight:400;" >
         <ul class="post-links">
-            <li><a href="#">1 hour</a></li>
-            <li><a href="#"><span class="text-danger"><i class="fa fa-heart"></i> Like</span></a></li>
+            <li><a href="javascript:{}" onclick="add_like('<%= @channel.id %>', '<%= mailinglist.id %>')"><span id="like_<%= mailinglist.id %>" class="text-danger"><i class= 
+                <% if mailinglist.channels_mailinglists.where(channel_id: @channel).first.is_favorite %>
+                    "fa fa-heart"
+                <% else %>
+                    "fa fa-heart-o"
+                <% end %>
+                ></i> <%= pluralize(mailinglist.likes, 'Like') %></span></a></li>
             <% reply = Array.new %>
             <% recursive(reply, mailinglist) %>
             <li><a href="javascript:{}" onclick="get_comments(<%= mailinglist.id.to_s %>)"><%= pluralize(reply.count-1, 'Comment') %></a></li>
