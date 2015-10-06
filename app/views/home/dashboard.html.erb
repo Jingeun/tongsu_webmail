@@ -146,63 +146,73 @@
 					</div>
 				</section>
 		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<section class="widget">
-					<h4><span class="fw-semi-bold">Projects list</span> to join</h4>
-					<div class="widget-controls">
-                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                            <a data-widgster="load" title="I am spinning!" href="#"><i class="fa fa-refresh"></i></a>
-                            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
-                     </div>
-					<div class="widget-body table-responsive" style="height:319px; overflow-y:scroll;">
-                         <table class="table table-hover">
-							<thead>
-								<tr>
-                                    <th style="text-align:center" width="5%">#</th>
-                                    <th style="text-align:center" width="60%" >Project Name</th>
-                                    <th style="text-align:center" width="20%">Today</th>
-                                    <th style="text-align:center" width="15%">Timeline</th>
-                                </tr>
-                            </thead>
-                            <tbody style="font-size:18px; text-align:center;">
-							<% @groups.each_with_index do |group, index| %>
-								<tr>
-                                    <td><%= group.id %></td>
-                                    <td><%= group.name %></td>
-                                    <td><span class="badge">0</span></td>
-                                    <td><a href="#"><button type="button" class="btn btn-primary btn-xs mb-xs">Link</button></a></td>
-                                </tr>
-							<% end %>
-                                
-                            </tbody>
-                         </table>
-					</div>
-				</section>
-			</div>
-			
-			<div class="col-md-6 col-lg-6">
-                <section class="widget">
-					<h4><span class="fw-semi-bold">Mailing-list count</span> charts weekly</h4>
-					<p class="fs-mini"> &nbsp&nbsp Some project may know how to active!</p>
-					<div class="widget-controls">
-						<a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-						<a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-						<a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
-					</div>
-                    <div class="widget-body">
-						<!-- chars.js 내용 수정 -->
-                        <div class="mt mb" id="flot-main" style="width: 100%; height: 260px;"></div>
-                        <div class="chart-tooltip" id="flot-main-tooltip" style="opacity: 0"></div>
-                    </div>
-                </section>
-            </div>
-		</div>
 		
 		<div class="row">
 			<div class="col-md-12 widget-container">
                 <section class="widget" id="news-widget" data-widgster-load="demo/ajax/widgets/news.php">
+						<h4><span class="fw-semi-bold">Discussion</span> Top 5</h4>
+                        <div class="widget-controls">
+                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                            <a data-widgster="load" title="I am spinning!" href="#"><i class="fa fa-refresh"></i></a>
+                            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+                        </div>
+                    <div class="widget-body">
+                        <table class="table">
+                            <thead>
+								<tr>
+									<th class="hidden-xs">#</th>
+									<th>Channel</th>
+									<th>From</th>
+									<th class="hidden-xs">Subject</th>
+									<th class="hidden-xs">Date</th>
+									<th class="hidden-xs"></th>
+									<th></th>
+								</tr>
+                            </thead>
+                            <tbody>
+                            <% @top.each_with_index do |mail, index| %>
+                                <tr>
+                                    <td class="hidden-xs"><%= index %></td>
+                                    <td>
+                                        <%= mail.channels.first.name %>
+                                    </td>
+                                    <td>
+                                        <%= mail.from_name %>
+                                    </td>
+                                    <td class="hidden-xs">
+                                        <%= truncate(mail.subject, length: 80, separator: " ") %>
+                                    </td>
+                                    <td class="hidden-xs text-semi-muted">
+                                        <%= mail.updated_at.localtime.strftime("%b %e, %l:%m %P")%>
+                                    </td>
+                                    <td class="width-150">
+                                        <div class="progress progress-sm mt-xs js-progress-animate">
+                                            <% case index %>
+                                            <% when 0 %>
+                                                <div class="progress-bar progress-bar-success" data-width="29%" style="width: 0;"></div>
+                                            <% when 1 %>
+                                                <div class="progress-bar progress-bar-warning" data-width="33%" style="width: 0;"></div>
+                                            <% when 2 %>
+                                                <div class="progress-bar progress-bar-gray" data-width="38%" style="width: 0;"></div>
+                                            <% when 3 %>
+                                                <div class="progress-bar progress-bar-danger" data-width="17%" style="width: 0;"></div>
+                                            <% when 4 %>
+                                                <div class="progress-bar" data-width="41%" style="width: 0;"></div>
+                                            <% end %>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <div class="row">
+			<div class="col-md-12 widget-container">
+                <section class="widget" id="news-widget1" data-widgster-load="demo/ajax/widgets/news.php">
 						<h4><span class="fw-semi-bold">Discussion</span> Top 5</h4>
                         <div class="widget-controls">
                             <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
