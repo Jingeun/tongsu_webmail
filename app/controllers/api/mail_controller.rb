@@ -290,9 +290,9 @@ module API
 						subject: 	 mail.subject,
 						content:     body,
 						date: 		 mail.date,
-						from: 		 mail.from.join(', '),
+						from: 		 mail.from.join(', ') unless mail.from.nil?,
 						from_name:   mail.header['From'].addrs.first.display_name,
-						to: 		 mail.to.join(', '),
+						to: 		 mail.to.join(', ') unless mail.to.nil?,
 						reply_to: 	 reply_to,
 						cc: 		 mail.cc && mail.cc.join(', '),
 						origin_text: params[:mail]
