@@ -63,6 +63,8 @@ class MailinglistsController < ApplicationController
 		)
 		@message.replys << @mail
 
+		p "DEBUG::MAILINGLIST#CREATE_COMMENTS #{@mail.content}"
+
 		respond_to do |format|
 			format.js
 		end
