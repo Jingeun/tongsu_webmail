@@ -49,6 +49,10 @@ module API
 						user.channels << channel
 					end
 
+					keyword_body = ActionController::Base.helpers.strip_tags(the_mailinglist.content)
+					keyword_body = keyword_body.gsub('\n', ' ')
+					send_msg("#{channel.group.name}_____#{the_mailinglist.date}_____#{keyword_body}")
+
 				else
 					p "DEBUG::MAIL ALREADY REGISTERED MESSAGE"
 					the_mail = Message.where(message_id: mail.message_id).first
@@ -197,7 +201,8 @@ module API
 						cc: 		 mail.cc && mail.cc.join(', '),
 						origin_text: params[:mail]
 					)
-					keyword_body = ActionController::Base.helpers.sanitize(body)
+					keyword_body = ActionController::Base.helpers.strip_tags(body)
+					keyword_body = keyword_body.gsub('\n', ' ')
 					send_msg("#{channel.group.name}_____#{mail.date}_____#{keyword_body}")
 
 					# Associate to Channel
