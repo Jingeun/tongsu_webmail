@@ -1,7 +1,5 @@
 <!-- timelines -->
 
-<!-- ##Gmap Library <script src="/assets/timelines/maps.js"></script> <script src="/assets/timelines/timeline.js"></script> -->
-
 <div class="content-wrap">
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
@@ -9,15 +7,22 @@
             <li>Tongsu</li>
             <li class="active">Mailing List</li>
         </ol>
-        <h2 class="page-title"><%= @channel.group.name %> - <span class="fw-semi-bold"><%= @channel.name %></span></h2>
-
+		<div class="row" style="margin-left:0;">
+			<div class="pull-left">
+				<h2 class="page-title" style="margin:0 0 15px 0;"><%= @channel.group.name %> - <span class="fw-semi-bold"><%= @channel.name %></span></h2>
+			</div>
+			<div class="btn-group pull-right" style="margin:0 18% 15px 0;">
+				<button type="button" class="btn btn-default" onclick="location.href='<%= mailinglist_path(@channel) %>'">TimeLine</button>
+				<button type="button" class="btn btn-default" onclick="location.href='<%= board_path(@channel)%>'">Board</a></button>
+			</div>
+		</div>
         <div class="row">
             <div class="col-md-10">
             <ul class="timeline" id="my-posts">
                 <%= render @mailinglists %>
             </ul>
             </div>
-            <div class="col-md-2 hidden-xs" id="gnb_wrp" style="background-color:#ccc">
+            <div class="col-md-2 hidden-xs" id="gnb_wrp" style="background-color:#ccc;paddng-top:10px;padding-bottom:10px">
                 <h4>Monthly <span class="fw-semi-bold">Keywords</span></h4>
                 <p class="text-muted fs-mini">Listed content is categorized by the following groups:</p>
                 <ul class="nav nav-pills nav-stacked search-result-categories mt">

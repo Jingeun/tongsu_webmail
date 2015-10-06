@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
-	before_action :authenticate_user!, only: [:dashboard]
-	before_action :get_not_read_message, only: [:dashboard, :import]
-	before_action :get_groups, only: [:dashboard, :import]
+	before_action :authenticate_user!, only: [:dashboard, :board]
+	before_action :get_not_read_message, only: [:dashboard, :import, :board]
+	before_action :get_groups, only: [:dashboard, :import, :board]
 
 	def index
 		if user_signed_in?
@@ -17,6 +17,9 @@ class HomeController < ApplicationController
 	def dashboard
 		@top = Mailinglist.top
 	end
+
+	def board
+        end
 
 	def id_check
 		id = params[:uid]

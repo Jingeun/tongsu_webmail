@@ -1,0 +1,89 @@
+<!-- board -->
+<style>
+#table-dynamic{
+    font-family: Arial;
+    font-weight: normal;
+	line-height: 26px;
+}
+#table-dynamic tr{
+	height:50px;
+}
+#subject{
+	padding-left:40px;
+	vertical-align:middle;
+}
+.views{
+	width:70px;
+	border:1px solid black;
+	text-align:center;
+	background-color:red;
+}
+</style>
+<div class="content-wrap">
+    <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
+    <main id="content" class="content" role="main">
+        <ol class="breadcrumb" style="font-size:16px;">
+            <li>Tongsu</li>
+            <li class="active">Mailing List</li>
+        </ol>
+		<div class="row" style="margin-left:0;">
+			<div class="pull-left">
+				<h2 class="page-title" style="margin:0 0 15px 0;">OPENSTACK - <span class="fw-semi-bold">openstack-dev</span></h2>
+			</div>
+			<div class="btn-group pull-right" style="margin:0 18% 15px 0;">
+				<button type="button" class="btn btn-default" onclick="location.href=''#">TimeLine</button>
+				<button type="button" class="btn btn-default" onclick="location.href='<%= board_path(@channel)%>'">Board</a></button>
+			</div>
+        </div>
+		<section class="widget" style="margin-left:5%; width:80%">
+			<div class="row" style="text-align:center;margin-top:15px;margin-bottom:30px; ">
+				<form class="form-inline" action="" method="POST">
+					<div class="form-group" style="width:100%">
+						<input type="text" class="form-control" name="subject" placeholder="Search Subject" style="width:40%">
+						<button type="submit" class="btn btn-default mb-xs" style="margin-top:5px;" >Search</button>
+					</div>
+				</form>
+				</div>
+            <div class="widget-body" style="padding:0 20px;">
+                <div id="table-dynamic">
+					<table class="table table-striped table-editable no-margin mb-sm">
+						<tbody style="font-size:20px;">
+							<tr role="row" class="odd" >
+								<td id="subject"><a href="#">
+									Subject ex)Packstack complains of not being able to detect ipaddress of interface
+								</a></td>
+								<td><div class="views some-views"><span class="item-count">149</span><div>views</div> </div>
+								</td>
+							</tr>
+							<tr role="row" class="even">
+								<td id="subject"><a href="#">
+									Subject ex)Devstack KILO - Rabbitmq notifications enable
+								</a></td>
+								<td><div class="views some-views" style="border:1px solid red"><span class="item-count">149</span><div>views</div> </div>
+								</td>
+							</tr>
+							<tr role="row" class="odd">
+								<td id="subject"><a href="#">
+									Subject ex)glance\nova command line SSL failure
+								</a></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="backgrid-paginator" style="text-align:center">
+						<ul>
+							<li class="disabled"><a href="#" title="First"><i class="fa fa-angle-double-lebackground: url(../images/view-background.png) repeat-x;ft fa-lg"></i></a></li>
+							<li class="disabled"><a href="#" title="Previous"><i class="fa fa-angle-left fa-lg"></i></a></li>
+							<li class="active"><a href="#" title="Page 1">1</a></li>
+							<li class="disabled"><a href="#" title="Next"><i class="fa fa-angle-right fa-lg"></i></a></li>
+							<li class="disabled"><a href="#" title="Last"><i class="fa fa-angle-double-right fa-lg"></i></a></li>
+						</ul>
+					</div>
+				</div>
+            </div>
+        </section>
+		
+    </main>
+</div>
+
+
