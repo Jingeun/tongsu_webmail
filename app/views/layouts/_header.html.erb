@@ -78,7 +78,9 @@ window.onload = function(){time()};
                     </a>
                     <ul id="sidebar-<%= group.id %>" class="collapse">
                         <% group.channels.each do |channel| %>
+                            <% if current_user.channels.include?(channel) %>
                             <li><a href="<%= mailinglist_path(channel) %>"><%= channel.name %></a></li>
+                            <% end %>
                         <% end %>
                     </ul>
                 </li>
