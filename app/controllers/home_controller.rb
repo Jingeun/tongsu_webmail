@@ -22,7 +22,18 @@ class HomeController < ApplicationController
 	end
 
 	def board
-        end
+    end
+
+    def subscribe
+    	group = Group.find_by_id(params[:id])
+    	group.channels.each do |channel|
+    		unless current_user.channels.include?(channel)
+    			current_user.channels << channel
+    		end
+    	end
+
+    	redirect_to root_path
+    end
 
 	def id_check
 		id = params[:uid]
