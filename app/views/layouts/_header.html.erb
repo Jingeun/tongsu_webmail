@@ -159,7 +159,7 @@ window.onload = function(){time()};
                             <!-- notification list with .thin-scroll which styles scrollbar for webkit -->
                             <div id="notifications-list" class="list-group thin-scroll">
                                 <% current_user.notifications.each do |noti| %>
-                                <a class="list-group-item" href="#">
+                                <a class="list-group-item" href="<%= noti.url %>">
                                     <span class="thumb-sm pull-left mr clearfix">
                                         <img class="img-circle" src="/assets/avatar.png" alt="...">
                                     </span>
