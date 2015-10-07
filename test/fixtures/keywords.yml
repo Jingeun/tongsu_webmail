@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  group_id: 
+  year: 1
+  month: 1
+  keyword1: MyString
+  keyword2: MyString
+  keyword3: MyString
+  keyword4: MyString
+  keyword5: MyString
+
+two:
+  group_id: 
+  year: 1
+  month: 1
+  keyword1: MyString
+  keyword2: MyString
+  keyword3: MyString
+  keyword4: MyString
+  keyword5: MyString
