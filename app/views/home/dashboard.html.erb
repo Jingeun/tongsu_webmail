@@ -229,48 +229,32 @@
                             <thead>
 								<tr>
 									<th class="hidden-xs">#</th>
-									<th>Channel</th>
-									<th>From</th>
-									<th class="hidden-xs">Subject</th>
-									<th class="hidden-xs">Date</th>
-									<th class="hidden-xs"></th>
-									<th></th>
+									<th class="hidden-xs" style="width: 160px;">Group</th>
+									<th class="hidden-xs" style="width: 164px;">Channel</th>
+									<th class="hidden-xs" style="width: 271px;">From</th>
+									<th style="width: 778px;">Subject</th>
+									<th class="hidden-xs" style="width: 167px;">Date</th>					
 								</tr>
                             </thead>
                             <tbody>
-                            <% @top.each_with_index do |mail, index| %>
-                                <tr>
-                                    <td class="hidden-xs"><%= index %></td>
-                                    <td>
-                                        <%= mail.channels.first.name %>
-                                    </td>
-                                    <td>
-                                        <%= mail.from_name %>
-                                    </td>
-                                    <td class="hidden-xs">
-                                        <%= truncate(mail.subject, length: 80, separator: " ") %>
-                                    </td>
-                                    <td class="hidden-xs text-semi-muted">
-                                        <%= mail.updated_at.localtime.strftime("%b %e, %l:%m %P")%>
-                                    </td>
-                                    <td class="width-150">
-                                        <div class="progress progress-sm mt-xs js-progress-animate">
-                                            <% case index %>
-                                            <% when 0 %>
-                                                <div class="progress-bar progress-bar-success" data-width="29%" style="width: 0;"></div>
-                                            <% when 1 %>
-                                                <div class="progress-bar progress-bar-warning" data-width="33%" style="width: 0;"></div>
-                                            <% when 2 %>
-                                                <div class="progress-bar progress-bar-gray" data-width="38%" style="width: 0;"></div>
-                                            <% when 3 %>
-                                                <div class="progress-bar progress-bar-danger" data-width="17%" style="width: 0;"></div>
-                                            <% when 4 %>
-                                                <div class="progress-bar" data-width="41%" style="width: 0;"></div>
-                                            <% end %>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <% end %>
+	                            <% @top.each_with_index do |mail, index| %>
+	                                <tr>
+	                                    <td class="hidden-xs"><%= index %></td>
+	                                    <td class="hidden-xs"><%= mail.channels.first.group.name %></td>
+	                                    <td>
+	                                        <%= mail.channels.first.name %>
+	                                    </td>
+	                                    <td>
+	                                        <%= mail.from_name %>
+	                                    </td>
+	                                    <td>
+	                                        <%= truncate(mail.subject, length: 80, separator: " ") %>
+	                                    </td>
+	                                    <td class="hidden-xs text-semi-muted">
+	                                        <%= mail.updated_at.localtime.strftime("%b %e, %l:%m %P")%>
+	                                    </td>
+	                                </tr>
+	                            <% end %>
                             </tbody>
                         </table>
                     </div>
@@ -280,8 +264,8 @@
 
         <div class="row">
 			<div class="col-md-12 widget-container">
-                <section class="widget" id="news-widget1" data-widgster-load="demo/ajax/widgets/news.php">
-						<h4><span class="fw-semi-bold">Discussion</span> Top 5</h4>
+                <section class="widget" id="news-widget" data-widgster-load="demo/ajax/widgets/news.php">
+						<h4><span class="fw-semi-bold">Vote</span> Top 5</h4>
                         <div class="widget-controls">
                             <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
                             <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
@@ -293,40 +277,32 @@
                             <thead>
 								<tr>
 									<th class="hidden-xs">#</th>
-									<th>Channel</th>
-									<th>From</th>
-									<th class="hidden-xs">Subject</th>
-									<th class="hidden-xs">Date</th>
-									<th class="hidden-xs"></th>
-									<th></th>
+									<th class="hidden-xs" style="width: 160px;">Group</th>
+									<th class="hidden-xs" style="width: 164px;">Channel</th>
+									<th class="hidden-xs" style="width: 271px;">From</th>
+									<th style="width: 778px;">Subject</th>
+									<th class="hidden-xs" style="width: 167px;">Date</th>					
 								</tr>
                             </thead>
                             <tbody>
-                            <% @top.each_with_index do |mail, index| %>
-                                <tr>
-                                    <td class="hidden-xs"><%= index+1 %></td>
-                                    <td><%= mail.channels.first.name %></td>
-                                    <td><%= mail.from_name %></td>
-                                    <td class="hidden-xs"><%= truncate(mail.subject, length: 80, separator: " ") %></td>
-                                    <td class="hidden-xs text-semi-muted"><%= mail.updated_at.localtime.strftime("%b %e, %l:%m %P")%></td>
-                                    <td class="width-150">
-                                        <div class="progress progress-sm mt-xs js-progress-animate">
-                                            <% case index %>
-                                            <% when 0 %>
-                                                <div class="progress-bar progress-bar-success" data-width="29%" style="width: 0;"></div>
-                                            <% when 1 %>
-                                                <div class="progress-bar progress-bar-warning" data-width="33%" style="width: 0;"></div>
-                                            <% when 2 %>
-                                                <div class="progress-bar progress-bar-gray" data-width="38%" style="width: 0;"></div>
-                                            <% when 3 %>
-                                                <div class="progress-bar progress-bar-danger" data-width="17%" style="width: 0;"></div>
-                                            <% when 4 %>
-                                                <div class="progress-bar" data-width="41%" style="width: 0;"></div>
-                                            <% end %>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <% end %>
+	                            <% @likes.each_with_index do |mail, index| %>
+	                                <tr>
+	                                    <td class="hidden-xs"><%= index %></td>
+	                                    <td class="hidden-xs"><%= mail.channels.first.group.name %></td>
+	                                    <td>
+	                                        <%= mail.channels.first.name %>
+	                                    </td>
+	                                    <td>
+	                                        <%= mail.from_name %>
+	                                    </td>
+	                                    <td>
+	                                        <%= truncate(mail.subject, length: 80, separator: " ") %>
+	                                    </td>
+	                                    <td class="hidden-xs text-semi-muted">
+	                                        <%= mail.updated_at.localtime.strftime("%b %e, %l:%m %P")%>
+	                                    </td>
+	                                </tr>
+	                            <% end %>
                             </tbody>
                         </table>
                     </div>
@@ -338,12 +314,5 @@
     </main>
 </div>
 
-<script src="/assets/home/dashboard/sparkline_index.js"></script>
-<script src="/assets/home/dashboard/jquery.flot.js"></script>
-<script src="/assets/home/dashboard/jquery.flot.animator.min.js"></script>
 <script src="/assets/home/dashboard/charts.js"></script>
 <script src="/assets/home/dashboard/modal.js"></script>
-<script src="/assets/home/dashboard/core.js"></script>
-<script src="/assets/home/dashboard/widget.js"></script>
-<script src="/assets/home/dashboard/mouse.js"></script>
-<script src="/assets/home/dashboard/draggable.js"></script>

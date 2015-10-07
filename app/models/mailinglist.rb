@@ -21,6 +21,6 @@ class Mailinglist < ActiveRecord::Base
 
   def self.top
     # where("updated_at >= ?", Time.zone.today.beginning_of_day)
-    includes(:replys).where(origin_id: nil).order('replys_count ASC').limit(5)
+    # unscoped.includes(:replys).where(origin_id: nil).order('replys_count DESC').limit(5)
   end
 end
