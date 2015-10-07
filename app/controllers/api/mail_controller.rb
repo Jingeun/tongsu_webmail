@@ -27,7 +27,7 @@ module API
 					# If mail is mailinglist
 					p "DEBUG::MAIL ALREADY REGISTERED MAILINGLIST"
 					if params[:import].eql?("true")
-						p "DEBUG::MAIL IMPORT MESSAGE : #{mail.subject} #{mail.date}"
+						p "DEBUG::MAIL ALREADY IMPORT-MESSAGE : #{mail.subject} #{mail.date}"
 					end
 					the_mailinglist = Mailinglist.where(message_id: mail.message_id).first
 
@@ -207,6 +207,9 @@ module API
 					keyword_body = ActionController::Base.helpers.strip_tags(body)
 					keyword_body = keyword_body.gsub('\n', ' ')
 					send_msg("#{channel.group.name}_____#{mail.date}_____#{keyword_body}")
+					if params[:import].eql?("true")
+						p "DEBUG::MAIL NEW IMPORT-MESSAGE : #{mail.subject} #{mail.date}"
+					end
 
 					# Associate to Channel
 					ch_mailing = channel.mailinglists

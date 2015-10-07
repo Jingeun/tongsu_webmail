@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :get_not_read_message, except: [:show, :original]
+	before_action :get_import_count, except: [:show, :original]
 	before_action :get_groups, except: [:original, :create]
 
 	def index
@@ -29,6 +30,7 @@ class MessagesController < ApplicationController
 		end
 
 		get_not_read_message
+		get_import_count
 	end
 
 	def new
@@ -118,5 +120,10 @@ class MessagesController < ApplicationController
 
 	    ch.close
 	    conn.close
+	end
+
+	def get_import_count
+		@import_not_read = current_user.users_messages.where(is_read: false, is_import: true).count
+		@inbox_not_read  = current_user.users_messages.where(is_read: false, is_import: false).count
 	end
 end
