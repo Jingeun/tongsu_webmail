@@ -38,16 +38,17 @@
                             <a href="#"><%= @keywords.keyword3 %></a>
                         </li>
                         <% end %>
-               
+                        <% unless @keywords.keyword4.nil? %>
                         <li>
-                            <a href="#">11</a>
+                           <a href="#"><%= @keywords.keyword4 %></a>
                         </li>
-                       
-                     
+                       <% end %>
+
+                        <% unless @keywords.keyword5.nil? %>
                         <li>
-                            <a href="#">2</a>
+                            <a href="#"><%= @keywords.keyword5 %></a>
                         </li>
-                        
+                        <% end %>
                     <% end %>
                 </ul>
             </div>
