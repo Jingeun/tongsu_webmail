@@ -768,10 +768,10 @@
 										<% recommand_group = (Group.all - @groups) %>
 										<% unless recommand_group.empty? %>
 											<% (Group.all - @groups).sample(5).each do |g| %>
-											<tr role="row">
+											<tr role="row" style="height:47px;">
 												<td><span class="fw-semi-bold"><%= g.name %></span></td>
 												<td>
-													<%= link_to "Register", subscribe_path(id: g.id), method: :post, class: "btn btn-default width-100 btn-sm mb-xs" %>
+													<%= link_to "Register", subscribe_path(id: g.id), method: :post, class: "btn btn-default width-100 btn-xs mb-xs" %>
 												</td>
 											</tr>
 											<% end %>
