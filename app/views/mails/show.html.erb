@@ -1,0 +1,94 @@
+<div class="content-wrap">
+    <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
+    <main id="content" class="content" role="main">
+        <ol class="breadcrumb">
+            <li>Mailing List</li>
+            <li class="active">Shows</li>
+        </ol>
+        <h1 class="page-title"><%= @channel.group.name %> - <span class="fw-semi-bold"><%= @channel.name %></span></h1>
+        <div class="row">
+            <div class="col-md-2 col-lg-2">
+            </div>
+            <div class="col-md-8 col-lg-8">
+                <% @messages.each do |message| %>
+                <section class="widget widget-email">
+                    <header>
+                        <h4><%= message.subject %></h4>
+                        <div class="widget-controls">
+                            <a href="#"><i class="fa fa-print"></i></a>
+                        </div>
+                    </header>
+                    <div class="widget-body">
+                        <div id="email-view" class="email-view">
+                            <div class="email-details clearfix">
+                                <div class="email-details-content">
+                                    <span class="thumb thumb-sm pull-left">
+                                        <img class="img-circle" src="<%= asset_path "common/people/a5.jpg" %>">
+                                    </span>
+                                    <div class="pull-left">
+                                        <strong><%= message.from_name %></strong> &nbsp
+                                        <span class="email">&lt;<%= message.from %>&gt;</span></br>
+                                        <div class="receiver" style="margin-top:1px">to <%= message.to %></div>
+                                    </div>
+                                    <div class="email-actions pull-right">
+                                        <div class="btn-group">
+                                            <button id="email-opened-reply" class="btn btn-sm btn-gray">
+                                                <i class="fa fa-reply"></i> Reply
+                                            </button>
+                                            <button class="btn btn-sm btn-gray dropdown-toggle" data-toggle="dropdown">
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="#"><i class="fa fa-reply reply-btn"></i> Reply</a></li>
+                                                <li><a href="#"><i class="fa fa-arrow-right reply-btn"></i> Forward</a></li>
+                                                <li><a href="<%= original_message_path(message) %>" target="_blank"><i class="fa fa-inbox"></i> Original text</a></li>
+                                                <li><a href="#"><i class="fa fa-print"></i> Print</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li>
+                                                <li><a href="#"><i class="glyphicon glyphicon-trash"></i> Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <time class="email-date pull-right">
+                                        <%= message.created_at.localtime.strftime("%k:%M") %>
+                                    </time>
+                                </div>
+                            </div>
+                            <div class="email-body" style="font-size:14px !important;">
+                                <p><%= message.content.html_safe %></p>
+                            </div>
+                            <% if message.attaches.present? %>
+                            <div class="email-attachments">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <hr>
+                                        <p class="details"><strong><%= pluralize(message.attaches.count, "attachment") %></strong> &nbsp;<!-- -&nbsp; 
+                                             <a href="#">Download all attachments</a>
+                                            &nbsp;&nbsp;&nbsp;<a href="#">View all Images</a></p> -->
+                                        <% message.attaches.each do |file| %>
+                                        <section class="attachment" style="width: 300px;">
+                                            <% if file.content_content_type.start_with?('image/') %>
+                                                <a href="<%= file.content.url %>" data-lightbox="roadtrip" data-title="<%= file.content_file_name %>">
+                                                <%= image_tag file.content.url, style: "max-width: 300px;" %></a>
+                                            <% end %>
+                                                <h5 class="title"><%= file.content_file_name %></h5>
+                                                <p class="details">
+                                                    <%= (file.content_file_size/1024.0).round(2) %>K  &nbsp;&nbsp;
+                                                    <%= link_to "Download", api_download_url(url: file.content.path, subdomain: "api"), method: :post %>
+                                                </p>
+                                        </section>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div> 
+                            <% end %>
+                        </div>
+                    </div>
+                </section>
+                <% end %>
+            </div>
+        </div>
+    </main>
+</div>
+
+<%= javascript_include_tag 'lightbox/lightbox' %>

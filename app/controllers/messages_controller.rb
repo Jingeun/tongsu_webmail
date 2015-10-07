@@ -105,8 +105,6 @@ class MessagesController < ApplicationController
 		end
 	end
 
-	private
-
 	def send_msg(msg)
 		require 'bunny'
 	    conn = Bunny.new(hostname: "210.118.69.58", vhost: "tongsu-vhost", user: "tongsu", password: "12341234")

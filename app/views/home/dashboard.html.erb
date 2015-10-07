@@ -216,16 +216,15 @@
 		
 		<div class="row">
 			<div class="col-md-12 widget-container">
-                <section class="widget" id="news-widget" data-widgster-load="demo/ajax/widgets/news.php">
+                <section class="widget widget-email" id="news-widget" data-widgster-load="demo/ajax/widgets/news.php">
 						<h4><span class="fw-semi-bold">Discussion</span> Top 5</h4>
                         <div class="widget-controls">
-                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                            <a data-widgster="load" title="I am spinning!" href="#"><i class="fa fa-refresh"></i></a>
-                            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a data-widgster="expand" title="Expand" href="javascript:{};"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                            <a data-widgster="collapse" title="Collapse" href="javascript:{};"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                            <a data-widgster="load" title="I am spinning!" href="javascript:{};"><i class="fa fa-refresh"></i></a>
                         </div>
                     <div class="widget-body">
-                        <table class="table">
+                        <table class="table table-emails table-hover">
                             <thead>
 								<tr>
 									<th class="hidden-xs">#</th>
@@ -238,7 +237,7 @@
                             </thead>
                             <tbody>
 	                            <% @top.each_with_index do |mail, index| %>
-	                                <tr>
+	                                <tr onclick="location.href='<%= mailinglist_mail_path(mail.channels.first, mail) %>'" style="cursor:pointer">
 	                                    <td class="hidden-xs"><%= index %></td>
 	                                    <td class="hidden-xs"><%= mail.channels.first.group.name %></td>
 	                                    <td>
@@ -267,13 +266,12 @@
                 <section class="widget" id="news-widget" data-widgster-load="demo/ajax/widgets/news.php">
 						<h4><span class="fw-semi-bold">Vote</span> Top 5</h4>
                         <div class="widget-controls">
-                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                            <a data-widgster="load" title="I am spinning!" href="#"><i class="fa fa-refresh"></i></a>
-                            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a data-widgster="expand" title="Expand" href="javascript:{};"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                            <a data-widgster="collapse" title="Collapse" href="javascript:{};"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                            <a data-widgster="load" title="I am spinning!" href="javascript:{};"><i class="fa fa-refresh"></i></a>
                         </div>
                     <div class="widget-body">
-                        <table class="table">
+                        <table class="table table-emails table-hover">
                             <thead>
 								<tr>
 									<th class="hidden-xs">#</th>
@@ -286,7 +284,7 @@
                             </thead>
                             <tbody>
 	                            <% @likes.each_with_index do |mail, index| %>
-	                                <tr>
+	                                <tr onclick="location.href='<%= mailinglist_mail_path(mail.channels.first, mail) %>'" style="cursor:pointer">
 	                                    <td class="hidden-xs"><%= index %></td>
 	                                    <td class="hidden-xs"><%= mail.channels.first.group.name %></td>
 	                                    <td>
