@@ -27,7 +27,7 @@ module API
 					# If mail is mailinglist
 					p "DEBUG::MAIL ALREADY REGISTERED MAILINGLIST"
 					if params[:import].eql?("true")
-						p "DEBUG::MAIL IMPORT MESSAGE-ID : #{mail.message_id}"
+						p "DEBUG::MAIL IMPORT MESSAGE : #{mail.subject} #{mail.date}"
 					end
 					the_mailinglist = Mailinglist.where(message_id: mail.message_id).first
 

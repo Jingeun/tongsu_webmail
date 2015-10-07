@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 	resources :imports, only: [:new, :create]
 	
 	devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
-	resources :mailinglists, only: [:index, :show]
+	resources :mailinglists, only: [:index, :show] do
+		resources :mails, only: [:show]
+	end
 	post '/mailinglists/see_more'
 	post '/mailinglists/get_comments'
 	post '/mailinglists/create_comments'
