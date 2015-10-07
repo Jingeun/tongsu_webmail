@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20151007184119) do
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
-    t.string   "type",        limit: 255
+    t.string   "type1",       limit: 255
     t.string   "url",         limit: 255
     t.string   "description", limit: 255
     t.boolean  "is_read",     limit: 1,   default: false

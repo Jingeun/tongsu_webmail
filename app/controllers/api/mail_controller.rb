@@ -333,7 +333,7 @@ module API
 					else
 						notification_path = Rails.application.routes.url_helpers.message_path(message)
 						user.notifications.create(
-							type: "message",
+							type1: "message",
 							url: notification_path,
 							description: mail.subject
 						)
