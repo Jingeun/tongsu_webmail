@@ -5,6 +5,18 @@ module API
   		include ActionView::Helpers::SanitizeHelper
 
   		def keyword
+  			group = Group.where(name: params[:group]).first
+  			group.keywords.create(
+  				year: 		params[:year],
+  				month: 		params[:month],
+  				keyword1: 	params[:keyword1],
+  				keyword2: 	params[:keyword2],
+  				keyword3: 	params[:keyword3],
+  				keyword4: 	params[:keyword4],
+  				keyword5: 	params[:keyword5]
+  			)
+
+  			head 200
   		end
 
 		def receive

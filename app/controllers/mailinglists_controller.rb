@@ -11,8 +11,10 @@ class MailinglistsController < ApplicationController
 	end
 
 	def show
-		@uid     = current_user.uid
-		@channel = Channel.find_by_id(params[:id])
+		@uid      = current_user.uid
+		@channel  = Channel.find_by_id(params[:id])
+		date_time = DateTime.now
+		@keywords = @channel.group.keywords.where(year: date_time.year, month: date_time.month).first
 
 		# If channel non-exists
 		unless @channel.present?
