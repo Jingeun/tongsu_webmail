@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007160022) do
+ActiveRecord::Schema.define(version: 20151007184119) do
 
   create_table "attaches", force: :cascade do |t|
     t.integer  "attachable_id",        limit: 4
@@ -128,6 +128,18 @@ ActiveRecord::Schema.define(version: 20151007160022) do
 
   add_index "messages", ["message_id"], name: "index_messages_on_message_id", unique: true, using: :btree
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.string   "type",        limit: 255
+    t.string   "url",         limit: 255
+    t.string   "description", limit: 255
+    t.boolean  "is_read",     limit: 1,   default: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
   create_table "sent_messages", force: :cascade do |t|
     t.string   "from",       limit: 255
     t.string   "to",         limit: 255
@@ -185,6 +197,7 @@ ActiveRecord::Schema.define(version: 20151007160022) do
   add_foreign_key "channels_mailinglists", "mailinglists"
   add_foreign_key "imports", "users"
   add_foreign_key "keywords", "groups"
+  add_foreign_key "notifications", "users"
   add_foreign_key "users_messages", "messages"
   add_foreign_key "users_messages", "users"
 end

@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 	# Import account 1:N Association
 	has_many :imports, dependent: :destroy
 
+	has_many :notifications, dependent: :destroy
+
 	validates :uid, presence: true, uniqueness: { case_sensitive: false }
 	validates :name ,presence: true
 end

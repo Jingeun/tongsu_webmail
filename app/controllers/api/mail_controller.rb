@@ -330,6 +330,13 @@ module API
 
 					if params[:import].eql?("true")
 						message.users_messages.where(user_id: user).first.update_attributes(is_import: true)
+					else
+						notification_path = Rails.application.routes.url_helpers.message_path(message)
+						user.notifications.create(
+							type: "message",
+							url: notification_path,
+							description: mail.subject
+						)
 					end
 
 					# Save File Attachments

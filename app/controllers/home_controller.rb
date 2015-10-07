@@ -15,6 +15,8 @@ class HomeController < ApplicationController
 	end
 
 	def dashboard
+		test   = Rails.application.routes.url_helpers.message_path(Message.first)
+		p "DEBUG::DASHBOARD #{test}"
 		@top   = Mailinglist.unscoped.joins(:channels).merge(current_user.channels).includes(:replys).where(origin_id: nil).order('replys_count DESC').limit(5)
 		@likes = Mailinglist.unscoped.joins(:channels).merge(current_user.channels).includes(:replys).where(origin_id: nil).order('likes DESC').limit(5)
 	end
