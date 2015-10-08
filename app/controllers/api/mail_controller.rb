@@ -7,7 +7,7 @@ module API
   		def keyword
   			group = Group.where(name: params[:group]).first
   			a     = group.keywords.where(year: params[:year], month: params[:month]).first
-  			a.destory = unless a.nil?
+  			a.destroy unless a.nil?
   			group.keywords.create(
   				year: 		params[:year],
   				month: 		params[:month],
