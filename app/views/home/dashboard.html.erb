@@ -809,7 +809,7 @@
                             <tbody>
 	                            <% @top.each_with_index do |mail, index| %>
 	                                <tr onclick="location.href='<%= mailinglist_mail_path(mail.channels.first, mail) %>'" style="cursor:pointer">
-	                                    <td class="hidden-xs"><%= index %></td>
+	                                    <td class="hidden-xs"><%= index+1 %></td>
 	                                    <td class="hidden-xs"><%= mail.channels.first.group.name %></td>
 	                                    <td>
 	                                        <%= mail.channels.first.name %>
@@ -856,7 +856,7 @@
                             <tbody>
 	                            <% @likes.each_with_index do |mail, index| %>
 	                                <tr onclick="location.href='<%= mailinglist_mail_path(mail.channels.first, mail) %>'" style="cursor:pointer">
-	                                    <td class="hidden-xs"><%= index %></td>
+	                                    <td class="hidden-xs"><%= index+1 %></td>
 	                                    <td class="hidden-xs"><%= mail.channels.first.group.name %></td>
 	                                    <td>
 	                                        <%= mail.channels.first.name %>
