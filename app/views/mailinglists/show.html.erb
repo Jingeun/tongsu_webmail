@@ -14,9 +14,13 @@
 		</div>
         <div class="row">
             <div class="col-md-9">
-            <ul class="timeline" id="my-posts">
-                <%= render @mailinglists %>
-            </ul>
+                <% if @mailinglists.count > 0 %>
+                    <ul class="timeline" id="my-posts">
+                        <%= render @mailinglists %>
+                    </ul>
+                <% else %>
+                    <h3> No search result.... </h3>
+                <% end %>
             </div>
             <div class="col-md-3 hidden-xs" id="gnb_wrp" style="top: 180px;left: 78%;position:fixed;background-color: whitesmoke;">
                 <h4>Monthly <span class="fw-semi-bold">Keywords</span></h4>
@@ -54,7 +58,7 @@
             </div>
         </div>
 	<div class="row">
--        <div class="timeline" id="infinite-scrolling" style="text-align: center;">
+-        <div id="infinite-scrolling" style="text-align: center; ">
 -          <%= will_paginate %>
 -        </div>
 -        </div>
