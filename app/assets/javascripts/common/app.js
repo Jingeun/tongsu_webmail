@@ -28,6 +28,7 @@ $(function(){
      *     navigation states)
      * @constructor
      */
+     $('#search-form1').hide();
     var SingAppView = function(){
 
         this.pjaxEnabled = window.PJAX_ENABLED;

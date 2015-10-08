@@ -63,3 +63,7 @@ function add_like(channel, id) {
         }
     });
 }
+
+$(function() {
+    $('#search-form1').show();
+});

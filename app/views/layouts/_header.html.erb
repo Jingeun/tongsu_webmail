@@ -90,7 +90,7 @@ window.onload = function(){time()};
 </nav>
 <!-- This is the white navigation bar seen on the top. A bit enhanced BS navbar. See .page-controls in _base.scss. -->
 <% if user_signed_in? %>
-<nav class="page-controls navbar navbar-default">
+<nav class="page-controls navbar navbar-default" style="position:fixed;">
     <div class="container-fluid">
         <!-- .navbar-header contains links seen on xs & sm screens -->
         <div class="navbar-header">
@@ -123,7 +123,14 @@ window.onload = function(){time()};
 
         <!-- this part is hidden for xs screens -->
         <div class="collapse navbar-collapse">
-            <!-- Session -->
+            <form class="navbar-form navbar-left ng-pristine ng-valid" role="search">
+                <div class="form-group" style="display:none;" id="search-form1">
+                    <div class="input-group input-group-no-border">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span> 
+                        <input class="form-control" type="text" placeholder="Search Dashboard" name="search">
+                    </div>
+                </div>
+            </form>            <!-- Session -->
             <% if user_signed_in? %>
             <ul class="nav navbar-nav navbar-right">
                 <li>
