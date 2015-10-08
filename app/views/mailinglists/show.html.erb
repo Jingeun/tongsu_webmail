@@ -29,28 +29,28 @@
                     <% unless @keywords.nil? %>
                         <% unless @keywords.keyword1.nil? %>
                         <li>
-                            <a href="#"><%= @keywords.keyword1 %></a>
+                            <a href="?search=<%= @keywords.keyword1 %>"><%= @keywords.keyword1 %></a>
                         </li>
                         <% end %>
                         <% unless @keywords.keyword2.nil? %>
                         <li>
-                            <a href="#"><%= @keywords.keyword2 %></a>
+                            <a href="?search=<%= @keywords.keyword2 %>"><%= @keywords.keyword2 %></a>
                         </li>
                         <% end %>
                         <% unless @keywords.keyword3.nil? %>
                         <li>
-                            <a href="#"><%= @keywords.keyword3 %></a>
+                            <a href="?search=<%= @keywords.keyword3 %>"><%= @keywords.keyword3 %></a>
                         </li>
                         <% end %>
                         <% unless @keywords.keyword4.nil? %>
                         <li>
-                           <a href="#"><%= @keywords.keyword4 %></a>
+                           <a href="?search=<%= @keywords.keyword4 %>"><%= @keywords.keyword4 %></a>
                         </li>
                        <% end %>
 
                         <% unless @keywords.keyword5.nil? %>
                         <li>
-                            <a href="#"><%= @keywords.keyword5 %></a>
+                            <a href="?search=<%= @keywords.keyword5 %>"><%= @keywords.keyword5 %></a>
                         </li>
                         <% end %>
                     <% end %>
