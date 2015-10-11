@@ -25,7 +25,7 @@ class MailinglistsController < ApplicationController
 		# Check authentication
 		if current_user.channels.include?(@channel)
 			if params[:search].present?
-				@mailinglists = @channel.mailinglists.where("lower(subject) LIKE ?", "%#{params[:search].downcase}%").paginate(page: params[:page], per_page: 10)		
+				@mailinglists = @channel.mailinglists.where("lower(subject) LIKE ? or lower(content) LIKE ?", "%#{params[:search].downcase}%", "%#{params[:search].downcase}%").paginate(page: params[:page], per_page: 10)		
 			else
 				@mailinglists = @channel.mailinglists.where(origin_id: nil).paginate(page: params[:page], per_page: 10)		
 			end
